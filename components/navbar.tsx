@@ -68,7 +68,7 @@ export function Navbar() {
   }, [isDesktop]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-16 pt-2 md:pt-6">
+    <header className="fixed inset-x-0 top-0 z-50 h-16 px-0 pt-2 md:px-4 md:pt-6">
       <motion.nav
         initial={false}
         transition={spring}

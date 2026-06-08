@@ -56,10 +56,25 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
   const rafRef = useRef<number | undefined>(undefined);
   const tickingRef = useRef(false);
 
+  const findLoadedImage = (index: number) => {
+    const images = imagesRef.current;
+    const exact = images[index];
+    if (exact?.complete && exact.naturalWidth > 0) return exact;
+
+    // Fall back to the nearest already-loaded frame in either direction.
+    for (let offset = 1; offset < images.length; offset += 1) {
+      const before = images[index - offset];
+      if (before?.complete && before.naturalWidth > 0) return before;
+      const after = images[index + offset];
+      if (after?.complete && after.naturalWidth > 0) return after;
+    }
+    return undefined;
+  };
+
   const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
-    const image = imagesRef.current[index];
-    if (!canvas || !image?.complete || image.naturalWidth === 0) return;
+    const image = findLoadedImage(index);
+    if (!canvas || !image) return;
 
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
@@ -123,35 +138,34 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
   useEffect(() => {
     let cancelled = false;
 
-    const loadFrames = async () => {
-      const images = await Promise.all(
-        SEQUENCE_FRAMES.map(
-          (src) =>
-            new Promise<HTMLImageElement>((resolve, reject) => {
-              const image = new Image();
-              image.decoding = "async";
-              image.src = src;
-              image.onload = async () => {
-                try {
-                  await image.decode();
-                } catch {
-                  // decode() can fail on older browsers; loaded image still works
-                }
-                resolve(image);
-              };
-              image.onerror = () => reject(new Error(`Failed to load ${src}`));
-            }),
-        ),
-      );
+    // Pre-size the array so frames land at the correct index even if some
+    // load out of order or fail (a single failure must not blank the canvas).
+    const images: HTMLImageElement[] = new Array(SEQUENCE_FRAMES.length);
+    imagesRef.current = images;
 
-      if (cancelled) return;
+    updateMetrics();
 
-      imagesRef.current = images;
-      updateMetrics();
-      drawFrame(frameIndexRef.current);
-    };
+    SEQUENCE_FRAMES.forEach((src, index) => {
+      const image = new Image();
+      image.decoding = "async";
 
-    loadFrames();
+      const onReady = () => {
+        if (cancelled) return;
+        images[index] = image;
+        // Draw as soon as the currently-needed frame is available.
+        if (index === frameIndexRef.current) {
+          drawFrame(index);
+        } else if (index === 0 && imagesRef.current[frameIndexRef.current] == null) {
+          drawFrame(index);
+        }
+      };
+
+      image.onload = onReady;
+      image.onerror = () => {
+        // Skip failed frames; neighbouring frames still render.
+      };
+      image.src = src;
+    });
 
     return () => {
       cancelled = true;
@@ -183,8 +197,9 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
   }, []);
 
   return (
-    <div className="relative">
-      <div className="pointer-events-none fixed inset-0 z-0 bg-black">
+    <div ref={containerRef} className="relative">
+      {/* Sticky (not fixed) keeps the canvas repainting during scroll on iOS Safari. */}
+      <div className="pointer-events-none sticky top-0 z-0 h-svh w-full overflow-hidden bg-black">
         <canvas
           ref={canvasRef}
           className="absolute bottom-0 left-0 z-[1] block h-[75vh] w-full md:inset-0 md:h-full md:z-auto"
@@ -201,7 +216,8 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
         />
       </div>
 
-      <div ref={containerRef} className="relative">
+      {/* Pulled up over the sticky stage; scrolls away while the canvas stays pinned. */}
+      <div className="relative z-10 mt-[-100svh]">
         {children}
         <div
           aria-hidden
