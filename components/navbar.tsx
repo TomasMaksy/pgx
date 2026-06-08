@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
   { label: "Product", href: "#" },
@@ -20,29 +20,34 @@ const spring = {
 };
 
 export function Navbar() {
-  const rafRef = useRef<number | undefined>(undefined);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const update = () => {
-      setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
+    let rafId: number | undefined;
+    let scrolled = window.scrollY > SCROLL_THRESHOLD;
+
+    const apply = () => {
+      const next = window.scrollY > SCROLL_THRESHOLD;
+      if (next !== scrolled) {
+        scrolled = next;
+        setIsScrolled(next);
+      }
     };
 
     const onScroll = () => {
-      if (rafRef.current !== undefined) {
-        cancelAnimationFrame(rafRef.current);
-      }
-      rafRef.current = requestAnimationFrame(update);
+      if (rafId !== undefined) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = undefined;
+        apply();
+      });
     };
 
-    update();
+    apply();
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      if (rafRef.current !== undefined) {
-        cancelAnimationFrame(rafRef.current);
-      }
+      if (rafId !== undefined) cancelAnimationFrame(rafId);
     };
   }, []);
 
