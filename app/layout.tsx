@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
 import { Navbar } from "@/components/navbar";
+import { SEQUENCE_FRAMES } from "@/lib/sequence-frames";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,6 +31,22 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${sourceSerif.variable} h-full antialiased`}
     >
+      <head>
+        {/*
+          Preload the entire scroll sequence at the document level so it starts
+          fetching before hydration. Frame 0 is highest priority (it's the
+          placeholder); the rest stream in behind it as low priority.
+        */}
+        {SEQUENCE_FRAMES.map((src, index) => (
+          <link
+            key={src}
+            rel="preload"
+            as="image"
+            href={src}
+            fetchPriority={index === 0 ? "high" : "low"}
+          />
+        ))}
+      </head>
       <body className={inter.className}>
         <Navbar />
         {children}

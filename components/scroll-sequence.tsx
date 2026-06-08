@@ -56,19 +56,25 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
   const rafRef = useRef<number | undefined>(undefined);
   const tickingRef = useRef(false);
 
+  const isReady = (image: HTMLImageElement | undefined) =>
+    !!image && image.complete && image.naturalWidth > 0;
+
   const findLoadedImage = (index: number) => {
     const images = imagesRef.current;
     const exact = images[index];
-    if (exact?.complete && exact.naturalWidth > 0) return exact;
+    if (isReady(exact)) return exact;
 
     // Fall back to the nearest already-loaded frame in either direction.
     for (let offset = 1; offset < images.length; offset += 1) {
       const before = images[index - offset];
-      if (before?.complete && before.naturalWidth > 0) return before;
+      if (isReady(before)) return before;
       const after = images[index + offset];
-      if (after?.complete && after.naturalWidth > 0) return after;
+      if (isReady(after)) return after;
     }
-    return undefined;
+
+    // Last resort: the first frame is always loaded with priority and acts as
+    // the placeholder until the requested frame (or a neighbour) is ready.
+    return isReady(images[0]) ? images[0] : undefined;
   };
 
   const drawFrame = (index: number) => {
@@ -145,18 +151,18 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
 
     updateMetrics();
 
-    SEQUENCE_FRAMES.forEach((src, index) => {
+    const loadFrame = (index: number, priority: "high" | "low") => {
       const image = new Image();
       image.decoding = "async";
+      image.fetchPriority = priority;
 
       const onReady = () => {
         if (cancelled) return;
         images[index] = image;
-        // Draw as soon as the currently-needed frame is available.
-        if (index === frameIndexRef.current) {
-          drawFrame(index);
-        } else if (index === 0 && imagesRef.current[frameIndexRef.current] == null) {
-          drawFrame(index);
+        // Draw as soon as the currently-needed frame is available, and let the
+        // first frame paint immediately as the placeholder.
+        if (index === frameIndexRef.current || index === 0) {
+          drawFrame(frameIndexRef.current);
         }
       };
 
@@ -164,8 +170,16 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
       image.onerror = () => {
         // Skip failed frames; neighbouring frames still render.
       };
-      image.src = src;
-    });
+      // Hits the <link rel="preload"> cache for frame 0, so it resolves instantly.
+      image.src = SEQUENCE_FRAMES[index];
+    };
+
+    // Load (and paint) the first frame first so the placeholder is guaranteed,
+    // then aggressively preload the rest of the sequence in the background.
+    loadFrame(0, "high");
+    for (let index = 1; index < SEQUENCE_FRAMES.length; index += 1) {
+      loadFrame(index, "low");
+    }
 
     return () => {
       cancelled = true;
