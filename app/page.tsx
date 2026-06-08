@@ -10,10 +10,9 @@ export default function Home() {
           <h1 className="max-w-5xl text-4xl leading-none font-semibold tracking-tight text-white md:text-5xl lg:text-7xl">
             Your DNA <br /> Doesn&apos;t Change.
             <br />
-            <span className="font-serif font-semibold tracking-tighter italic">
-              Prescribing
+            <span className="font-serif text-[40px] font-semibold tracking-tighter italic md:text-[54px] lg:text-[76px]">
+              Prescribing Should.
             </span>{" "}
-            Should.
           </h1>
           <p className="mt-6 max-w-md text-base text-white md:text-2xl">
             Clinical decision support powered by pharmacogenomics and AI

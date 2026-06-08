@@ -34,10 +34,7 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (!isDesktop) {
-      setIsScrolled(false);
-      return;
-    }
+    if (!isDesktop) return;
 
     let rafId: number | undefined;
     let scrolled = window.scrollY > SCROLL_THRESHOLD;
