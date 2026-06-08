@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4 } from "next/font/google";
+import { Inter, Source_Serif_4, Geist } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { SEQUENCE_FRAMES } from "@/lib/sequence-frames";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,7 +32,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${sourceSerif.variable} h-full antialiased`}
+      className={cn(
+        "h-full bg-black antialiased",
+        inter.variable,
+        sourceSerif.variable,
+        "font-sans",
+        geist.variable,
+      )}
     >
       <head>
         {/*
@@ -47,7 +56,7 @@ export default function RootLayout({
           />
         ))}
       </head>
-      <body className={inter.className}>
+      <body className={cn(inter.className, "min-h-full bg-black text-foreground")}>
         <Navbar />
         {children}
       </body>
