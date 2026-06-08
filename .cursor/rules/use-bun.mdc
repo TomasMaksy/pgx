@@ -1,0 +1,16 @@
+---
+description: Use Bun as the package manager and runtime for this project
+alwaysApply: true
+---
+
+# Use Bun
+
+Always prefer Bun over npm, yarn, or pnpm in this project.
+
+- Install dependencies: `bun install`
+- Add packages: `bun add <package>` or `bun add -d <package>`
+- Run scripts: `bun run <script>` or `bun <script>`
+- Execute packages: `bunx <command>` instead of `npx`
+- Run dev server: `bun dev`
+
+Do not use npm, yarn, or pnpm unless Bun cannot handle a specific task.
