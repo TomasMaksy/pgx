@@ -18,7 +18,7 @@ export default function Home() {
         </p>
         <button
           type="button"
-          className="mt-10 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-white/15 md:text-base"
+          className="glass-inset mt-10 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-white/15 md:text-base"
         >
           Get Started
           <ChevronRight className="size-4" strokeWidth={2} />
