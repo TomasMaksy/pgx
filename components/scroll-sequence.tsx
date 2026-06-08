@@ -45,7 +45,9 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
     };
 
     const onScroll = () => {
-      cancelAnimationFrame(rafRef.current);
+      if (rafRef.current !== undefined) {
+        cancelAnimationFrame(rafRef.current);
+      }
       rafRef.current = requestAnimationFrame(updateFrame);
     };
 
@@ -56,7 +58,9 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
-      cancelAnimationFrame(rafRef.current);
+      if (rafRef.current !== undefined) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, []);
 
