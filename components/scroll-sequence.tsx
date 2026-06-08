@@ -19,7 +19,7 @@ function drawCoverFrame(
   image: HTMLImageElement,
   width: number,
   height: number,
-  objectPosition: "center" | "right",
+  objectPositionX: number,
 ) {
   const imgRatio = image.naturalWidth / image.naturalHeight;
   const canvasRatio = width / height;
@@ -33,8 +33,7 @@ function drawCoverFrame(
     drawHeight = height;
     drawWidth = height * imgRatio;
     offsetY = 0;
-    offsetX =
-      objectPosition === "right" ? width - drawWidth : (width - drawWidth) / 2;
+    offsetX = (width - drawWidth) * objectPositionX;
   } else {
     drawWidth = width;
     drawHeight = width / imgRatio;
@@ -45,12 +44,14 @@ function drawCoverFrame(
   ctx.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
 }
 
+/** 0 = left, 0.5 = center, 0.75 = right-1/4, 1 = right */
+const OBJECT_POSITION_X = 0.75;
+
 export function ScrollSequence({ children }: ScrollSequenceProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const frameIndexRef = useRef(0);
-  const objectPositionRef = useRef<"center" | "right">("center");
   const metricsRef = useRef({ scrollableDistance: 0, containerTop: 0 });
   const rafRef = useRef<number | undefined>(undefined);
   const tickingRef = useRef(false);
@@ -76,7 +77,7 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    drawCoverFrame(ctx, image, width, height, objectPositionRef.current);
+    drawCoverFrame(ctx, image, width, height, OBJECT_POSITION_X);
   };
 
   const setFrame = (index: number) => {
@@ -104,9 +105,7 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
     const { scrollableDistance } = metricsRef.current;
     const scrolled = Math.max(0, -container.getBoundingClientRect().top);
     const progress =
-      scrollableDistance <= 0
-        ? 0
-        : Math.min(1, scrolled / scrollableDistance);
+      scrollableDistance <= 0 ? 0 : Math.min(1, scrolled / scrollableDistance);
     const nextIndex = Math.min(
       SEQUENCE_FRAMES.length - 1,
       Math.round(progress * (SEQUENCE_FRAMES.length - 1)),
@@ -120,18 +119,6 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
     tickingRef.current = true;
     rafRef.current = requestAnimationFrame(updateFrame);
   };
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-    const updateObjectPosition = () => {
-      objectPositionRef.current = mediaQuery.matches ? "right" : "center";
-      drawFrame(frameIndexRef.current);
-    };
-
-    updateObjectPosition();
-    mediaQuery.addEventListener("change", updateObjectPosition);
-    return () => mediaQuery.removeEventListener("change", updateObjectPosition);
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -200,7 +187,17 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
       <div className="pointer-events-none fixed inset-0 z-0 bg-black">
         <canvas
           ref={canvasRef}
-          className="block h-[100dvh] w-full md:h-full"
+          className="absolute bottom-0 left-0 z-[1] block h-[75vh] w-full md:inset-0 md:h-full md:z-auto"
+        />
+        {/* Overlaps top of canvas to fade the hard edge into black */}
+        <div
+          aria-hidden
+          className="absolute left-0 z-[2] h-[32vh] w-full md:hidden"
+          style={{
+            bottom: "calc(75vh - 22vh)",
+            background:
+              "linear-gradient(to bottom, #000 0%, #000 30%, rgba(0,0,0,0.75) 55%, rgba(0,0,0,0.35) 75%, transparent 100%)",
+          }}
         />
       </div>
 

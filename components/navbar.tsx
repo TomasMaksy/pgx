@@ -21,8 +21,24 @@ const spring = {
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  const isCompact = isDesktop && isScrolled;
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const updateDesktop = () => setIsDesktop(mediaQuery.matches);
+    updateDesktop();
+    mediaQuery.addEventListener("change", updateDesktop);
+    return () => mediaQuery.removeEventListener("change", updateDesktop);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) {
+      setIsScrolled(false);
+      return;
+    }
+
     let rafId: number | undefined;
     let scrolled = window.scrollY > SCROLL_THRESHOLD;
 
@@ -49,15 +65,15 @@ export function Navbar() {
       window.removeEventListener("scroll", onScroll);
       if (rafId !== undefined) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [isDesktop]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-16 pt-6">
+    <header className="fixed inset-x-0 top-0 z-50 h-16 pt-2 md:pt-6">
       <motion.nav
         initial={false}
         transition={spring}
         animate={
-          isScrolled
+          isCompact
             ? {
                 width: "min(70rem, 100%)",
                 borderRadius: 100,
@@ -68,7 +84,7 @@ export function Navbar() {
               }
         }
         className={`mx-auto border ${
-          isScrolled
+          isCompact
             ? "glass-inset border-white/15 bg-white/10 backdrop-blur-md"
             : "border-transparent bg-transparent"
         }`}

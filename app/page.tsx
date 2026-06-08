@@ -4,7 +4,7 @@ import { ScrollSequence } from "@/components/scroll-sequence";
 export default function Home() {
   return (
     <ScrollSequence>
-      <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-8 md:px-16 lg:px-24">
+      <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-start px-8 pt-24 md:justify-center md:px-16 md:pt-0 lg:px-24">
         <h1 className="max-w-5xl text-4xl leading-none font-semibold tracking-tight text-neutral-300 md:text-5xl lg:text-7xl">
           Your DNA <br /> Doesn&apos;t Change.
           <br />
