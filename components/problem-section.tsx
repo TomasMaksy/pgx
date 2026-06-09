@@ -1,5 +1,14 @@
 "use client";
 
+import { useState } from "react";
+import { ExternalLink } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Tooltip } from "@/components/ui/tooltip-card";
 
 type Source = {
@@ -8,6 +17,7 @@ type Source = {
   title: string;
   detail: string;
   url: string;
+  fact: string;
 };
 
 const SOURCES: Record<number, Source> = {
@@ -16,32 +26,33 @@ const SOURCES: Record<number, Source> = {
     label: "Pirmohamed et al., BMJ 2004",
     title: "Adverse drug reactions as cause of admission to hospital",
     detail:
-      "Prospective analysis of 18,820 patients: 6.5% of admissions were ADR-related, most were avoidable, and ~80% directly caused the admission.",
+      "Prospective analysis of 18,820 admissions across two UK hospitals over six months.",
     url: "https://www.bmj.com/content/329/7456/15",
+    fact: "6.5% ADR-related · 80% caused admission · >70% avoidable",
   },
   2: {
     id: 2,
     label: "Oscanoa et al., Eur J Clin Pharmacol 2017",
-    title: "ADR-related hospital admissions in older adults",
-    detail:
-      "Meta-analysis of patients aged 65+: roughly 1 in 10 hospital admissions in the elderly is caused by an adverse drug reaction.",
+    title: "Hospital admissions due to adverse drug reactions in the elderly",
+    detail: "Meta-analysis of 42 studies in patients over 60.",
     url: "https://pubmed.ncbi.nlm.nih.gov/28251277/",
+    fact: "8.7% pooled in patients 60+ (~1 in 10)",
   },
   3: {
     id: 3,
     label: "Higienos institutas",
     title: "Lithuanian hospital discharge statistics",
-    detail:
-      "National data from the Institute of Hygiene on annual hospitalisations in Lithuania.",
+    detail: "National inpatient data from the Institute of Hygiene.",
     url: "https://sveikstat.hi.lt/chart-summary-ctry.aspx?lang=eng&sel_rep_panel=8&top_loc=ctry&top_uid=110",
+    fact: "~430k annual hospital discharges",
   },
   4: {
     id: 4,
-    label: "Internal estimate",
-    title: "Applying international ADR rates to Lithuania",
-    detail:
-      "Estimate derived by applying the 6.5% ADR-related admission rate to Lithuania's annual hospitalisation volume.",
+    label: "Derived estimate",
+    title: "Applying the 6.5% ADR rate to Lithuania",
+    detail: "National discharges × 6.5% ADR rate.",
     url: "https://www.bmj.com/content/329/7456/15",
+    fact: "430k × 6.5% ≈ 28k/year",
   },
 };
 
@@ -50,7 +61,58 @@ const SUPERSCRIPTS = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸"
 const TOOLTIP_CLASS =
   "rounded-xl border-white/10 bg-neutral-900/95 shadow-lg shadow-black/50 ring-white/10 backdrop-blur-md";
 
-function SourceCard({ source }: { source: Source }) {
+type StatKey = "6.5%" | "80%" | "~28k";
+
+type StatModal = {
+  key: StatKey;
+  figure: string;
+  sourceIds: number[];
+  title: string;
+  summary: string;
+  caption: React.ReactNode;
+};
+
+const STATS: StatModal[] = [
+  {
+    key: "6.5%",
+    figure: "6.5%",
+    sourceIds: [1, 2],
+    title: "6.5% ADR-related admissions",
+    summary: "1 in 15 overall. ~1 in 10 in patients 65+.",
+    caption: (
+      <>
+        ADR-related admissions; ~10% in patients 65+ <Citation ids={[1, 2]} />
+      </>
+    ),
+  },
+  {
+    key: "80%",
+    figure: "80%",
+    sourceIds: [1],
+    title: "80% directly cause admission",
+    summary:
+      "The reaction caused the hospitalisation — not a complication during stay.",
+    caption: (
+      <>
+        directly cause admission — most avoidable <Citation ids={[1]} />
+      </>
+    ),
+  },
+  {
+    key: "~28k",
+    figure: "~28k",
+    sourceIds: [3, 4],
+    title: "~28k ADR hospitalisations/year",
+    summary: "~430k annual discharges × 6.5% ≈ 28,000 in Lithuania.",
+    caption: (
+      <>
+        hospitalisations/year in Lithuania <Citation ids={[3, 4]} />
+      </>
+    ),
+  },
+];
+
+function TooltipSourceCard({ source }: { source: Source }) {
   return (
     <div className="flex max-w-[16rem] flex-col gap-1.5">
       <p className="text-[10px] font-medium tracking-[0.18em] text-white/40 uppercase">
@@ -60,6 +122,19 @@ function SourceCard({ source }: { source: Source }) {
         {source.title}
       </p>
       <p className="text-xs leading-relaxed text-white/60">{source.detail}</p>
+    </div>
+  );
+}
+
+function TooltipSourceCards({ ids }: { ids: number[] }) {
+  return (
+    <div className="flex flex-col gap-4">
+      {ids.map((id, index) => (
+        <div key={id}>
+          {index > 0 && <div className="mb-4 border-t border-white/10" />}
+          <TooltipSourceCard source={SOURCES[id]} />
+        </div>
+      ))}
     </div>
   );
 }
@@ -83,50 +158,30 @@ function Citation({ ids }: { ids: number[] }) {
   );
 }
 
-function SourceCards({ ids }: { ids: number[] }) {
+function SourceReference({ source }: { source: Source }) {
   return (
-    <div className="flex flex-col gap-4">
-      {ids.map((id, index) => (
-        <div key={id}>
-          {index > 0 && <div className="mb-4 border-t border-white/10" />}
-          <SourceCard source={SOURCES[id]} />
-        </div>
-      ))}
-    </div>
+    <a
+      href={source.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group hover:text-foreground flex items-start justify-between gap-3 py-2.5 transition-colors"
+    >
+      <div className="min-w-0">
+        <p className="text-muted-foreground text-xs">{source.label}</p>
+        <p className="text-foreground mt-0.5 text-sm leading-snug">
+          {source.title}
+        </p>
+        <p className="text-muted-foreground mt-0.5 text-xs">{source.fact}</p>
+      </div>
+      <ExternalLink className="text-muted-foreground group-hover:text-foreground mt-0.5 size-3.5 shrink-0 transition-colors" />
+    </a>
   );
 }
 
-const STATS = [
-  {
-    figure: "6.5%",
-    sourceIds: [1, 2],
-    caption: (
-      <>
-        ADR-related admissions; ~10% in patients 65+ <Citation ids={[1, 2]} />
-      </>
-    ),
-  },
-  {
-    figure: "80%",
-    sourceIds: [1],
-    caption: (
-      <>
-        directly cause admission — most avoidable <Citation ids={[1]} />
-      </>
-    ),
-  },
-  {
-    figure: "~28k",
-    sourceIds: [3, 4],
-    caption: (
-      <>
-        hospitalisations/year in Lithuania <Citation ids={[3, 4]} />
-      </>
-    ),
-  },
-];
-
 export function ProblemSection() {
+  const [openStat, setOpenStat] = useState<StatKey | null>(null);
+  const activeStat = STATS.find((stat) => stat.key === openStat);
+
   return (
     <div className="w-full md:max-w-[50%]">
       <p className="text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
@@ -134,7 +189,9 @@ export function ProblemSection() {
       </p>
 
       <h2 className="mt-4 text-4xl leading-[0.95] font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
-        <span className="text-7xl font-semibold tracking-tighter">1 in 15</span>{" "}
+        <span className="text-gradient-headline text-7xl font-semibold tracking-tighter">
+          1 in 15
+        </span>{" "}
         <span className="mt-2 block text-2xl font-normal text-white/60 md:text-3xl">
           of all hospital admissions are caused by an adverse drug reaction
         </span>
@@ -144,14 +201,21 @@ export function ProblemSection() {
         {STATS.map((stat) => (
           <div key={stat.figure}>
             <Tooltip
-              content={<SourceCards ids={stat.sourceIds} />}
+              content={<TooltipSourceCards ids={stat.sourceIds} />}
               containerClassName="block"
               className={TOOLTIP_CLASS}
               contentClassName="p-3 md:p-4"
             >
-              <p className="w-fit cursor-pointer font-serif text-4xl font-semibold tracking-tighter text-white italic transition-colors hover:text-white/80 md:text-5xl lg:text-6xl">
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setOpenStat(stat.key);
+                }}
+                className="text-gradient-headline w-fit cursor-pointer text-left text-4xl font-semibold tracking-tighter text-white transition-colors hover:text-white/70 md:text-5xl"
+              >
                 {stat.figure}
-              </p>
+              </button>
             </Tooltip>
             <p className="mt-1 text-[11px] leading-snug text-white/45 md:text-xs">
               {stat.caption}
@@ -159,6 +223,30 @@ export function ProblemSection() {
           </div>
         ))}
       </div>
+
+      <Dialog
+        open={openStat !== null}
+        onOpenChange={(open) => !open && setOpenStat(null)}
+      >
+        {activeStat && (
+          <DialogContent className="gap-5 p-6 md:max-w-md md:gap-6 md:p-8">
+            <DialogHeader className="gap-2">
+              <DialogTitle className="text-2xl leading-tight font-semibold tracking-tight md:text-3xl">
+                {activeStat.title}
+              </DialogTitle>
+              <DialogDescription className="text-muted-foreground text-xs leading-snug md:text-sm">
+                {activeStat.summary}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="divide-border border-border divide-y border-t">
+              {activeStat.sourceIds.map((id) => (
+                <SourceReference key={id} source={SOURCES[id]} />
+              ))}
+            </div>
+          </DialogContent>
+        )}
+      </Dialog>
     </div>
   );
 }

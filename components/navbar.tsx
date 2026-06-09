@@ -26,7 +26,7 @@ export function Navbar() {
       <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 border border-transparent bg-transparent px-8 md:px-16 lg:px-24">
         <Link
           href="/"
-          className="justify-self-start font-serif text-lg font-semibold text-white italic"
+          className="justify-self-start text-lg font-semibold text-white"
         >
           pgx.bio
         </Link>

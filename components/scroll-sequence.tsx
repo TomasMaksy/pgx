@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import {
   SEQUENCE_FRAMES,
+  SEQUENCE_HOLD_SLOTS,
   SEQUENCE_SCROLL_HEIGHT_VH,
 } from "@/lib/sequence-frames";
 
@@ -127,9 +128,11 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
     const scrolled = Math.max(0, -container.getBoundingClientRect().top);
     const progress =
       scrollableDistance <= 0 ? 0 : Math.min(1, scrolled / scrollableDistance);
+    const maxFrameIndex = SEQUENCE_FRAMES.length - 1;
+    const totalScrollSlots = maxFrameIndex + SEQUENCE_HOLD_SLOTS;
     const nextIndex = Math.min(
-      SEQUENCE_FRAMES.length - 1,
-      Math.round(progress * (SEQUENCE_FRAMES.length - 1)),
+      maxFrameIndex,
+      Math.round(progress * totalScrollSlots),
     );
 
     setFrame(nextIndex);

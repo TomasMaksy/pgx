@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4, Geist } from "next/font/google";
+import { Inter, Geist } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { SEQUENCE_FRAMES } from "@/lib/sequence-frames";
 import "./globals.css";
@@ -10,13 +10,6 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const sourceSerif = Source_Serif_4({
-  variable: "--font-source-serif-4",
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +28,6 @@ export default function RootLayout({
       className={cn(
         "h-full bg-black antialiased",
         inter.variable,
-        sourceSerif.variable,
         "font-sans",
         geist.variable,
       )}
