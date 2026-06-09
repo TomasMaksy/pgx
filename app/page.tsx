@@ -1,29 +1,18 @@
-import { ChevronRight } from "lucide-react";
+import { HeroSection } from "@/components/hero-section";
 import { Logos8 } from "@/components/logos8";
+import { ProblemSection } from "@/components/problem-section";
 import { ScrollSequence } from "@/components/scroll-sequence";
 
 export default function Home() {
   return (
     <>
       <ScrollSequence>
-        <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-start px-8 pt-24 md:justify-center md:px-16 md:pt-0 lg:px-24">
-          <h1 className="max-w-5xl text-4xl leading-none font-semibold tracking-tight text-white md:text-5xl lg:text-7xl">
-            Your DNA <br /> Doesn&apos;t Change.
-            <br />
-            <span className="font-serif text-[40px] font-semibold tracking-tighter italic md:text-[54px] lg:text-[76px]">
-              Prescribing Should.
-            </span>{" "}
-          </h1>
-          <p className="mt-6 max-w-md text-base text-white md:text-2xl">
-            Clinical decision support powered by pharmacogenomics and AI
-          </p>
-          <button
-            type="button"
-            className="glass-inset mt-10 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-white/15 md:text-base"
-          >
-            Get Started
-            <ChevronRight className="size-4" strokeWidth={2} />
-          </button>
+        <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-start px-8 pt-44 md:justify-center md:px-16 md:pt-0 lg:px-24">
+          <HeroSection />
+        </section>
+
+        <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-start px-8 pb-24 md:justify-center md:px-16 md:pb-32 lg:px-24">
+          <ProblemSection />
         </section>
       </ScrollSequence>
 

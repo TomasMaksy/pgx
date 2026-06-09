@@ -55,6 +55,19 @@
     inset 0 -2px 16px rgba(255, 255, 255, 0.04);
 }
 
+.text-gradient-headline {
+  background: linear-gradient(
+    180deg,
+    #e8e8e8 0%,
+    #b8b8b8 45%,
+    #6e6e6e 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
 :root {
   --background: #000000;
   --foreground: #ededed;
@@ -130,7 +143,7 @@
   }
   html,
   body {
-    @apply bg-black text-foreground;
+    @apply text-foreground bg-black;
   }
   html {
     @apply font-sans;

@@ -235,7 +235,7 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
         {children}
         <div
           aria-hidden
-          className="pointer-events-none"
+          className="relative"
           style={{ height: `${SEQUENCE_SCROLL_HEIGHT_VH}vh` }}
         />
       </div>
