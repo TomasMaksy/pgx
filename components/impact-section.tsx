@@ -1,0 +1,92 @@
+import { Check, X } from "lucide-react";
+
+const COMPARISONS = [
+  {
+    traditional: "23.6% actionable gene–drug interactions go unidentified",
+    precision: "95% have actionable genetic insights",
+  },
+  {
+    traditional: "Medication risks discovered after treatment begins",
+    precision: "Risks identified before the first dose",
+  },
+  {
+    traditional: "Higher rates of adverse drug reactions",
+    precision: "↓30% clinically relevant ADRs",
+  },
+  {
+    traditional: "Longer hospital stays",
+    precision: "↓36% hospitalization duration",
+  },
+  {
+    traditional: "Higher downstream healthcare costs",
+    precision: "€276 lower costs per actionable patient",
+  },
+  {
+    traditional: "One prescription at a time",
+    precision: "One profile, lifelong guidance",
+  },
+] as const;
+
+export function ImpactSection() {
+  return (
+    <div className="w-full">
+      <p className="mx-auto w-fit text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
+        The impact
+      </p>
+
+      <h2 className="mx-auto mt-4 max-w-4xl text-center text-3xl leading-[1.1] font-semibold tracking-tight text-white md:text-4xl lg:text-5xl">
+        What Happens When Prescribing Becomes Genetics-Aware?
+      </h2>
+
+      <p className="mx-auto mt-6 max-w-3xl text-center text-base leading-relaxed text-white/55 md:text-lg">
+        When medication decisions are informed by pharmacogenomics, clinicians
+        can identify inherited medication risks before treatment begins—reducing
+        avoidable adverse drug reactions, improving treatment effectiveness, and
+        lowering healthcare utilization.
+      </p>
+
+      <div className="glass-inset mt-12 overflow-hidden rounded-2xl border border-white/10 bg-white/4 backdrop-blur-md md:mt-16">
+        <div className="grid grid-cols-1 border-b border-white/10 md:grid-cols-2">
+          <div className="border-b border-white/10 px-6 py-5 text-center md:border-r md:border-b-0 md:px-8 md:py-6">
+            <h3 className="text-lg font-semibold tracking-tight text-white/50 md:text-xl">
+              Traditional Care
+            </h3>
+          </div>
+          <div className="border-orange-500/20 bg-linear-to-b from-orange-500/10 to-transparent px-6 py-5 text-center md:px-8 md:py-6">
+            <h3 className="text-lg font-semibold tracking-tight text-white md:text-xl">
+              Precision Prescribing
+            </h3>
+          </div>
+        </div>
+
+        <ul className="divide-y divide-white/10">
+          {COMPARISONS.map((row) => (
+            <li
+              key={row.traditional}
+              className="grid grid-cols-1 md:grid-cols-2"
+            >
+              <div className="flex items-start gap-3 border-b border-white/8 px-6 py-4 md:gap-4 md:border-r md:border-b-0 md:px-8 md:py-5">
+                <X
+                  className="mt-0.5 size-4 shrink-0 text-white/25"
+                  strokeWidth={2}
+                />
+                <p className="text-sm leading-relaxed text-white/40 md:text-base">
+                  {row.traditional}
+                </p>
+              </div>
+              <div className="flex items-start gap-3 bg-orange-500/5 px-6 py-4 md:gap-4 md:px-8 md:py-5">
+                <Check
+                  className="mt-0.5 size-4 shrink-0 text-orange-400"
+                  strokeWidth={2}
+                />
+                <p className="text-sm leading-relaxed text-white/75 md:text-base">
+                  {row.precision}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
