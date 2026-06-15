@@ -11,7 +11,7 @@ const ANIM_BUFFER = 0.1;
 const INITIAL_DELAY = 0;
 const PHASE_GAP = 0.1;
 
-const firstLines = ["Nikita Your DNA", "Doesn't Change."] as const;
+const firstLines = ["Your DNA", "Doesn't Change."] as const;
 const secondLine = "Prescribing Should.";
 const subheadline =
   "Clinical decision support powered by pharmacogenomics and AI";
