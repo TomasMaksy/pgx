@@ -28,9 +28,9 @@ const STEPS = [
 ] as const;
 
 const CONNECTOR_GRADIENTS = [
-  "linear-gradient(to bottom, #f97316, #ea580c)",
-  "linear-gradient(to bottom, #ea580c, #dc2626)",
-  "linear-gradient(to bottom, #dc2626, #b91c1c)",
+  "linear-gradient(to bottom, #2DD4BF, #20B8A5)",
+  "linear-gradient(to bottom, #20B8A5, #179E8D)",
+  "linear-gradient(to bottom, #179E8D, #0F8475)",
 ] as const;
 
 function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
@@ -54,7 +54,7 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
           <path
             d="M 40 90 L 55 65 L 75 78 L 95 45 L 115 60 L 140 35"
             fill="none"
-            stroke="rgba(249,115,22,0.85)"
+            stroke="rgba(45,212,191,0.85)"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -65,7 +65,7 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
               cx={x}
               cy={[90, 65, 78, 45, 60, 35][i]}
               r="4"
-              fill="rgba(249,115,22,0.6)"
+              fill="rgba(45,212,191,0.6)"
             />
           ))}
           <rect
@@ -112,8 +112,8 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
             width="44"
             height="56"
             rx="8"
-            fill="rgba(249,115,22,0.12)"
-            stroke="rgba(234,88,12,0.45)"
+            fill="rgba(45,212,191,0.12)"
+            stroke="rgba(32,184,165,0.45)"
           />
           <rect
             x="136"
@@ -126,7 +126,7 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
           />
           <path
             d="M 64 72 L 78 72 M 122 72 L 136 72"
-            stroke="rgba(234,88,12,0.55)"
+            stroke="rgba(32,184,165,0.55)"
             strokeWidth="1.5"
             strokeDasharray="3 3"
           />
@@ -146,7 +146,7 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
             rx="1.5"
             fill="rgba(255,255,255,0.08)"
           />
-          <circle cx="100" cy="58" r="6" fill="rgba(249,115,22,0.5)" />
+          <circle cx="100" cy="58" r="6" fill="rgba(45,212,191,0.5)" />
           <rect
             x="86"
             y="72"
@@ -279,11 +279,11 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
             height="40"
             rx="8"
             fill="rgba(255,255,255,0.08)"
-            stroke="rgba(234,88,12,0.45)"
+            stroke="rgba(32,184,165,0.45)"
           />
           <path
             d="M 90 55 L 110 55 M 60 55 L 70 55 L 75 90 M 130 55 L 140 55 L 135 90"
-            stroke="rgba(234,88,12,0.55)"
+            stroke="rgba(32,184,165,0.55)"
             strokeWidth="1.5"
             strokeDasharray="3 3"
           />
@@ -344,8 +344,8 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
           width="50"
           height="20"
           rx="6"
-          fill="rgba(249,115,22,0.2)"
-          stroke="rgba(234,88,12,0.5)"
+          fill="rgba(45,212,191,0.2)"
+          stroke="rgba(32,184,165,0.5)"
         />
         <text
           x="80"

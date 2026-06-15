@@ -28,7 +28,7 @@ const SOURCES: Record<number, Source> = {
     detail:
       "Prospective analysis of 18,820 admissions across two UK hospitals over six months.",
     url: "https://www.bmj.com/content/329/7456/15",
-    fact: "6.5% ADR-related · 80% caused admission · >70% avoidable",
+    fact: "6.5% ADR-related admissions · >70% avoidable",
   },
   2: {
     id: 2,
@@ -59,20 +59,20 @@ const SOURCES: Record<number, Source> = {
   },
   5: {
     id: 5,
-    label: "Derived estimate",
-    title: "Applying the 1-in-12 ADR rate to Lithuania",
-    detail: "National discharges × 8.33% ADR-related admission rate.",
-    url: "https://www.mdpi.com/2077-0383/12/4/1320",
-    fact: "560,362 × 8.33% ≈ 46,700/year",
+    label: "Williams et al., Age Ageing 2025",
+    title:
+      "Hospital admissions due to adverse drug reactions and adverse drug events in older adults: a systematic review",
+    detail:
+      "Systematic review of ADR- and ADE-related hospital admissions in older adults.",
+    url: "https://doi.org/10.1093/ageing/afaf231",
+    fact: "80% of medication-related admissions predictable or preventable",
   },
 };
-
-const SUPERSCRIPTS = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"];
 
 const TOOLTIP_CLASS =
   "rounded-xl border-white/10 bg-neutral-900/95 shadow-lg shadow-black/50 ring-white/10 backdrop-blur-md";
 
-type StatKey = "6.5%" | "80%" | "~47k";
+type StatKey = "8.3%" | "80%" | "~47k";
 
 type StatModal = {
   key: StatKey;
@@ -85,41 +85,41 @@ type StatModal = {
 
 const STATS: StatModal[] = [
   {
-    key: "6.5%",
-    figure: "6.5%",
-    sourceIds: [1, 2],
-    title: "6.5% ADR-related admissions",
-    summary: "1 in 15 overall. ~1 in 10 in patients 65+.",
+    key: "8.3%",
+    figure: "8.3%",
+    sourceIds: [4],
+    title: "8.3% ADR-related admissions",
+    summary: "Approximately 1 in 12 hospital admissions are related to adverse drug reactions.",
     caption: (
       <>
-        ADR-related admissions; ~10% in patients 65+ <Citation ids={[1, 2]} />
+        ADR-related admissions <Citation ids={[4]} />
       </>
     ),
   },
   {
     key: "80%",
     figure: "80%",
-    sourceIds: [1],
-    title: "80% directly cause admission",
+    sourceIds: [5],
+    title: "80% predictable or preventable",
     summary:
-      "The reaction caused the hospitalisation — not a complication during stay.",
+      "80% of medication-related admissions may be predictable or preventable.",
     caption: (
       <>
-        directly cause admission — most avoidable <Citation ids={[1]} />
+        of medication-related admissions predictable or preventable{" "}
+        <Citation ids={[5]} />
       </>
     ),
   },
   {
     key: "~47k",
     figure: "~47k",
-    sourceIds: [3, 4, 5],
+    sourceIds: [3, 4],
     title: "~46,700 ADR hospitalisations/year",
     summary:
-      "Estimate based on 560,362 annual Lithuanian hospital discharges and a published 1-in-12 (8.33%) ADR-related admission rate.",
+      "560,362 annual Lithuanian hospital discharges × 8.33% (1 in 12) ≈ 46,700. Estimate calculated from published discharge volume and ADR-related admission prevalence.",
     caption: (
       <>
-        estimated hospitalisations/year in Lithuania{" "}
-        <Citation ids={[3, 4, 5]} />
+        estimated hospitalisations/year in Lithuania <Citation ids={[3, 4]} />
       </>
     ),
   },
@@ -154,7 +154,7 @@ function TooltipSourceCards({ ids }: { ids: number[] }) {
 
 function Citation({ ids }: { ids: number[] }) {
   return (
-    <span className="inline-flex gap-0.5 whitespace-nowrap">
+    <span className="inline-flex whitespace-nowrap">
       {ids.map((id) => (
         <a
           key={id}
@@ -164,7 +164,9 @@ function Citation({ ids }: { ids: number[] }) {
           aria-label={`Source ${id}: ${SOURCES[id].label}`}
           className="text-white/40 underline-offset-2 transition-colors hover:text-white hover:underline"
         >
-          {SUPERSCRIPTS[id]}
+          <sup className="ml-px text-[0.65em] leading-none font-normal">
+            {id}
+          </sup>
         </a>
       ))}
     </span>
@@ -206,7 +208,7 @@ export function ProblemSection() {
           1 in 12
         </span>{" "}
         <span className="mt-2 block text-2xl font-normal text-white/60 md:text-3xl">
-          of all hospital admissions are caused by an adverse drug reaction
+          hospital admissions are related to adverse drug reactions
         </span>
       </h2>
 

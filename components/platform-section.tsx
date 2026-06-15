@@ -115,7 +115,7 @@ function PolypharmacyGraphic() {
           strokeWidth="1.5"
           strokeDasharray="4 4"
         />
-        <circle cx="140" cy="120" r="4" fill="rgba(255,140,60,0.9)" />
+        <circle cx="140" cy="120" r="4" fill="rgba(45,212,191,0.9)" />
       </svg>
     </div>
   );
@@ -145,11 +145,11 @@ function LearningGraphic() {
         <path
           d="M 60 12 A 38 38 0 0 1 92 68"
           fill="none"
-          stroke="rgba(255,140,60,0.7)"
+          stroke="rgba(45,212,191,0.7)"
           strokeWidth="2"
           strokeLinecap="round"
         />
-        <circle cx="92" cy="68" r="4" fill="rgba(255,140,60,0.9)" />
+        <circle cx="92" cy="68" r="4" fill="rgba(45,212,191,0.9)" />
         {[0, 72, 144, 216, 288].map((angle, i) => {
           const rad = (angle * Math.PI) / 180;
           const x = 60 + Math.cos(rad) * 20;
@@ -202,7 +202,7 @@ function BalticDatabaseGraphic() {
           fill="none"
           stroke="rgba(255,255,255,0.12)"
         />
-        <circle cx="50" cy="28" r="5" fill="rgba(255,140,60,0.85)" />
+        <circle cx="50" cy="28" r="5" fill="rgba(45,212,191,0.85)" />
       </svg>
     </div>
   );
@@ -253,7 +253,7 @@ function BentoCard({
       className={[
         "group relative flex overflow-hidden rounded-3xl border p-6 md:p-8",
         isHero
-          ? "border-orange-500/20 bg-linear-to-b from-orange-500 via-orange-600 to-red-700"
+          ? "border-mint/20 bg-linear-to-b from-mint via-mint-dark to-mint-darkest"
           : "glass-inset border-white/10 bg-white/4 backdrop-blur-md",
         isSplit ? "flex-row items-center justify-between gap-6" : "flex-col",
         className,

@@ -46,7 +46,7 @@ export function Navbar() {
 
         <Link
           href="#"
-          className="glass-inset justify-self-end rounded-full border border-white/15 bg-white/10 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-white/15"
+          className="glass-inset justify-self-end rounded-full border border-mint/30 bg-mint/15 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-md transition-colors hover:border-mint/45 hover:bg-mint/25"
         >
           Get Started
         </Link>

@@ -52,7 +52,7 @@ export function ImpactSection() {
               Traditional Care
             </h3>
           </div>
-          <div className="border-orange-500/20 bg-linear-to-b from-orange-500/10 to-transparent px-6 py-5 text-center md:px-8 md:py-6">
+          <div className="border-mint/20 bg-linear-to-b from-mint/10 to-transparent px-6 py-5 text-center md:px-8 md:py-6">
             <h3 className="text-lg font-semibold tracking-tight text-white md:text-xl">
               Precision Prescribing
             </h3>
@@ -74,9 +74,9 @@ export function ImpactSection() {
                   {row.traditional}
                 </p>
               </div>
-              <div className="flex items-start gap-3 bg-orange-500/5 px-6 py-4 md:gap-4 md:px-8 md:py-5">
+              <div className="flex items-start gap-3 bg-mint/5 px-6 py-4 md:gap-4 md:px-8 md:py-5">
                 <Check
-                  className="mt-0.5 size-4 shrink-0 text-orange-400"
+                  className="mt-0.5 size-4 shrink-0 text-mint"
                   strokeWidth={2}
                 />
                 <p className="text-sm leading-relaxed text-white/75 md:text-base">

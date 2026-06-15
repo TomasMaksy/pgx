@@ -5,6 +5,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-mint: #2dd4bf;
+  --color-mint-light: #5eead4;
+  --color-mint-lighter: #7df5e8;
+  --color-mint-dark: #20b8a5;
+  --color-mint-darker: #179e8d;
+  --color-mint-darkest: #0f8475;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
