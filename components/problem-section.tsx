@@ -40,19 +40,30 @@ const SOURCES: Record<number, Source> = {
   },
   3: {
     id: 3,
-    label: "Higienos institutas",
-    title: "Lithuanian hospital discharge statistics",
-    detail: "National inpatient data from the Institute of Hygiene.",
+    label: "Institute of Hygiene Lithuania",
+    title: "Health Statistics of Lithuania 2023",
+    detail:
+      "Official national inpatient episode volume from the Institute of Hygiene.",
     url: "https://sveikstat.hi.lt/chart-summary-ctry.aspx?lang=eng&sel_rep_panel=8&top_loc=ctry&top_uid=110",
-    fact: "~430k annual hospital discharges",
+    fact: "560,362 annual hospital discharges",
   },
   4: {
     id: 4,
+    label: "Haerdtlein et al., J Clin Med 2023",
+    title:
+      "Which Adverse Events and Which Drugs Are Implicated in Drug-Related Hospital Admissions?",
+    detail:
+      "Systematic review and meta-analysis of 12 studies on ADR-related admissions.",
+    url: "https://www.mdpi.com/2077-0383/12/4/1320",
+    fact: "8.3% prevalence — ≈1 in 12 admissions ADR-related",
+  },
+  5: {
+    id: 5,
     label: "Derived estimate",
-    title: "Applying the 6.5% ADR rate to Lithuania",
-    detail: "National discharges × 6.5% ADR rate.",
-    url: "https://www.bmj.com/content/329/7456/15",
-    fact: "430k × 6.5% ≈ 28k/year",
+    title: "Applying the 1-in-12 ADR rate to Lithuania",
+    detail: "National discharges × 8.33% ADR-related admission rate.",
+    url: "https://www.mdpi.com/2077-0383/12/4/1320",
+    fact: "560,362 × 8.33% ≈ 46,700/year",
   },
 };
 
@@ -61,7 +72,7 @@ const SUPERSCRIPTS = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸"
 const TOOLTIP_CLASS =
   "rounded-xl border-white/10 bg-neutral-900/95 shadow-lg shadow-black/50 ring-white/10 backdrop-blur-md";
 
-type StatKey = "6.5%" | "80%" | "~28k";
+type StatKey = "6.5%" | "80%" | "~47k";
 
 type StatModal = {
   key: StatKey;
@@ -99,14 +110,16 @@ const STATS: StatModal[] = [
     ),
   },
   {
-    key: "~28k",
-    figure: "~28k",
-    sourceIds: [3, 4],
-    title: "~28k ADR hospitalisations/year",
-    summary: "~430k annual discharges × 6.5% ≈ 28,000 in Lithuania.",
+    key: "~47k",
+    figure: "~47k",
+    sourceIds: [3, 4, 5],
+    title: "~46,700 ADR hospitalisations/year",
+    summary:
+      "Estimate based on 560,362 annual Lithuanian hospital discharges and a published 1-in-12 (8.33%) ADR-related admission rate.",
     caption: (
       <>
-        hospitalisations/year in Lithuania <Citation ids={[3, 4]} />
+        estimated hospitalisations/year in Lithuania{" "}
+        <Citation ids={[3, 4, 5]} />
       </>
     ),
   },
@@ -190,7 +203,7 @@ export function ProblemSection() {
 
       <h2 className="mt-4 text-4xl leading-[0.95] font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
         <span className="text-gradient-headline text-7xl font-semibold tracking-tighter">
-          1 in 15
+          1 in 12
         </span>{" "}
         <span className="mt-2 block text-2xl font-normal text-white/60 md:text-3xl">
           of all hospital admissions are caused by an adverse drug reaction
