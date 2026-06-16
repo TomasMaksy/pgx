@@ -2,6 +2,7 @@
 
 import { ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
+import { MatterButton } from "@/components/ui/matter-button";
 import { TextAnimate } from "@/components/ui/text-animate";
 
 const headlineSegmentClass = "text-gradient-headline font-sans tracking-tight";
@@ -98,8 +99,7 @@ export function HeroSection() {
         {subheadline}
       </TextAnimate>
 
-      <motion.button
-        type="button"
+      <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -107,11 +107,13 @@ export function HeroSection() {
           delay: buttonDelay,
           ease: [0.16, 1, 0.3, 1],
         }}
-        className="glass-inset mt-10 inline-flex w-fit items-center gap-2 rounded-full border border-mint/30 bg-mint/15 px-6 py-3 text-sm font-medium text-white backdrop-blur-md transition-colors hover:border-mint/45 hover:bg-mint/25 md:text-base"
+        className="mt-10"
       >
-        Get Started
-        <ChevronRight className="size-4" strokeWidth={2} />
-      </motion.button>
+        <MatterButton type="button" className="inline-flex items-center gap-2">
+          Get Started
+          <ChevronRight className="size-4" strokeWidth={2} />
+        </MatterButton>
+      </motion.div>
     </>
   );
 }
