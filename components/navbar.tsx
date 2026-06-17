@@ -7,9 +7,9 @@ import GradualBlur from "@/components/gradual-blur";
 import { MatterButton } from "@/components/ui/matter-button";
 
 const NAV_LINKS = [
-  { label: "Product", href: "#" },
-  { label: "Platform", href: "#" },
-  { label: "About", href: "#" },
+  { label: "Product", href: "#product" },
+  { label: "Platform", href: "#platform" },
+  { label: "About", href: "#why-now" },
 ];
 
 const enter = {
@@ -42,23 +42,24 @@ export function Navbar() {
         initial={{ y: "-100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={enter}
-        className="fixed inset-x-0 top-0 z-50 px-0 pt-0 backdrop-blur-md md:backdrop-blur-none"
+        className="fixed inset-x-0 top-0 z-50 px-0 pt-4 backdrop-blur-md md:pt-7 md:backdrop-blur-none"
       >
-        <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 border border-transparent bg-transparent px-8 md:px-16 lg:px-24">
+        <nav className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 border border-transparent bg-transparent px-8 md:px-16 lg:px-24">
           <Link
             href="/"
             className="justify-self-start text-lg font-semibold text-white"
           >
             <Image
-              src="/logo.webp"
-              alt="Genolink Biotechnologies Logo"
-              width={140}
-              height={100}
-              className="opacity-75"
+              src="/grey-matte-logo-main.webp"
+              alt="GenoLink Biotechnologies"
+              width={200}
+              height={57}
+              unoptimized
+              className="h-9 w-auto md:h-11"
             />
           </Link>
 
-          <ul className="hidden items-center gap-8 md:flex">
+          <ul className="hidden items-center justify-self-center gap-8 md:flex">
             {NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <Link

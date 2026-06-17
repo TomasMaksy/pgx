@@ -1,3 +1,5 @@
+import { LifetimeFlow } from "@/components/lifetime-flow";
+
 const STEPS = [
   {
     number: "01",
@@ -432,6 +434,8 @@ export function SolutionSection() {
           ))}
         </ol>
       </div>
+
+      <LifetimeFlow />
     </div>
   );
 }
