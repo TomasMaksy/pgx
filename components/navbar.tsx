@@ -47,7 +47,7 @@ export function Navbar() {
         <nav className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 border border-transparent bg-transparent px-8 md:px-16 lg:px-24">
           <Link
             href="/"
-            className="justify-self-start text-lg font-semibold text-white"
+            className="col-start-1 justify-self-start text-lg font-semibold text-white"
           >
             <Image
               src="/grey-matte-logo-main.webp"
@@ -59,7 +59,7 @@ export function Navbar() {
             />
           </Link>
 
-          <ul className="hidden items-center justify-self-center gap-8 md:flex">
+          <ul className="col-start-2 hidden items-center justify-self-center gap-8 md:flex">
             {NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <Link
@@ -74,7 +74,7 @@ export function Navbar() {
 
           <MatterButton
             type="button"
-            wrapperClassName="justify-self-end shrink-0"
+            wrapperClassName="col-start-3 justify-self-end shrink-0"
             className="h-11 px-6 text-sm"
           >
             Get Started
