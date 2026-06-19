@@ -78,11 +78,11 @@ export function ResearchSection() {
 
   return (
     <div className="w-full">
-      <p className="mx-auto w-fit text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
+      <p className="section-eyebrow mx-auto w-fit">
         Backed by research
       </p>
 
-      <h2 className="mx-auto mt-4 max-w-4xl text-center text-3xl leading-[1.1] font-semibold tracking-tight text-white md:text-4xl lg:text-5xl">
+      <h2 className="section-title mx-auto max-w-4xl text-center">
         <PointerHighlight
           containerClassName="inline-block"
           rectangleClassName="rounded-sm border-mint/50 scale-110"

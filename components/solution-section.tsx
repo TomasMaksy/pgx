@@ -1,4 +1,5 @@
-import { LifetimeFlow } from "@/components/lifetime-flow";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const STEPS = [
   {
@@ -35,154 +36,48 @@ const CONNECTOR_GRADIENTS = [
   "linear-gradient(to bottom, #179E8D, #0F8475)",
 ] as const;
 
+function StepImage({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <div className="flex h-full max-h-62 min-h-36 items-end justify-center overflow-hidden rounded-2xl border-4 border-white/10 bg-black/50 backdrop-blur-sm">
+      <Image
+        src={src}
+        alt={alt}
+        width={280}
+        height={380}
+        className={cn(
+          "h-full w-full object-contain object-bottom pt-8",
+          className,
+        )}
+      />
+    </div>
+  );
+}
+
 function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
   if (type === "test") {
     return (
-      <div className="flex h-full min-h-48 items-center justify-center rounded-2xl border border-white/10 bg-white/4 p-6 backdrop-blur-sm">
-        <svg
-          viewBox="0 0 200 140"
-          className="h-full w-full max-w-xs"
-          aria-hidden
-        >
-          <rect
-            x="20"
-            y="20"
-            width="160"
-            height="100"
-            rx="12"
-            fill="rgba(255,255,255,0.04)"
-            stroke="rgba(255,255,255,0.12)"
-          />
-          <path
-            d="M 40 90 L 55 65 L 75 78 L 95 45 L 115 60 L 140 35"
-            fill="none"
-            stroke="rgba(45,212,191,0.85)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          {[40, 55, 75, 95, 115, 140].map((x, i) => (
-            <circle
-              key={i}
-              cx={x}
-              cy={[90, 65, 78, 45, 60, 35][i]}
-              r="4"
-              fill="rgba(45,212,191,0.6)"
-            />
-          ))}
-          <rect
-            x="40"
-            y="32"
-            width="60"
-            height="6"
-            rx="3"
-            fill="rgba(255,255,255,0.15)"
-          />
-          <rect
-            x="40"
-            y="44"
-            width="40"
-            height="4"
-            rx="2"
-            fill="rgba(255,255,255,0.08)"
-          />
-        </svg>
-      </div>
+      <StepImage
+        src="/how-it-works/1.webp"
+        alt="Cheek swab DNA test sample collection"
+      />
     );
   }
 
   if (type === "analysis") {
     return (
-      <div className="flex h-full min-h-48 items-center justify-center rounded-2xl border border-white/10 bg-white/4 p-6 backdrop-blur-sm">
-        <svg
-          viewBox="0 0 200 140"
-          className="h-full w-full max-w-xs"
-          aria-hidden
-        >
-          <rect
-            x="20"
-            y="50"
-            width="44"
-            height="44"
-            rx="8"
-            fill="rgba(255,255,255,0.05)"
-            stroke="rgba(255,255,255,0.12)"
-          />
-          <rect
-            x="78"
-            y="38"
-            width="44"
-            height="56"
-            rx="8"
-            fill="rgba(45,212,191,0.12)"
-            stroke="rgba(32,184,165,0.45)"
-          />
-          <rect
-            x="136"
-            y="50"
-            width="44"
-            height="44"
-            rx="8"
-            fill="rgba(255,255,255,0.05)"
-            stroke="rgba(255,255,255,0.12)"
-          />
-          <path
-            d="M 64 72 L 78 72 M 122 72 L 136 72"
-            stroke="rgba(32,184,165,0.55)"
-            strokeWidth="1.5"
-            strokeDasharray="3 3"
-          />
-          <rect
-            x="28"
-            y="62"
-            width="28"
-            height="3"
-            rx="1.5"
-            fill="rgba(255,255,255,0.15)"
-          />
-          <rect
-            x="28"
-            y="70"
-            width="20"
-            height="3"
-            rx="1.5"
-            fill="rgba(255,255,255,0.08)"
-          />
-          <circle cx="100" cy="58" r="6" fill="rgba(45,212,191,0.5)" />
-          <rect
-            x="86"
-            y="72"
-            width="28"
-            height="3"
-            rx="1.5"
-            fill="rgba(255,255,255,0.2)"
-          />
-          <rect
-            x="86"
-            y="80"
-            width="20"
-            height="3"
-            rx="1.5"
-            fill="rgba(255,255,255,0.1)"
-          />
-          <rect
-            x="144"
-            y="62"
-            width="28"
-            height="3"
-            rx="1.5"
-            fill="rgba(255,255,255,0.15)"
-          />
-          <rect
-            x="144"
-            y="70"
-            width="20"
-            height="3"
-            rx="1.5"
-            fill="rgba(255,255,255,0.08)"
-          />
-        </svg>
-      </div>
+      <StepImage
+        src="/how-it-works/2.webp"
+        alt="DNA sequence analysis with AI-assisted bioinformatics"
+        className="-mt-20"
+      />
     );
   }
 
@@ -375,13 +270,11 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
 export function SolutionSection() {
   return (
     <div className="w-full">
-      <p className="mx-auto w-fit text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
-        The solution
-      </p>
+      <p className="section-eyebrow mx-auto w-fit">The solution</p>
 
-      <h2 className="mx-auto mt-4 max-w-3xl text-center text-4xl leading-[1.05] font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
+      <h2 className="section-title section-title-lg mx-auto max-w-3xl text-center">
         <span className="text-gradient-headline">One Profile.</span>{" "}
-        <span className="block md:inline">
+        <span className="block text-white/85 md:inline">
           A Lifetime of Smarter Prescribing.
         </span>
       </h2>
@@ -398,7 +291,7 @@ export function SolutionSection() {
             <li
               key={step.number}
               className={[
-                "relative grid grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-12",
+                "relative grid grid-cols-1 gap-8 md:grid-cols-2 md:items-stretch md:gap-12",
                 index < STEPS.length - 1 ? "pb-16 md:pb-24" : "",
               ].join(" ")}
             >
@@ -414,13 +307,13 @@ export function SolutionSection() {
 
               <div className="flex min-w-0 items-start gap-3 md:gap-4">
                 <div className="flex w-9 shrink-0 justify-center md:w-10">
-                  <span className="relative z-10 text-3xl font-semibold tracking-tight text-white/15 md:text-4xl">
+                  <span className="relative z-10 text-3xl font-medium tracking-tight text-white/15 md:text-4xl">
                     {step.number}
                   </span>
                 </div>
 
                 <div className="min-w-0">
-                  <h3 className="text-3xl font-semibold tracking-tight text-white/75 md:text-4xl">
+                  <h3 className="section-heading text-3xl md:text-4xl">
                     {step.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/50 md:text-base">
@@ -434,8 +327,6 @@ export function SolutionSection() {
           ))}
         </ol>
       </div>
-
-      <LifetimeFlow />
     </div>
   );
 }

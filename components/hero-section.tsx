@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { MatterButton } from "@/components/ui/matter-button";
 import { TextAnimate } from "@/components/ui/text-animate";
@@ -109,8 +110,12 @@ export function HeroSection() {
         }}
         className="mt-10"
       >
-        <MatterButton type="button" className="inline-flex items-center gap-2">
-          Get Started
+        <MatterButton
+          nativeButton={false}
+          render={<Link href="#contact" />}
+          className="inline-flex items-center gap-2"
+        >
+          Contact Us
           <ChevronRight className="size-4" strokeWidth={2} />
         </MatterButton>
       </motion.div>

@@ -6,35 +6,36 @@ import { useInView, useReducedMotion } from "motion/react";
 const METRICS = [
   {
     value: "−30%",
-    label: "Fewer serious adverse drug reactions",
-    source: "PREPARE study, The Lancet, 2023",
+    label: "30% fewer serious adverse drug reactions",
+    source: "PREPARE trial — The Lancet, 2023",
   },
   {
     value: "95%",
     label:
-      "of individuals carry at least one clinically relevant or actionable PGx variant",
-    source: "A Swiss hospital-based cohort study",
+      "95% of people carry a PGx variant that can inform prescribing",
+    source: "Swiss hospital cohort study",
   },
   {
     value: "1 in 4",
-    label: "primary-care prescriptions adjusted to the patient's genome",
-    source: "Implementation data, primary care (Netherlands)",
+    label: "1 in 4 primary-care prescriptions are PGx-relevant",
+    source: "Dutch primary-care implementation data",
   },
   {
     value: "−36%",
-    label: "shorter hospital stays — fewer occupied beds, shorter queues",
-    source: "PREPARE: average stay 2.4 → 1.5 days",
+    label: "36% shorter hospital stays when prescribing is PGx-guided",
+    source: "PREPARE: 2.4 → 1.5 days average stay",
   },
   {
     value: "≈€2 500",
-    label: "cost of one preventable drug-reaction hospitalisation (Lithuania)",
+    label: "≈€2,500 per preventable ADR-related hospitalisation",
     source:
-      "Estimate for Lithuania; EU average ~€5,500 (IATROSTAT-ECO, France, 2023)",
+      "Lithuanian estimate; EU average ~€5,500 (IATROSTAT-ECO, 2023)",
   },
   {
-    value: "≈€5–10M / year",
-    label: "potential saving for Lithuania's healthcare system",
-    source: "Preliminary estimate; the exact figure to be set by the project",
+    value: "≈€5–10M",
+    label:
+      "€5–10M estimated annual savings for Lithuania's healthcare system",
+    source: "Modeled from PREPARE outcomes and local ADR incidence",
     highlight: true,
   },
 ] as const;
@@ -95,36 +96,37 @@ function RollingValue({
 export function MetricsSection() {
   return (
     <div className="w-full">
-      <p className="text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
+      <p className="section-eyebrow">
         Impact
       </p>
-      <h2 className="mt-4 max-w-3xl text-3xl leading-[1.1] font-semibold tracking-tight text-white md:text-4xl lg:text-5xl">
-        What this changes — in numbers.
+      <h2 className="section-title max-w-3xl">
+        The measurable impact of genetics-aware prescribing.
       </h2>
 
-      <div className="mt-10 md:mt-14">
+      <div className="mt-8 md:mt-10">
         {METRICS.map((m) => (
           <div
             key={m.label}
-            className="grid grid-cols-1 gap-3 border-t border-white/10 py-7 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-10 md:py-9"
+            className="grid grid-cols-1 gap-2 border-t border-white/10 py-5 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-8 md:py-6"
           >
-            <div className="max-w-md">
-              <p className="text-base leading-snug text-white/80 md:text-lg">
+            <RollingValue
+              value={m.value}
+              aria-hidden
+              className={[
+                "order-1 font-sans text-4xl leading-[1.05] font-light tracking-tight tabular-nums md:order-2 md:text-right md:text-5xl lg:text-6xl",
+                "highlight" in m && m.highlight
+                  ? "text-gradient-mint"
+                  : "text-white/85",
+              ].join(" ")}
+            />
+            <div className="order-2 max-w-xl md:order-1">
+              <p className="text-lg leading-snug font-medium tracking-tight text-white/85 md:text-xl">
                 {m.label}
               </p>
-              <p className="mt-2 text-xs leading-snug text-white/35">
+              <p className="mt-1.5 text-xs leading-snug text-white/40 md:text-sm">
                 {m.source}
               </p>
             </div>
-            <RollingValue
-              value={m.value}
-              className={[
-                "font-serif text-5xl leading-[1.05] font-light tracking-tight tabular-nums md:text-right md:text-6xl",
-                "highlight" in m && m.highlight
-                  ? "text-mint-lighter"
-                  : "text-white",
-              ].join(" ")}
-            />
           </div>
         ))}
       </div>

@@ -436,7 +436,7 @@ function StageCard({
 
       <h3
         className={[
-          "relative z-10 mt-5 font-semibold tracking-tight text-white",
+          "relative z-10 mt-5 section-heading",
           big ? "text-xl md:text-2xl" : "text-lg",
         ].join(" ")}
       >
@@ -460,10 +460,10 @@ export function VisionSection() {
   return (
     <div className="w-full">
       <Reveal className="text-center">
-        <p className="text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
+        <p className="section-eyebrow">
           Our goals
         </p>
-        <h2 className="mx-auto mt-4 max-w-4xl text-3xl leading-[1.1] font-semibold tracking-tight text-white md:text-4xl lg:text-5xl">
+        <h2 className="section-title mx-auto max-w-4xl text-center">
           Make genetics the backbone of every prescription — and grow from there
           into the medicine of the future.
         </h2>
@@ -510,7 +510,7 @@ export function VisionSection() {
       {/* Ради чего — ценность платформы */}
       <Reveal delay={0.05}>
         <div className="mt-12 md:mt-16">
-          <h3 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
+          <h3 className="section-heading text-2xl md:text-3xl">
             Why we do this
           </h3>
           <div className="glass-inset mt-6 overflow-hidden rounded-3xl border border-white/10 bg-white/4 backdrop-blur-md">
@@ -521,7 +521,7 @@ export function VisionSection() {
                     <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-mint/25 bg-mint/15">
                       <Icon className="size-5 text-mint" strokeWidth={2} />
                     </div>
-                    <h4 className="text-base font-semibold tracking-tight text-white">
+                    <h4 className="section-heading text-base">
                       {title}
                     </h4>
                   </div>

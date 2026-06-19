@@ -16,7 +16,7 @@ export function ResearchReadingCard({ card }: ResearchReadingCardProps) {
       rel="noopener noreferrer"
       containerClassName="h-full w-full"
     >
-      <article className="flex h-full w-full flex-col rounded-xl border border-white/10 bg-white/4 transition-[border-color,box-shadow] duration-500 ease-in-out [transform-style:preserve-3d] group-hover/pin:border-white/20 group-hover/pin:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.14),inset_0_0_24px_rgba(255,255,255,0.07),inset_0_0_48px_rgba(255,255,255,0.04)]">
+      <article className="glass-inset flex h-full w-full flex-col overflow-hidden rounded-xl border border-neutral-500/30 bg-neutral-900/70 backdrop-blur-xs transition-[border-color] duration-500 ease-in-out [transform-style:preserve-3d] group-hover/pin:border-neutral-400/40">
         <div className="relative aspect-2/1 w-full shrink-0 overflow-hidden rounded-t-xl bg-white/5">
           <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
         </div>
@@ -26,7 +26,7 @@ export function ResearchReadingCard({ card }: ResearchReadingCardProps) {
             {card.journal} · {card.year}
           </p>
 
-          <h3 className="mt-2 line-clamp-2 text-sm leading-snug font-semibold tracking-tight text-white">
+          <h3 className="section-heading mt-2 line-clamp-2 text-sm leading-snug">
             {card.headline}
           </h3>
 

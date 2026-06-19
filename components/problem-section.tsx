@@ -131,7 +131,7 @@ function TooltipSourceCard({ source }: { source: Source }) {
       <p className="text-[10px] font-medium tracking-[0.18em] text-white/40 uppercase">
         Source {source.id} · {source.label}
       </p>
-      <p className="text-sm leading-snug font-semibold text-white">
+      <p className="text-sm leading-snug font-medium text-white/80">
         {source.title}
       </p>
       <p className="text-xs leading-relaxed text-white/60">{source.detail}</p>
@@ -199,15 +199,15 @@ export function ProblemSection() {
 
   return (
     <div className="w-full md:max-w-[50%]">
-      <p className="text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
+      <p className="section-eyebrow">
         The problem
       </p>
 
-      <h2 className="mt-4 text-4xl leading-[0.95] font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
-        <span className="text-gradient-headline text-7xl font-semibold tracking-tighter">
+      <h2 className="section-title section-title-lg max-w-none">
+        <span className="text-gradient-headline text-7xl font-medium tracking-tighter">
           1 in 12
         </span>{" "}
-        <span className="mt-2 block text-2xl font-normal text-white/60 md:text-3xl">
+        <span className="mt-2 block text-2xl font-normal text-white/55 md:text-3xl">
           hospital admissions are related to adverse drug reactions
         </span>
       </h2>
@@ -227,7 +227,7 @@ export function ProblemSection() {
                   event.stopPropagation();
                   setOpenStat(stat.key);
                 }}
-                className="text-gradient-headline w-fit cursor-pointer text-left text-4xl font-semibold tracking-tighter text-white transition-colors hover:text-white/70 md:text-5xl"
+                className="text-gradient-headline w-fit cursor-pointer text-left text-4xl font-medium tracking-tighter transition-colors hover:opacity-80 md:text-5xl"
               >
                 {stat.figure}
               </button>
@@ -246,7 +246,7 @@ export function ProblemSection() {
         {activeStat && (
           <DialogContent className="gap-5 p-6 md:max-w-md md:gap-6 md:p-8">
             <DialogHeader className="gap-2">
-              <DialogTitle className="text-2xl leading-tight font-semibold tracking-tight md:text-3xl">
+              <DialogTitle className="text-2xl leading-tight font-medium tracking-tight md:text-3xl">
                 {activeStat.title}
               </DialogTitle>
               <DialogDescription className="text-muted-foreground text-xs leading-snug md:text-sm">

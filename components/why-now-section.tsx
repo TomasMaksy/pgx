@@ -491,7 +491,7 @@ function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
             {detail.eyebrow}
           </div>
 
-          <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+          <h3 className="section-heading mt-4 text-2xl md:text-3xl">
             {detail.title}
           </h3>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/65 md:text-base">
@@ -531,7 +531,7 @@ function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
             <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/8">
               {detail.tiles.map(({ value, label }) => (
                 <div key={label} className="bg-black/40 p-4">
-                  <p className="text-xl font-bold tracking-tight text-white md:text-2xl">
+                  <p className="text-xl font-medium tracking-tight text-white/85 md:text-2xl">
                     {value}
                   </p>
                   <p className="mt-1 text-xs leading-snug text-white/50">
@@ -600,11 +600,11 @@ export function WhyNowSection() {
 
   return (
     <div className="w-full">
-      <p className="text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
+      <p className="section-eyebrow">
         Why now
       </p>
 
-      <h2 className="mt-4 max-w-3xl text-3xl leading-[1.1] font-semibold tracking-tight text-white md:text-4xl lg:text-5xl">
+      <h2 className="section-title max-w-3xl">
         A narrow window — open right now.
       </h2>
 
@@ -622,7 +622,7 @@ export function WhyNowSection() {
       {/* Thesis card: text left, diagram right */}
       <div className="glass-inset mt-12 grid grid-cols-1 gap-8 overflow-hidden rounded-3xl border border-mint/20 bg-linear-to-b from-mint/12 to-transparent p-6 md:mt-16 md:grid-cols-2 md:items-center md:p-10">
         <div>
-          <h3 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
+          <h3 className="section-heading text-2xl md:text-3xl">
             Four factors are converging right now
           </h3>
           <p className="mt-4 max-w-xl text-sm leading-7 text-white/55 md:text-base md:leading-8">
@@ -693,7 +693,7 @@ export function WhyNowSection() {
                   </span>
                 </div>
 
-                <h3 className="relative z-10 mt-5 text-base font-semibold tracking-tight text-white">
+                <h3 className="section-heading relative z-10 mt-5 text-base">
                   {tag}
                 </h3>
                 <p
@@ -796,7 +796,7 @@ export function WhyNowSection() {
                 />
               </div>
 
-              <h4 className="mt-5 text-base font-semibold tracking-tight text-white">
+              <h4 className="section-heading mt-5 text-base">
                 {name}
               </h4>
               {note && (

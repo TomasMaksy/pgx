@@ -61,7 +61,36 @@
 }
 
 .text-gradient-headline {
-  background: linear-gradient(180deg, #e8e8e8 0%, #b8b8b8 45%, #6e6e6e 100%);
+  background: linear-gradient(180deg, #d4d4d4 0%, #a3a3a3 45%, #737373 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.section-eyebrow {
+  @apply text-xs font-medium tracking-[0.25em] text-white/50 uppercase;
+}
+
+.section-title {
+  @apply mt-4 text-3xl leading-[1.1] font-medium tracking-tight text-white/85 md:text-4xl lg:text-5xl;
+}
+
+.section-title-lg {
+  @apply text-4xl leading-[1.05] md:text-5xl lg:text-6xl;
+}
+
+.section-heading {
+  @apply font-medium tracking-tight text-white/80;
+}
+
+.text-gradient-mint {
+  background: linear-gradient(
+    180deg,
+    #2dd4bf 0%,
+    #20b8a5 45%,
+    #0f8475 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -146,6 +175,6 @@
     @apply text-foreground bg-black;
   }
   html {
-    @apply font-sans;
+    @apply scroll-smooth font-sans;
   }
 }

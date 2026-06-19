@@ -30,11 +30,11 @@ const COMPARISONS = [
 export function ImpactSection() {
   return (
     <div className="w-full">
-      <p className="mx-auto w-fit text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
+      <p className="section-eyebrow mx-auto w-fit">
         The impact
       </p>
 
-      <h2 className="mx-auto mt-4 max-w-4xl text-center text-3xl leading-[1.1] font-semibold tracking-tight text-white md:text-4xl lg:text-5xl">
+      <h2 className="section-title mx-auto max-w-4xl text-center">
         What Happens When Prescribing Becomes Genetics-Aware?
       </h2>
 
@@ -48,12 +48,12 @@ export function ImpactSection() {
       <div className="glass-inset mt-12 overflow-hidden rounded-2xl border border-white/10 bg-white/4 backdrop-blur-md md:mt-16">
         <div className="grid grid-cols-1 border-b border-white/10 md:grid-cols-2">
           <div className="border-b border-white/10 px-6 py-5 text-center md:border-r md:border-b-0 md:px-8 md:py-6">
-            <h3 className="text-lg font-semibold tracking-tight text-white/50 md:text-xl">
+            <h3 className="section-heading text-lg text-white/50 md:text-xl">
               Traditional Care
             </h3>
           </div>
           <div className="border-mint/20 bg-linear-to-b from-mint/10 to-transparent px-6 py-5 text-center md:px-8 md:py-6">
-            <h3 className="text-lg font-semibold tracking-tight text-white md:text-xl">
+            <h3 className="section-heading text-lg md:text-xl">
               Precision Prescribing
             </h3>
           </div>

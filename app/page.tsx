@@ -1,13 +1,15 @@
 import { HeroSection } from "@/components/hero-section";
 import { ProblemSection } from "@/components/problem-section";
-import { ImpactSection } from "@/components/impact-section";
 import { MetricsSection } from "@/components/metrics-section";
+import { MacbookMockupSection } from "@/components/macbook-mockup-section";
 import { PlatformSection } from "@/components/platform-section";
 import { ResearchSection } from "@/components/research-section";
 import { SolutionSection } from "@/components/solution-section";
 import { VisionSection } from "@/components/vision-section";
 import { WhyNowSection } from "@/components/why-now-section";
 import { MoreFeaturesSection } from "@/components/more-features-section";
+import { TeamSection } from "@/components/team-section";
+import { FooterSection } from "@/components/footer-section";
 import { ScrollSequence } from "@/components/scroll-sequence";
 
 export default function Home() {
@@ -30,9 +32,11 @@ export default function Home() {
         <SolutionSection />
       </section>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-8 py-16 md:px-16 md:py-20 lg:px-24">
+      {/* <LifetimeFlow /> */}
+
+      {/* <section className="relative z-10 mx-auto max-w-7xl px-8 py-16 md:px-16 md:py-20 lg:px-24">
         <ImpactSection />
-      </section>
+      </section> */}
 
       <section
         id="platform"
@@ -41,15 +45,13 @@ export default function Home() {
         <PlatformSection />
       </section>
 
+      <MacbookMockupSection />
+
       <section
         id="impact"
         className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
       >
         <MetricsSection />
-      </section>
-
-      <section className="relative z-10 mx-auto max-w-7xl px-8 py-16 md:px-16 md:py-20 lg:px-24">
-        <ResearchSection />
       </section>
 
       <section
@@ -66,9 +68,28 @@ export default function Home() {
         <VisionSection />
       </section>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-8 py-16 md:px-16 md:py-20 lg:px-24">
+      <section
+        id="team"
+        className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
+      >
+        <TeamSection />
+      </section>
+
+      <section
+        id="features"
+        className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
+      >
         <MoreFeaturesSection />
       </section>
+
+      <section
+        id="research"
+        className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
+      >
+        <ResearchSection />
+      </section>
+
+      <FooterSection />
     </div>
   );
 }

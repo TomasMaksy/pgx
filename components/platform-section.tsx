@@ -232,7 +232,7 @@ function BentoCard({
 
   const copy = (
     <div className="relative z-10 min-w-0 flex-1">
-      <h3 className="text-lg font-semibold tracking-tight text-white md:text-xl">
+      <h3 className="section-heading text-lg md:text-xl">
         {title}
       </h3>
       <p
@@ -295,11 +295,11 @@ function BentoCard({
 export function PlatformSection() {
   return (
     <div className="w-full">
-      <p className="text-xs font-medium tracking-[0.25em] text-white/50 uppercase">
+      <p className="section-eyebrow">
         The platform
       </p>
 
-      <h2 className="mt-4 max-w-3xl text-3xl leading-tight font-semibold tracking-tight text-white md:text-4xl lg:text-5xl">
+      <h2 className="section-title max-w-3xl">
         Built for every stage of the prescribing journey.
       </h2>
 

@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Product", href: "#product" },
   { label: "Platform", href: "#platform" },
   { label: "About", href: "#why-now" },
+  { label: "Contact Us", href: "#contact" },
 ];
 
 const enter = {
@@ -73,11 +74,12 @@ export function Navbar() {
           </ul>
 
           <MatterButton
-            type="button"
+            nativeButton={false}
+            render={<Link href="#contact" />}
             wrapperClassName="col-start-3 justify-self-end shrink-0"
             className="h-11 px-6 text-sm"
           >
-            Get Started
+            Contact Us
           </MatterButton>
         </nav>
       </motion.header>
