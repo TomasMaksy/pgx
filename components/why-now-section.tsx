@@ -163,14 +163,14 @@ const FUNDING = [
   {
     name: "Inovacijų agentūra",
     note: "Lithuania's innovation agency",
-    amount: "up to €300K",
+    amount: "up to €100K",
     logo: "/IA-logo.webp",
     logoClass: "max-h-9",
   },
   {
     name: "Eurostars 3 / Eureka",
     note: "Cross-border R&D funding",
-    amount: "up to €100K",
+    amount: "up to €300K",
     logo: "/eureka-logo.png",
     logoClass: "max-h-[52px]",
   },

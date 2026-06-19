@@ -10,10 +10,10 @@ const METRICS = [
     source: "PREPARE study, The Lancet, 2023",
   },
   {
-    value: "80%",
+    value: "95%",
     label:
-      "of people get the right drug and dose for their genetics — no trial and error",
-    source: "Lifetime electronic health record analysis",
+      "of individuals carry at least one clinically relevant or actionable PGx variant",
+    source: "A Swiss hospital-based cohort study",
   },
   {
     value: "1 in 4",
