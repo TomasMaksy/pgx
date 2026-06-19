@@ -39,11 +39,11 @@ const CONNECTOR_GRADIENTS = [
 function StepImage({
   src,
   alt,
-  className,
+  imageClassName,
 }: {
   src: string;
   alt: string;
-  className?: string;
+  imageClassName?: string;
 }) {
   return (
     <div className="flex h-full max-h-62 min-h-36 items-end justify-center overflow-hidden rounded-2xl border-4 border-white/10 bg-black/50 backdrop-blur-sm">
@@ -54,7 +54,7 @@ function StepImage({
         height={380}
         className={cn(
           "h-full w-full object-contain object-bottom pt-8",
-          className,
+          imageClassName,
         )}
       />
     </div>
@@ -76,7 +76,7 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
       <StepImage
         src="/how-it-works/2.webp"
         alt="DNA sequence analysis with AI-assisted bioinformatics"
-        className="-mt-20"
+        imageClassName="-translate-y-5"
       />
     );
   }
