@@ -10,7 +10,6 @@ const NAV_LINKS = [
   { label: "Product", href: "#product" },
   { label: "Platform", href: "#platform" },
   { label: "About", href: "#why-now" },
-  { label: "Contact Us", href: "#contact" },
 ];
 
 const enter = {
@@ -61,7 +60,7 @@ export function Navbar() {
             </span>
           </Link>
 
-          <ul className="col-start-2 hidden items-center justify-self-center gap-8 md:flex">
+          <ul className="col-start-2 hidden items-center gap-8 justify-self-center md:flex">
             {NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <Link

@@ -1,13 +1,12 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const CALL_URL =
   "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-HLTH-2027-01-CARE-02";
 
-const PRIMARY_STAT = {
-  amount: "€10M",
-  label: "Horizon Europe — EU grant per project",
-} as const;
+const CARD_CLASS =
+  "glass-inset flex flex-col rounded-2xl border border-white/10 bg-white/4 p-5 backdrop-blur-md md:p-6";
 
 export function EuGrantSection() {
   return (
@@ -38,65 +37,74 @@ export function EuGrantSection() {
           </a>
         </div>
 
-        <div className="flex flex-col gap-12 md:gap-16 lg:pt-2">
-          <div>
-            <p
-              className="text-[clamp(3.5rem,9vw,6.5rem)] leading-[1.05] font-light tracking-tight text-white/85 tabular-nums"
-              aria-label={PRIMARY_STAT.label}
-            >
-              {PRIMARY_STAT.amount}
-            </p>
-            <p className="mt-3 max-w-md text-base leading-snug text-white/45 md:text-lg">
-              {PRIMARY_STAT.label}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-8">
-            <div>
-              <div className="flex items-end gap-2">
-                <div className="flex h-12 w-18 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white px-2">
-                  <Image
-                    src="/IA-logo.webp"
-                    alt="Inovacijų agentūra"
-                    width={72}
-                    height={48}
-                    className="max-h-7 w-auto object-contain"
-                  />
-                </div>
+        <div className="flex flex-col gap-3 md:gap-4">
+          <article className={cn(CARD_CLASS, "min-w-0 overflow-hidden")}>
+            <div className="flex min-w-0 items-center justify-between gap-4">
+              <div className="min-w-0">
                 <p
-                  className="flex h-12 items-end text-5xl leading-none font-light tracking-tight text-white/85 tabular-nums"
-                  aria-label="Inovacijų agentūra — Lithuanian innovation funding"
+                  className="text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.05] font-medium tracking-tighter text-white/85 tabular-nums"
+                  aria-label="Horizon Europe — EU grant per project"
                 >
-                  €100K
+                  €10M
+                </p>
+                <p className="mt-2 text-sm leading-snug text-white/45 md:text-base">
+                  Horizon Europe — EU grant per project
                 </p>
               </div>
-              <p className="mt-4 max-w-xs text-sm leading-snug text-white/45 md:text-base">
+              <div className="flex h-14 w-28 max-w-[42%] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white px-2 py-1.5">
+                <Image
+                  src="/logo-es.webp"
+                  alt="Horizon Europe"
+                  width={291}
+                  height={72}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            </div>
+          </article>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
+            <article className={CARD_CLASS}>
+              <div className="flex h-12 w-18 items-center justify-center overflow-hidden rounded-xl bg-white px-2">
+                <Image
+                  src="/IA-logo.webp"
+                  alt="Inovacijų agentūra"
+                  width={72}
+                  height={48}
+                  className="max-h-7 w-auto object-contain"
+                />
+              </div>
+              <p
+                className="mt-4 text-4xl leading-none font-light tracking-tight text-white/85 tabular-nums md:text-5xl"
+                aria-label="Inovacijų agentūra — Lithuanian innovation funding"
+              >
+                €100K
+              </p>
+              <p className="mt-3 text-sm leading-snug text-white/45">
                 Inovacijų agentūra — Lithuanian innovation funding
               </p>
-            </div>
+            </article>
 
-            <div>
-              <div className="flex items-end gap-2">
-                <div className="flex h-12 w-18 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white px-2">
-                  <Image
-                    src="/eureka-logo.png"
-                    alt="Eurostars 3 / Eureka"
-                    width={72}
-                    height={48}
-                    className="max-h-9 w-auto object-contain"
-                  />
-                </div>
-                <p
-                  className="flex h-12 items-end text-5xl leading-none font-light tracking-tight text-white/85 tabular-nums"
-                  aria-label="Eurostars 3 / Eureka — cross-border R&D"
-                >
-                  €300K
-                </p>
+            <article className={CARD_CLASS}>
+              <div className="flex h-12 w-18 items-center justify-center overflow-hidden rounded-xl bg-white px-2">
+                <Image
+                  src="/eureka-logo.png"
+                  alt="Eurostars 3 / Eureka"
+                  width={72}
+                  height={48}
+                  className="max-h-9 w-auto object-contain"
+                />
               </div>
-              <p className="mt-4 max-w-xs text-sm leading-snug text-white/45 md:text-base">
+              <p
+                className="mt-4 text-4xl leading-none font-light tracking-tight text-white/85 tabular-nums md:text-5xl"
+                aria-label="Eurostars 3 / Eureka — cross-border R&D"
+              >
+                €300K
+              </p>
+              <p className="mt-3 text-sm leading-snug text-white/45">
                 Eurostars 3 / Eureka — cross-border R&amp;D
               </p>
-            </div>
+            </article>
           </div>
         </div>
       </div>
