@@ -42,7 +42,7 @@ function MatterButton({
         render={render}
         nativeButton={nativeButton ?? (render ? false : undefined)}
         className={cn(
-          "relative h-13 overflow-hidden rounded-full border-0 bg-black px-6 text-base text-white hover:bg-black active:translate-y-0 [a]:hover:bg-black",
+          "relative h-13 cursor-pointer overflow-hidden rounded-full border-0 bg-black px-6 text-base text-white hover:bg-black active:translate-y-0 [a]:cursor-pointer [a]:hover:bg-black",
 
           "before:absolute before:inset-0 before:block before:size-full before:rounded-full before:shadow-[inset_0_2px_4.5px_0px_rgba(255,255,255,0.6)]",
 

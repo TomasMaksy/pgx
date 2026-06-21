@@ -30,7 +30,7 @@ export function EuGrantSection() {
             href={CALL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group border-mint/40 bg-mint/10 text-mint-lighter hover:border-mint/60 hover:bg-mint/20 mt-8 inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
+            className="group border-mint/40 bg-mint/10 text-mint-lighter hover:border-mint/60 hover:bg-mint/20 mt-8 inline-flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
           >
             {t("Full call details on the EU portal")}
             <ArrowUpRight

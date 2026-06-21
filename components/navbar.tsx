@@ -8,9 +8,9 @@ import { MatterButton } from "@/components/ui/matter-button";
 import { useI18n } from "@/lib/i18n";
 
 const NAV_LINKS = [
-  { label: "Product", href: "#product" },
+  { label: "Solution", href: "#product" },
   { label: "Platform", href: "#platform" },
-  { label: "About", href: "#why-now" },
+  { label: "Why now", href: "#why-now" },
 ];
 
 function LanguageToggle() {
@@ -26,7 +26,7 @@ function LanguageToggle() {
       onClick={() => setLang(next)}
       aria-label={title}
       title={title}
-      className="group flex h-11 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 text-sm font-semibold tracking-wide text-white/80 transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95"
+      className="group flex h-11 cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 text-sm font-semibold tracking-wide text-white/80 transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95"
     >
       <span className="text-lg leading-none transition-transform duration-200 group-hover:scale-110">
         {flag}
@@ -90,7 +90,7 @@ export function Navbar() {
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  className="text-sm text-neutral-300 transition-colors hover:text-white"
+                  className="cursor-pointer text-sm text-neutral-300 transition-colors hover:text-white"
                 >
                   {t(link.label)}
                 </Link>

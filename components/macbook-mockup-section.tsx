@@ -205,7 +205,7 @@ export function MacbookMockupSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: toastExpanded ? 0 : 1 }}
           transition={{ duration: 0.25 }}
-          className="text-sm font-medium text-white/75 underline-offset-4 transition-colors hover:text-white/90 hover:underline disabled:pointer-events-none"
+          className="cursor-pointer text-sm font-medium text-white/75 underline-offset-4 transition-colors hover:text-white/90 hover:underline disabled:pointer-events-none disabled:cursor-not-allowed"
           disabled={toastExpanded}
           aria-hidden={toastExpanded}
           tabIndex={toastExpanded ? -1 : 0}
@@ -329,7 +329,7 @@ export function MacbookMockupSection() {
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
-                      className="text-mint-dark hover:text-mint-darker mt-2 rounded-md border bg-white/90 px-2 py-0.5 text-[8px] font-semibold transition-colors max-md:mt-1 max-md:px-1.5 max-md:py-px max-md:text-[7px]"
+                      className="text-mint-dark hover:text-mint-darker mt-2 cursor-pointer rounded-md border bg-white/90 px-2 py-0.5 text-[8px] font-semibold transition-colors max-md:mt-1 max-md:px-1.5 max-md:py-px max-md:text-[7px]"
                     >
                       {t("Read more")}
                     </motion.button>

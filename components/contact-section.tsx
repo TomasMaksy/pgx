@@ -136,7 +136,7 @@ function ContactInfo({
       <Link
         href={href}
         className={cn(
-          "flex items-center gap-3 py-2 transition-opacity hover:opacity-80",
+          "flex cursor-pointer items-center gap-3 py-2 transition-opacity hover:opacity-80",
           className,
         )}
       >

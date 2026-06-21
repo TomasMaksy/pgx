@@ -3,9 +3,8 @@
 
 export const LT: Record<string, string> = {
   // ── Navbar / common ──
-  Product: "Produktas",
+  Solution: "Sprendimas",
   Platform: "Platforma",
-  About: "Apie",
   "Contact Us": "Susisiekite",
   "Contact us": "Susisiekite",
   "Read more": "Skaityti daugiau",

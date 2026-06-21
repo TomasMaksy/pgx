@@ -234,4 +234,22 @@
   html {
     @apply scroll-smooth font-sans;
   }
+  :is(
+      button,
+      [type="button"],
+      [type="submit"],
+      [type="reset"],
+      [role="button"]
+    ):not(:disabled):not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+  a[href],
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+  :is(button, [role="button"]):disabled,
+  :is(button, [role="button"])[aria-disabled="true"] {
+    cursor: not-allowed;
+  }
 }
