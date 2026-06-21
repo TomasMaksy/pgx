@@ -104,6 +104,7 @@ const TEAM: TeamMember[] = [
   {
     id: "third",
     name: "Nikita Rancev",
+    image: "/team/nikita.webp",
   },
 ];
 

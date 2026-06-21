@@ -50,14 +50,15 @@ export function Navbar() {
             href="/"
             className="col-start-1 justify-self-start text-lg font-semibold text-white"
           >
-            <Image
-              src="/grey-matte-logo-main.webp"
-              alt="GenoLink Biotechnologies"
-              width={200}
-              height={57}
-              unoptimized
-              className="h-9 w-auto md:h-11"
-            />
+            <span className="relative block h-9 w-[126px] shrink-0 md:h-11 md:w-[154px]">
+              <Image
+                src="/grey-matte-logo-main.webp"
+                alt="GenoLink Biotechnologies"
+                fill
+                unoptimized
+                className="object-contain object-left"
+              />
+            </span>
           </Link>
 
           <ul className="col-start-2 hidden items-center justify-self-center gap-8 md:flex">

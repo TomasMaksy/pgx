@@ -2,8 +2,6 @@ import { HeroSection } from "@/components/hero-section";
 import { ProblemSection } from "@/components/problem-section";
 import { MetricsSection } from "@/components/metrics-section";
 import { MacbookMockupSection } from "@/components/macbook-mockup-section";
-import { PlatformSection } from "@/components/platform-section";
-import { ResearchSection } from "@/components/research-section";
 import { SolutionSection } from "@/components/solution-section";
 import { VisionSection } from "@/components/vision-section";
 import { WhyNowSection } from "@/components/why-now-section";
@@ -38,12 +36,12 @@ export default function Home() {
         <ImpactSection />
       </section> */}
 
-      <section
+      {/* <section
         id="platform"
         className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
       >
         <PlatformSection />
-      </section>
+      </section> */}
 
       <MacbookMockupSection />
 
@@ -81,13 +79,13 @@ export default function Home() {
       >
         <MoreFeaturesSection />
       </section>
-
+      {/* 
       <section
         id="research"
         className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
       >
         <ResearchSection />
-      </section>
+      </section> */}
 
       <FooterSection />
     </div>

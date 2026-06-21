@@ -219,7 +219,7 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
       <div className="pointer-events-none sticky top-0 z-0 h-svh w-full overflow-hidden bg-black">
         <canvas
           ref={canvasRef}
-          className="absolute bottom-0 left-0 z-[1] block h-[75vh] w-full md:inset-0 md:h-full md:z-auto"
+          className="absolute bottom-0 left-0 z-[1] block h-[75vh] w-full md:inset-0 md:z-auto md:h-full"
         />
         {/* Overlaps top of canvas to fade the hard edge into black */}
         <div
@@ -229,6 +229,15 @@ export function ScrollSequence({ children }: ScrollSequenceProps) {
             bottom: "calc(75vh - 22vh)",
             background:
               "linear-gradient(to bottom, #000 0%, #000 30%, rgba(0,0,0,0.75) 55%, rgba(0,0,0,0.35) 75%, transparent 100%)",
+          }}
+        />
+        {/* Overlaps bottom of canvas to fade into black */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 left-0 z-[2] h-[20vh] w-full"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 25%, rgba(0,0,0,0.75) 45%, #000 70%, #000 100%)",
           }}
         />
       </div>
