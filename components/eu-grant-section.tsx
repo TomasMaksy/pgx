@@ -39,31 +39,31 @@ export function EuGrantSection() {
 
         <div className="flex flex-col gap-3 md:gap-4">
           <article className={cn(CARD_CLASS, "min-w-0 overflow-hidden")}>
-            <div className="flex min-w-0 items-center justify-between gap-4">
-              <div className="min-w-0">
-                <p
-                  className="text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.05] font-medium tracking-tighter text-white/85 tabular-nums"
-                  aria-label="Horizon Europe — EU grant per project"
-                >
-                  €10M
-                </p>
-                <p className="mt-2 text-sm leading-snug text-white/45 md:text-base">
-                  Horizon Europe — EU grant per project
-                </p>
-              </div>
-              <div className="flex h-14 w-28 max-w-[42%] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white px-2 py-1.5">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between md:gap-4">
+              <div className="order-1 flex h-12 w-18 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white px-2 md:order-2 md:h-14 md:w-28 md:max-w-[42%] md:py-1.5">
                 <Image
                   src="/logo-es.webp"
                   alt="Horizon Europe"
                   width={291}
                   height={72}
-                  className="h-full w-full object-contain"
+                  className="max-h-7 w-auto object-contain md:h-full md:w-full"
                 />
+              </div>
+              <div className="order-2 min-w-0 md:order-1">
+                <p
+                  className="mt-4 text-4xl leading-none font-light tracking-tight text-white/85 tabular-nums md:mt-0 md:text-[clamp(2.5rem,7vw,4.5rem)] md:font-medium md:leading-[1.05] md:tracking-tighter"
+                  aria-label="Horizon Europe — EU grant per project"
+                >
+                  €10M
+                </p>
+                <p className="mt-3 text-sm leading-snug text-white/45 md:mt-2 md:text-base">
+                  Horizon Europe — EU grant per project
+                </p>
               </div>
             </div>
           </article>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
             <article className={CARD_CLASS}>
               <div className="flex h-12 w-18 items-center justify-center overflow-hidden rounded-xl bg-white px-2">
                 <Image
@@ -92,7 +92,7 @@ export function EuGrantSection() {
                   alt="Eurostars 3 / Eureka"
                   width={72}
                   height={48}
-                  className="max-h-9 w-auto object-contain"
+                  className="max-h-7 w-auto object-contain"
                 />
               </div>
               <p

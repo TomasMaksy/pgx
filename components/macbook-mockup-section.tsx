@@ -27,6 +27,24 @@ const COMPACT_TOAST = {
   scale: 1,
 } as const;
 
+const EXPANDED_TOAST_MOBILE = {
+  opacity: 1,
+  y: 0,
+  top: "6%",
+  right: "4%",
+  x: "0%",
+  scale: 1.41,
+} as const;
+
+const COMPACT_TOAST_MOBILE = {
+  opacity: 1,
+  y: 0,
+  top: "8%",
+  right: "5%",
+  x: "0%",
+  scale: 1.26,
+} as const;
+
 /** Seconds into the video when the toast appears. `null` = wait for natural end. */
 const TOAST_AT_SECONDS: number | null = null;
 
@@ -40,6 +58,11 @@ export function MacbookMockupSection() {
   const [toastExpanded, setToastExpanded] = useState(false);
   const [instantReveal, setInstantReveal] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px)").matches,
+  );
 
   const scheduleExpand = useCallback(() => {
     if (expandTimerRef.current) clearTimeout(expandTimerRef.current);
@@ -111,6 +134,14 @@ export function MacbookMockupSection() {
   }, []);
 
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
     const section = sectionRef.current;
     const video = videoRef.current;
     if (!section || !video) return;
@@ -151,7 +182,9 @@ export function MacbookMockupSection() {
     return () => video.removeEventListener("timeupdate", onTimeUpdate);
   }, [revealToast]);
 
-  const toastMotionState = toastExpanded ? EXPANDED_TOAST : COMPACT_TOAST;
+  const compactToast = isMobile ? COMPACT_TOAST_MOBILE : COMPACT_TOAST;
+  const expandedToast = isMobile ? EXPANDED_TOAST_MOBILE : EXPANDED_TOAST;
+  const toastMotionState = toastExpanded ? expandedToast : compactToast;
 
   return (
     <section
@@ -179,9 +212,9 @@ export function MacbookMockupSection() {
         </motion.button>
       </div>
 
-      <div className="relative mx-auto -mt-8 w-full max-w-5xl">
-        <div className="absolute top-[5.5%] right-[12.8%] left-[12.8%] z-5 aspect-1546/1002">
-          <div className="h-full w-full overflow-hidden rounded-lg">
+      <div className="relative mx-auto -mt-8 w-full max-w-5xl max-md:mt-0">
+        <div className="absolute top-[5.5%] right-[12.8%] left-[12.8%] z-5 aspect-1546/1002 max-md:relative max-md:top-auto max-md:right-auto max-md:left-auto max-md:z-auto max-md:w-full">
+          <div className="h-full w-full overflow-hidden rounded-lg max-md:rounded-2xl">
             <video
               ref={videoRef}
               src="/esve-vid.webm"
@@ -198,17 +231,17 @@ export function MacbookMockupSection() {
 
         <AnimatePresence>
           {showToast && (
-            <motion.div className="pointer-events-none absolute top-[5.5%] right-[12.8%] left-[12.8%] z-20 aspect-1546/1002 overflow-visible">
+            <motion.div className="pointer-events-none absolute top-[5.5%] right-[12.8%] left-[12.8%] z-20 aspect-1546/1002 overflow-visible max-md:inset-0 max-md:top-0 max-md:right-0 max-md:bottom-0 max-md:left-0 max-md:aspect-auto">
               <motion.div
                 initial={
                   instantReveal
-                    ? EXPANDED_TOAST
+                    ? expandedToast
                     : {
                         opacity: 0,
                         y: -12,
                         scale: 0.94,
-                        top: "6%",
-                        right: "4%",
+                        top: compactToast.top,
+                        right: compactToast.right,
                       }
                 }
                 animate={toastMotionState}
@@ -241,11 +274,11 @@ export function MacbookMockupSection() {
                       }
                 }
                 style={{ transformOrigin: "top right" }}
-                className="pointer-events-auto absolute w-[52%] min-w-0 md:w-[42%]"
+                className="pointer-events-auto absolute w-[52%] min-w-0 md:w-[42%] max-md:w-[54%] max-md:max-w-[220px]"
               >
-                <div className="flex flex-col gap-1.5 rounded-xl border border-white/20 bg-white/95 p-2 shadow-lg shadow-black/25 backdrop-blur-md md:flex-row md:items-start md:gap-2">
-                  <div className="flex items-center gap-2 md:shrink-0 md:items-start">
-                    <div className="relative size-7 shrink-0 overflow-hidden rounded-lg">
+                <div className="flex flex-col gap-1.5 rounded-xl border border-white/20 bg-white/95 p-2 shadow-lg shadow-black/25 backdrop-blur-md md:flex-row md:items-start md:gap-2 max-md:gap-1 max-md:rounded-lg max-md:p-1.5">
+                  <div className="flex items-center gap-2 md:shrink-0 md:items-start max-md:gap-1.5">
+                    <div className="relative size-7 shrink-0 overflow-hidden rounded-lg max-md:size-6 max-md:rounded-md">
                       <Image
                         src="/esvlogo.webp"
                         alt=""
@@ -254,7 +287,7 @@ export function MacbookMockupSection() {
                         className="object-cover"
                       />
                     </div>
-                    <p className="min-w-0 flex-1 text-[10px] leading-tight font-semibold text-neutral-900 md:hidden">
+                    <p className="min-w-0 flex-1 text-[10px] leading-tight font-semibold text-neutral-900 md:hidden max-md:text-[9px]">
                       Pharmacogenomic Alert
                     </p>
                   </div>
@@ -262,7 +295,7 @@ export function MacbookMockupSection() {
                     <p className="hidden text-[10px] leading-tight font-semibold text-neutral-900 md:block">
                       Pharmacogenomic Alert: CYP2D6 Poor Metabolizer
                     </p>
-                    <p className="line-clamp-2 text-[8px] leading-snug text-neutral-600 md:mt-0.5 md:line-clamp-none">
+                    <p className="line-clamp-2 text-[8px] leading-snug text-neutral-600 md:mt-0.5 md:line-clamp-none max-md:text-[7px]">
                       <span className="md:hidden">
                         Reduced CYP2D6 activity may increase nebivolol exposure.
                       </span>
@@ -293,7 +326,7 @@ export function MacbookMockupSection() {
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
-                      className="text-mint-dark hover:text-mint-darker mt-2 rounded-md border bg-white/90 px-2 py-0.5 text-[8px] font-semibold transition-colors"
+                      className="text-mint-dark hover:text-mint-darker mt-2 rounded-md border bg-white/90 px-2 py-0.5 text-[8px] font-semibold transition-colors max-md:mt-1 max-md:px-1.5 max-md:py-px max-md:text-[7px]"
                     >
                       Read more
                     </motion.button>
@@ -310,7 +343,7 @@ export function MacbookMockupSection() {
           width={1920}
           height={1571}
           unoptimized
-          className="relative z-10 h-auto w-full"
+          className="relative z-10 h-auto w-full max-md:hidden"
         />
       </div>
 

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="relative">
       <ScrollSequence>
-        <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-start px-8 pt-44 md:justify-center md:px-16 md:pt-0 lg:px-24">
+        <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-start px-8 pt-32 md:justify-center md:px-16 md:pt-0 lg:px-24">
           <HeroSection />
         </section>
 

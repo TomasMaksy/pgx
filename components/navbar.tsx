@@ -42,14 +42,14 @@ export function Navbar() {
         initial={{ y: "-100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={enter}
-        className="fixed inset-x-0 top-0 z-50 px-0 pt-4 backdrop-blur-md md:pt-7 md:backdrop-blur-none"
+        className="fixed inset-x-0 top-0 z-50 py-3 backdrop-blur-md md:py-0 md:pt-7 md:backdrop-blur-none"
       >
-        <nav className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 border border-transparent bg-transparent px-8 md:px-16 lg:px-24">
+        <nav className="mx-auto flex h-12 w-full max-w-7xl items-center justify-between gap-3 px-5 md:grid md:h-16 md:grid-cols-[1fr_auto_1fr] md:gap-4 md:px-16 lg:px-24">
           <Link
             href="/"
-            className="col-start-1 justify-self-start text-lg font-semibold text-white"
+            className="flex shrink-0 items-center md:col-start-1 md:justify-self-start"
           >
-            <span className="relative block h-9 w-[126px] shrink-0 md:h-11 md:w-[154px]">
+            <span className="relative block h-9 w-[118px] shrink-0 md:h-11 md:w-[154px]">
               <Image
                 src="/grey-matte-logo-main.webp"
                 alt="GenoLink Biotechnologies"
@@ -75,8 +75,8 @@ export function Navbar() {
 
           <MatterButton
             render={<Link href="#contact" />}
-            wrapperClassName="col-start-3 justify-self-end shrink-0"
-            className="h-11 px-6 text-sm"
+            wrapperClassName="shrink-0 p-0.5 md:col-start-3 md:justify-self-end md:p-1"
+            className="h-9 px-4 text-xs md:h-11 md:px-6 md:text-sm"
           >
             Contact Us
           </MatterButton>

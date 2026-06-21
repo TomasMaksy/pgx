@@ -63,12 +63,12 @@ function TomasDescription({ compact }: { compact?: boolean }) {
 
 function AlanDescription({ compact }: { compact?: boolean }) {
   if (compact) {
-    return <span className="line-clamp-2 block">MD Medicine</span>;
+    return <span className="line-clamp-2 block">Medical Student</span>;
   }
 
   return (
     <>
-      <span className="block">MD Medicine</span>
+      <span className="block">Medical Student</span>
       <span className="block text-white/40">@Vilnius University</span>
     </>
   );

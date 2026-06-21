@@ -55,7 +55,7 @@ const { first, second, subheadlineDelay, buttonDelay } = buildTimeline();
 export function HeroSection() {
   return (
     <>
-      <h1 className="max-w-5xl text-5xl leading-none font-medium md:text-7xl">
+      <h1 className="max-w-5xl text-4xl leading-none font-medium md:text-7xl">
         {first.map(({ line, delay }) => (
           <TextAnimate
             key={line}

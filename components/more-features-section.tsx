@@ -23,9 +23,25 @@ const ITEM = 64;
 const SCROLL_SPEED = 24;
 
 export function MoreFeaturesSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(N * ITEM);
   const [center, setCenter] = useState<number>(N);
+  const [edgePad, setEdgePad] = useState(192);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const syncPad = () => {
+      setEdgePad(container.clientHeight / 2 - ITEM / 2);
+    };
+
+    syncPad();
+    const observer = new ResizeObserver(syncPad);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -70,12 +86,16 @@ export function MoreFeaturesSection() {
   return (
     <div className="w-full">
       <div className="mx-auto w-full max-w-xl">
-        <div className="pointer-events-none relative h-[28rem] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_24%,black_76%,transparent)]">
-          <div
-            ref={trackRef}
-            className="will-change-transform"
-          >
-            <div className="h-48 shrink-0" aria-hidden />
+        <div
+          ref={containerRef}
+          className="pointer-events-none relative h-[26rem] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] md:h-[28rem] md:[mask-image:linear-gradient(to_bottom,transparent,black_24%,black_76%,transparent)]"
+        >
+          <div ref={trackRef} className="will-change-transform">
+            <div
+              className="shrink-0"
+              style={{ height: edgePad }}
+              aria-hidden
+            />
             {LIST.map((f, idx) => {
               const d = Math.abs(idx - center);
               const color =
@@ -102,7 +122,11 @@ export function MoreFeaturesSection() {
                 </div>
               );
             })}
-            <div className="h-48 shrink-0" aria-hidden />
+            <div
+              className="shrink-0"
+              style={{ height: edgePad }}
+              aria-hidden
+            />
           </div>
         </div>
       </div>
