@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import {
@@ -9,7 +8,6 @@ import {
   FlaskConical,
   Landmark,
   Microscope,
-  Sparkles,
   Stethoscope,
   User,
 } from "lucide-react";
@@ -46,16 +44,6 @@ const STAGES = [
     title: "New fields and a scientific base",
     desc: "Building on a working system and accumulated data — expansion into new areas of medicine, new tests, and joint research with universities and clinics.",
     state: "grow" as const,
-  },
-  {
-    n: "04",
-    years: "2030+",
-    tag: "Horizon 2030+",
-    icon: Sparkles,
-    image: "/test4.webp",
-    title: "A genomic profile from birth — for life",
-    desc: "Our vision — that a genetic profile is created early in life, with parental consent, and accompanies a person throughout their life. For any illness, any doctor immediately sees the patient's drug predispositions and receives ready-made recommendations — treatment stays precise from day one. This requires a clear legal framework and data protection, and is built together with the government and regulators. As genomic science advances, the accumulated profiles will become the foundation of preventive medicine: more and more conditions can be predicted and prevented in advance.",
-    state: "dream" as const,
   },
 ] as const;
 
@@ -113,259 +101,6 @@ function Reveal({
   );
 }
 
-/* ── Потоки: три верхних этапа сливаются в один луч и питают цель ── */
-type FlowGeom = {
-  w: number;
-  h: number;
-  conduits: string[]; // карточка → узел слияния
-  trunk: string | null; // узел → цель
-  junction: { x: number; y: number } | null;
-  core: { x: number; y: number } | null;
-};
-
-const PULSE = 2.6; // базовая длительность цикла, с
-
-function ConvergeFlow({
-  containerRef,
-  topRefs,
-  bottomRef,
-}: {
-  containerRef: React.RefObject<HTMLDivElement | null>;
-  topRefs: React.RefObject<HTMLDivElement | null>[];
-  bottomRef: React.RefObject<HTMLDivElement | null>;
-}) {
-  const reduce = useReducedMotion();
-  const [geom, setGeom] = useState<FlowGeom>({
-    w: 0,
-    h: 0,
-    conduits: [],
-    trunk: null,
-    junction: null,
-    core: null,
-  });
-
-  useEffect(() => {
-    const measure = () => {
-      const cont = containerRef.current;
-      const bottom = bottomRef.current;
-      if (!cont || !bottom) return;
-      const c = cont.getBoundingClientRect();
-      const b = bottom.getBoundingClientRect();
-
-      const gx = b.left - c.left + b.width / 2; // центр цели по X
-      const goalTopY = b.top - c.top;
-
-      const starts: { x: number; y: number }[] = [];
-      topRefs.forEach((r) => {
-        const el = r.current;
-        if (!el) return;
-        const t = el.getBoundingClientRect();
-        starts.push({
-          x: t.left - c.left + t.width / 2,
-          y: t.bottom - c.top, // низ-центр верхней карточки
-        });
-      });
-      if (starts.length === 0) return;
-
-      const maxStartY = Math.max(...starts.map((s) => s.y));
-      // узел слияния — в просвете между рядами, ближе к цели
-      const jy = maxStartY + (goalTopY - maxStartY) * 0.62;
-      const junction = { x: gx, y: jy };
-
-      const conduits = starts.map((s) => {
-        const midY = (s.y + jy) / 2;
-        return `M ${s.x} ${s.y} C ${s.x} ${midY}, ${gx} ${midY}, ${gx} ${jy}`;
-      });
-
-      const trunk = `M ${gx} ${jy} L ${gx} ${goalTopY}`;
-
-      setGeom({
-        w: c.width,
-        h: c.height,
-        conduits,
-        trunk,
-        junction,
-        core: { x: gx, y: goalTopY },
-      });
-    };
-
-    measure();
-    const ro = new ResizeObserver(measure);
-    if (containerRef.current) ro.observe(containerRef.current);
-    window.addEventListener("resize", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, [containerRef, topRefs, bottomRef]);
-
-  if (!geom.w || geom.conduits.length === 0) return null;
-  const j = geom.junction!;
-
-  return (
-    <svg
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 hidden md:block"
-      width={geom.w}
-      height={geom.h}
-      viewBox={`0 0 ${geom.w} ${geom.h}`}
-      fill="none"
-    >
-      <defs>
-        <filter id="flow-glow" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="3" result="b" />
-          <feMerge>
-            <feMergeNode in="b" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        <filter id="flow-glow-soft" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="7" />
-        </filter>
-        <linearGradient id="conduit-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="rgba(45,212,191,0.05)" />
-          <stop offset="1" stopColor="rgba(45,212,191,0.4)" />
-        </linearGradient>
-      </defs>
-
-      {/* статичные направляющие: карточки → узел */}
-      {geom.conduits.map((d, i) => (
-        <path
-          key={`c-${i}`}
-          d={d}
-          stroke="url(#conduit-grad)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      ))}
-      {/* ствол: узел → цель (ярче — это объединённый поток) */}
-      {geom.trunk && (
-        <path
-          d={geom.trunk}
-          stroke="rgba(94,234,212,0.55)"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-        />
-      )}
-
-      {!reduce && (
-        <>
-          {/* импульсы по трём каналам → к узлу */}
-          {geom.conduits.map((d, i) => (
-            <circle
-              key={`p-${i}`}
-              r="3"
-              fill="#5eead4"
-              opacity="0"
-              filter="url(#flow-glow)"
-            >
-              <animateMotion
-                dur={`${PULSE}s`}
-                begin={`${i * (PULSE / 3)}s`}
-                repeatCount="indefinite"
-                path={d}
-                calcMode="linear"
-              />
-              <animate
-                attributeName="opacity"
-                values="0;1;1;0.6"
-                keyTimes="0;0.15;0.85;1"
-                dur={`${PULSE}s`}
-                begin={`${i * (PULSE / 3)}s`}
-                repeatCount="indefinite"
-              />
-            </circle>
-          ))}
-
-          {/* узел слияния — пульсирующее кольцо */}
-          <circle cx={j.x} cy={j.y} r="9" fill="rgba(45,212,191,0.18)" filter="url(#flow-glow-soft)">
-            <animate attributeName="r" values="7;13;7" dur={`${PULSE}s`} repeatCount="indefinite" />
-          </circle>
-          <circle
-            cx={j.x}
-            cy={j.y}
-            r="4"
-            fill="none"
-            stroke="#5eead4"
-            strokeWidth="1.5"
-            filter="url(#flow-glow)"
-          >
-            <animate attributeName="r" values="3;6;3" dur={`${PULSE}s`} repeatCount="indefinite" />
-            <animate
-              attributeName="opacity"
-              values="0.5;1;0.5"
-              dur={`${PULSE}s`}
-              repeatCount="indefinite"
-            />
-          </circle>
-
-          {/* объединённые импульсы по стволу → в цель */}
-          {geom.trunk &&
-            [0, 1].map((k) => (
-              <circle
-                key={`t-${k}`}
-                r="3.6"
-                fill="#ccfbf1"
-                opacity="0"
-                filter="url(#flow-glow)"
-              >
-                <animateMotion
-                  dur={`${PULSE}s`}
-                  begin={`${k * (PULSE / 2)}s`}
-                  repeatCount="indefinite"
-                  path={geom.trunk!}
-                  calcMode="linear"
-                />
-                <animate
-                  attributeName="opacity"
-                  values="0;1;1;0"
-                  keyTimes="0;0.1;0.8;1"
-                  dur={`${PULSE}s`}
-                  begin={`${k * (PULSE / 2)}s`}
-                  repeatCount="indefinite"
-                />
-              </circle>
-            ))}
-
-          {/* ядро на цели — разгорается при приходе потока */}
-          {geom.core && (
-            <>
-              <circle
-                cx={geom.core.x}
-                cy={geom.core.y}
-                r="16"
-                fill="rgba(45,212,191,0.22)"
-                filter="url(#flow-glow-soft)"
-              >
-                <animate
-                  attributeName="r"
-                  values="10;20;10"
-                  dur={`${PULSE}s`}
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  values="0.3;0.85;0.3"
-                  dur={`${PULSE}s`}
-                  repeatCount="indefinite"
-                />
-              </circle>
-              <circle cx={geom.core.x} cy={geom.core.y} r="3.5" fill="#ccfbf1" filter="url(#flow-glow)">
-                <animate
-                  attributeName="opacity"
-                  values="0.6;1;0.6"
-                  dur={`${PULSE}s`}
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </>
-          )}
-        </>
-      )}
-    </svg>
-  );
-}
-
 const CARD_STYLES = {
   now: "glass-inset border-white/12 bg-white/4",
   build: "glass-inset border-white/12 bg-white/4",
@@ -395,9 +130,7 @@ function StageCard({
       className={[
         "group relative flex h-full flex-col overflow-hidden rounded-3xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1",
         big ? "p-7 md:p-9" : "p-6",
-        state === "build" || state === "now" || state === "grow"
-          ? CARD_STYLES[state]
-          : `border ${CARD_STYLES[state]}`,
+        CARD_STYLES[state],
       ].join(" ")}
     >
       <div
@@ -439,22 +172,8 @@ function StageCard({
           />
         </div>
       ) : (
-        <div
-          className={[
-            "relative z-10 mt-6 flex size-12 items-center justify-center rounded-xl border",
-            state === "dream"
-              ? "border-mint/50 bg-mint/25"
-              : "border-mint/25 bg-mint/15",
-          ].join(" ")}
-        >
-          <Icon
-            className={
-              state === "dream"
-                ? "size-6 text-mint-lighter"
-                : "size-6 text-mint"
-            }
-            strokeWidth={2}
-          />
+        <div className="relative z-10 mt-6 flex size-12 items-center justify-center rounded-xl border border-mint/25 bg-mint/15">
+          <Icon className="size-6 text-mint" strokeWidth={2} />
         </div>
       )}
 
@@ -474,13 +193,6 @@ function StageCard({
 }
 
 export function VisionSection() {
-  const flowRef = useRef<HTMLDivElement>(null);
-  const top0 = useRef<HTMLDivElement>(null);
-  const top1 = useRef<HTMLDivElement>(null);
-  const top2 = useRef<HTMLDivElement>(null);
-  const topRefs = [top0, top1, top2];
-  const bottomRef = useRef<HTMLDivElement>(null);
-
   return (
     <div className="w-full">
       <Reveal className="text-center">
@@ -500,34 +212,16 @@ export function VisionSection() {
         </p>
       </Reveal>
 
-      {/* Этапы по годам: верхние три питают нижнюю цель */}
+      {/* Этапы по годам */}
       <div className="mt-12 md:mt-16">
-        <div ref={flowRef} className="relative">
-          <ConvergeFlow
-            containerRef={flowRef}
-            topRefs={topRefs}
-            bottomRef={bottomRef}
-          />
-
-          <div className="relative z-10">
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              {STAGES.slice(0, 3).map((stage, i) => (
-                <Reveal key={stage.n} delay={i * 0.08}>
-                  <div ref={topRefs[i]} className="h-full">
-                    <StageCard stage={stage} />
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <div className="mt-20 flex justify-center md:mt-28">
-              <Reveal delay={0.24} className="w-full md:max-w-[60%]">
-                <div ref={bottomRef}>
-                  <StageCard stage={STAGES[3]} big />
-                </div>
-              </Reveal>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+          {STAGES.map((stage, i) => (
+            <Reveal key={stage.n} delay={i * 0.08}>
+              <div className="h-full">
+                <StageCard stage={stage} />
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
 
