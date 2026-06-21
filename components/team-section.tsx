@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 
 type TeamMemberId = "tomas" | "alan" | "third";
 
@@ -49,42 +50,49 @@ const CARD_Z: Record<TeamMemberId, string> = {
 };
 
 function TomasDescription({ compact }: { compact?: boolean }) {
+  const { t } = useI18n();
   if (compact) {
-    return <span className="line-clamp-2 block">MSc Bioinformatics</span>;
+    return (
+      <span className="line-clamp-2 block">{t("MSc Bioinformatics")}</span>
+    );
   }
 
   return (
     <>
-      <span className="block">MSc Bioinformatics</span>
+      <span className="block">{t("MSc Bioinformatics")}</span>
       <span className="block text-white/40">@University of Edinburgh</span>
     </>
   );
 }
 
 function AlanDescription({ compact }: { compact?: boolean }) {
+  const { t } = useI18n();
   if (compact) {
-    return <span className="line-clamp-2 block">Medical Student</span>;
+    return <span className="line-clamp-2 block">{t("Medical Student")}</span>;
   }
 
   return (
     <>
-      <span className="block">Medical Student</span>
+      <span className="block">{t("Medical Student")}</span>
       <span className="block text-white/40">@Vilnius University</span>
     </>
   );
 }
 
 function NikitaDescription({ compact }: { compact?: boolean }) {
+  const { t } = useI18n();
   if (compact) {
-    return <span className="line-clamp-2 block">Serial entrepreneur</span>;
+    return (
+      <span className="line-clamp-2 block">{t("Serial entrepreneur")}</span>
+    );
   }
 
   return (
     <>
       <span className="block">
-        Serial entrepreneur
+        {t("Serial entrepreneur")}
         <br />
-        Scaled Ventures Beyond €3M+/yr
+        {t("Scaled Ventures Beyond €3M+/yr")}
       </span>
     </>
   );
@@ -196,6 +204,7 @@ export function TeamSection() {
 
   const setOpen = () => setExpanded(true);
   const setClosed = () => setExpanded(false);
+  const { t } = useI18n();
 
   return (
     <div
@@ -204,21 +213,17 @@ export function TeamSection() {
       onMouseLeave={isDesktop ? setClosed : undefined}
     >
       <p className="section-eyebrow mx-auto w-fit">
-        Our team
+        {t("Our team")}
       </p>
 
       <h2 className="section-title mx-auto max-w-4xl text-center">
-        Why us?
+        {t("Why us?")}
       </h2>
 
       <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-white/55 md:text-lg">
-        Young team combining expertise in Medicine, Biochemistry, and
-        Bioinformatics, with hands-on experience in personalized medicine at
-        AskBio and Bayer Pharmaceuticals. Our background ranges from VC-backed
-        startups to leading teams and companies with multimillion-euro annual
-        revenues. We believe the time for personalized healthcare is now, and
-        with your support, we can make it more effective, efficient, and
-        accessible for everyone.
+        {t(
+          "Young team combining expertise in Medicine, Biochemistry, and Bioinformatics, with hands-on experience in personalized medicine at AskBio and Bayer Pharmaceuticals. Our background ranges from VC-backed startups to leading teams and companies with multimillion-euro annual revenues. We believe the time for personalized healthcare is now, and with your support, we can make it more effective, efficient, and accessible for everyone.",
+        )}
       </p>
 
       <div className="mx-auto mt-12 w-full overflow-visible pb-4 md:mt-14 md:max-w-4xl md:px-2 md:pb-6">

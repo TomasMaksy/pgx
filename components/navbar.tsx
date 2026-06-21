@@ -5,12 +5,36 @@ import Link from "next/link";
 import Image from "next/image";
 import GradualBlur from "@/components/gradual-blur";
 import { MatterButton } from "@/components/ui/matter-button";
+import { useI18n } from "@/lib/i18n";
 
 const NAV_LINKS = [
   { label: "Product", href: "#product" },
   { label: "Platform", href: "#platform" },
   { label: "About", href: "#why-now" },
 ];
+
+function LanguageToggle() {
+  const { lang, setLang } = useI18n();
+  const next = lang === "lt" ? "en" : "lt";
+  const flag = next === "lt" ? "🇱🇹" : "🇬🇧";
+  const code = next === "lt" ? "LT" : "EN";
+  const title = next === "lt" ? "Pereiti į lietuvių" : "Switch to English";
+
+  return (
+    <button
+      type="button"
+      onClick={() => setLang(next)}
+      aria-label={title}
+      title={title}
+      className="group flex h-11 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 text-sm font-semibold tracking-wide text-white/80 transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95"
+    >
+      <span className="text-lg leading-none transition-transform duration-200 group-hover:scale-110">
+        {flag}
+      </span>
+      {code}
+    </button>
+  );
+}
 
 const enter = {
   duration: 1.4,
@@ -19,6 +43,7 @@ const enter = {
 };
 
 export function Navbar() {
+  const { t } = useI18n();
   return (
     <>
       <div
@@ -67,19 +92,22 @@ export function Navbar() {
                   href={link.href}
                   className="text-sm text-neutral-300 transition-colors hover:text-white"
                 >
-                  {link.label}
+                  {t(link.label)}
                 </Link>
               </li>
             ))}
           </ul>
 
-          <MatterButton
-            render={<Link href="#contact" />}
-            wrapperClassName="shrink-0 p-0.5 md:col-start-3 md:justify-self-end md:p-1"
-            className="h-9 px-4 text-xs md:h-11 md:px-6 md:text-sm"
-          >
-            Contact Us
-          </MatterButton>
+          <div className="flex shrink-0 items-center gap-2 md:col-start-3 md:justify-self-end md:gap-3">
+            <MatterButton
+              render={<Link href="#contact" />}
+              wrapperClassName="shrink-0 p-0.5 md:p-1"
+              className="h-9 px-4 text-xs md:h-11 md:px-6 md:text-sm"
+            >
+              {t("Contact Us")}
+            </MatterButton>
+            <LanguageToggle />
+          </div>
         </nav>
       </motion.header>
     </>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { SEQUENCE_FRAMES } from "@/lib/sequence-frames";
+import { LanguageProvider } from "@/lib/i18n";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -70,8 +71,10 @@ export default function RootLayout({
         ))}
       </head>
       <body className={cn(inter.className, "min-h-full bg-black text-foreground")}>
-        <Navbar />
-        {children}
+        <LanguageProvider>
+          <Navbar />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 
 type PgxReportModalProps = {
   open: boolean;
@@ -120,6 +121,7 @@ function DrugCard({
 }
 
 export function PgxReportModal({ open, onOpenChange }: PgxReportModalProps) {
+  const { t } = useI18n();
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
@@ -145,10 +147,10 @@ export function PgxReportModal({ open, onOpenChange }: PgxReportModalProps) {
           />
           <div className="min-w-0">
             <p className="text-[17px] font-medium text-neutral-900">
-              Pharmacogenomic profile
+              {t("Pharmacogenomic profile")}
             </p>
             <p className="mt-0.5 text-xs text-neutral-500">
-              Drug-gene interaction report · CPIC / FDA-guided
+              {t("Drug-gene interaction report · CPIC / FDA-guided")}
             </p>
           </div>
         </div>
@@ -161,8 +163,9 @@ export function PgxReportModal({ open, onOpenChange }: PgxReportModalProps) {
               aria-hidden
             />
             <p className="text-xs leading-relaxed text-neutral-600">
-              Demonstration only. Synthetic data — not for diagnostic or
-              prescribing use.
+              {t(
+                "Demonstration only. Synthetic data — not for diagnostic or prescribing use.",
+              )}
             </p>
           </div>
 
@@ -174,29 +177,31 @@ export function PgxReportModal({ open, onOpenChange }: PgxReportModalProps) {
               { label: "Method", value: "Targeted NGS + CNV" },
             ].map(({ label, value }) => (
               <div key={label}>
-                <span className="text-neutral-400">{label}</span>
+                <span className="text-neutral-400">{t(label)}</span>
                 <br />
-                <span className="text-neutral-800">{value}</span>
+                <span className="text-neutral-800">{t(value)}</span>
               </div>
             ))}
           </div>
 
           <p className="mt-6 mb-2.5 text-[13px] font-medium text-neutral-900">
-            Genotype results
+            {t("Genotype results")}
           </p>
           <div className="overflow-x-auto rounded-md border border-neutral-200">
             <table className="w-full table-fixed border-collapse text-xs">
               <thead>
                 <tr className="bg-neutral-50 text-left text-neutral-500">
-                  <th className="w-[24%] px-3 py-2.5 font-normal">Gene</th>
+                  <th className="w-[24%] px-3 py-2.5 font-normal">
+                    {t("Gene")}
+                  </th>
                   <th className="w-[22%] px-3 py-2.5 font-normal">
-                    Diplotype
+                    {t("Diplotype")}
                   </th>
                   <th className="w-[20%] px-3 py-2.5 font-normal">
-                    Activity
+                    {t("Activity")}
                   </th>
                   <th className="w-[34%] px-3 py-2.5 font-normal">
-                    Phenotype
+                    {t("Phenotype")}
                   </th>
                 </tr>
               </thead>
@@ -214,7 +219,7 @@ export function PgxReportModal({ open, onOpenChange }: PgxReportModalProps) {
                     <td className="px-3 py-3">{row.activity}</td>
                     <td className="px-3 py-3">
                       <PhenotypeBadge
-                        label={row.phenotype}
+                        label={t(row.phenotype)}
                         variant={row.variant}
                       />
                     </td>
@@ -225,14 +230,14 @@ export function PgxReportModal({ open, onOpenChange }: PgxReportModalProps) {
           </div>
 
           <p className="mt-6 mb-2.5 text-[13px] font-medium text-neutral-900">
-            Drug recommendations
+            {t("Drug recommendations")}
           </p>
 
           <div className="mb-3 rounded-lg border-2 border-mint-dark/30 bg-mint/5 p-5">
             <div className="mb-1.5 flex items-center justify-between gap-2">
               <span className="text-mint-darker inline-flex items-center gap-1 rounded-md bg-mint/15 px-2.5 py-0.5 text-[11px] font-medium">
                 <Target className="size-3" strokeWidth={2} aria-hidden />
-                Primary finding · current therapy
+                {t("Primary finding · current therapy")}
               </span>
               <span className="text-[11px] text-neutral-400">
                 FDA label · CPIC
@@ -241,111 +246,114 @@ export function PgxReportModal({ open, onOpenChange }: PgxReportModalProps) {
             <p className="text-[15px] font-medium text-neutral-900">
               Nebivolol{" "}
               <span className="text-xs font-normal text-neutral-500">
-                (CYP2D6 — poor metabolizer)
+                {t("(CYP2D6 — poor metabolizer)")}
               </span>
             </p>
 
             <ul className="mt-2 space-y-1.5 text-[13px] leading-relaxed text-neutral-600">
               <li>
                 <span className="font-medium text-neutral-800">
-                  Exposure:
+                  {t("Exposure:")}
                 </span>{" "}
-                CYP2D6 poor metabolizer → ~10–15× higher steady-state levels,
-                higher bioavailability, longer half-life.
+                {t(
+                  "CYP2D6 poor metabolizer → ~10–15× higher steady-state levels, higher bioavailability, longer half-life.",
+                )}
               </li>
               <li>
                 <span className="font-medium text-neutral-800">
-                  Clinical effect:
+                  {t("Clinical effect:")}
                 </span>{" "}
-                Trials show similar blood-pressure response and safety vs.
-                normal metabolizers.
+                {t(
+                  "Trials show similar blood-pressure response and safety vs. normal metabolizers.",
+                )}
               </li>
               <li>
-                <span className="font-medium text-neutral-800">Label:</span> No
-                mandatory dose adjustment required.
+                <span className="font-medium text-neutral-800">
+                  {t("Label:")}
+                </span>{" "}
+                {t("No mandatory dose adjustment required.")}
               </li>
             </ul>
 
             <div className="mt-4 rounded-md border border-mint-dark/25 bg-white px-4 py-3.5">
               <p className="text-[11px] font-semibold tracking-wide text-mint-darker uppercase">
-                Clinical suggestion
+                {t("Clinical suggestion")}
               </p>
               <p className="mt-1 text-[13px] leading-relaxed text-neutral-700">
-                Start at the lowest dose, titrate slowly to blood-pressure
-                response, and monitor for bradycardia, hypotension, or fatigue.
-                Review concurrent CYP2D6 inhibitors (e.g. paroxetine, fluoxetine,
-                bupropion).
+                {t(
+                  "Start at the lowest dose, titrate slowly to blood-pressure response, and monitor for bradycardia, hypotension, or fatigue. Review concurrent CYP2D6 inhibitors (e.g. paroxetine, fluoxetine, bupropion).",
+                )}
               </p>
             </div>
           </div>
 
           <DrugCard
-            name="Codeine"
+            name={t("Codeine")}
             gene="CYP2D6"
-            source="CPIC level A · strong"
+            source={t("CPIC level A · strong")}
             variant="danger"
           >
-            Poor analgesia due to minimal morphine conversion.{" "}
+            {t("Poor analgesia due to minimal morphine conversion.")}{" "}
             <span className={ACCENT_STYLES.danger}>
-              Avoid — use a non-codeine analgesic.
+              {t("Avoid — use a non-codeine analgesic.")}
             </span>
           </DrugCard>
 
           <DrugCard
-            name="Metoprolol"
+            name={t("Metoprolol")}
             gene="CYP2D6"
             source="DPWG"
             variant="warning"
           >
-            Raised plasma levels as an alternative β-blocker.{" "}
+            {t("Raised plasma levels as an alternative β-blocker.")}{" "}
             <span className={ACCENT_STYLES.warning}>
-              Use lowest effective dose; monitor heart rate.
+              {t("Use lowest effective dose; monitor heart rate.")}
             </span>
           </DrugCard>
 
           <DrugCard
-            name="Clopidogrel"
+            name={t("Clopidogrel")}
             gene="CYP2C19"
-            source="CPIC level A"
+            source={t("CPIC level A")}
             variant="warning"
           >
-            Reduced antiplatelet activation.{" "}
+            {t("Reduced antiplatelet activation.")}{" "}
             <span className={ACCENT_STYLES.warning}>
-              Prefer prasugrel or ticagrelor if an antiplatelet is needed.
+              {t("Prefer prasugrel or ticagrelor if an antiplatelet is needed.")}
             </span>
           </DrugCard>
 
           <DrugCard
-            name="Warfarin"
+            name={t("Warfarin")}
             gene="CYP2C9"
-            source="CPIC level A"
+            source={t("CPIC level A")}
             variant="success"
           >
-            No CYP2C9-driven change.{" "}
+            {t("No CYP2C9-driven change.")}{" "}
             <span className={ACCENT_STYLES.success}>
-              Dose per standard algorithm (also consider VKORC1).
+              {t("Dose per standard algorithm (also consider VKORC1).")}
             </span>
           </DrugCard>
 
           <div className="mt-5 flex flex-wrap gap-3.5 text-[11px] text-neutral-500">
             <span className="inline-flex items-center gap-1.5">
               <span className="size-2 rounded-sm bg-red-500" aria-hidden />
-              Avoid / major change
+              {t("Avoid / major change")}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="size-2 rounded-sm bg-amber-500" aria-hidden />
-              Adjust / monitor
+              {t("Adjust / monitor")}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="size-2 rounded-sm bg-emerald-500" aria-hidden />
-              Standard dosing
+              {t("Standard dosing")}
             </span>
           </div>
 
           <p className="mt-5 border-t border-neutral-200 pt-4 text-[11px] leading-relaxed text-neutral-400">
-            Reflects tested variants only. Interpretation evolves with
-            guidelines; drug interactions can alter phenotype. Not a substitute
-            for clinical judgment.
+            {t(
+              "Reflects tested variants only. Interpretation evolves with guidelines; drug interactions can alter phenotype. Not a substitute for clinical judgment.",
+            )}
           </p>
         </div>
       </DialogContent>

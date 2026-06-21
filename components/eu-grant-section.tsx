@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 
 const CALL_URL =
   "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/HORIZON-HLTH-2027-01-CARE-02";
@@ -9,19 +12,19 @@ const CARD_CLASS =
   "glass-inset flex flex-col rounded-2xl border border-white/10 bg-white/4 p-5 backdrop-blur-md md:p-6";
 
 export function EuGrantSection() {
+  const { t } = useI18n();
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-start lg:gap-16 xl:gap-24">
         <div className="max-w-xl">
-          <p className="section-eyebrow">Horizon Europe</p>
+          <p className="section-eyebrow">{t("Horizon Europe")}</p>
           <h2 className="section-title section-title-lg mt-4 max-w-md">
-            EU funding matched to what we build
+            {t("EU funding matched to what we build")}
           </h2>
           <p className="mt-6 text-base leading-relaxed text-white/55 md:text-lg">
-            A matched EU Research &amp; Innovation Action under Cluster 1
-            Health. Direct contribution covering 100% of eligible costs — and
-            the call scope reads almost line-for-line like the GenoLink
-            platform.
+            {t(
+              "A matched EU Research & Innovation Action under Cluster 1 Health. Direct contribution covering 100% of eligible costs — and the call scope reads almost line-for-line like the GenoLink platform.",
+            )}
           </p>
           <a
             href={CALL_URL}
@@ -29,7 +32,7 @@ export function EuGrantSection() {
             rel="noopener noreferrer"
             className="group border-mint/40 bg-mint/10 text-mint-lighter hover:border-mint/60 hover:bg-mint/20 mt-8 inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
           >
-            Full call details on the EU portal
+            {t("Full call details on the EU portal")}
             <ArrowUpRight
               className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               strokeWidth={2}
@@ -57,7 +60,7 @@ export function EuGrantSection() {
                   €10M
                 </p>
                 <p className="mt-3 text-sm leading-snug text-white/45 md:mt-2 md:text-base">
-                  Horizon Europe — EU grant per project
+                  {t("Horizon Europe — EU grant per project")}
                 </p>
               </div>
             </div>
@@ -81,7 +84,7 @@ export function EuGrantSection() {
                 €100K
               </p>
               <p className="mt-3 text-sm leading-snug text-white/45">
-                Inovacijų agentūra — Lithuanian innovation funding
+                {t("Inovacijų agentūra — Lithuanian innovation funding")}
               </p>
             </article>
 
@@ -102,7 +105,7 @@ export function EuGrantSection() {
                 €300K
               </p>
               <p className="mt-3 text-sm leading-snug text-white/45">
-                Eurostars 3 / Eureka — cross-border R&amp;D
+                {t("Eurostars 3 / Eureka — cross-border R&D")}
               </p>
             </article>
           </div>

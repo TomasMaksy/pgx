@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { PgxReportModal } from "@/components/pgx-report-modal";
+import { useI18n } from "@/lib/i18n";
 
 const PLAY_THRESHOLD = 0.25;
 const TOAST_EXPAND_DELAY_MS = 2000;
@@ -185,6 +186,7 @@ export function MacbookMockupSection() {
   const compactToast = isMobile ? COMPACT_TOAST_MOBILE : COMPACT_TOAST;
   const expandedToast = isMobile ? EXPANDED_TOAST_MOBILE : EXPANDED_TOAST;
   const toastMotionState = toastExpanded ? expandedToast : compactToast;
+  const { t } = useI18n();
 
   return (
     <section
@@ -193,7 +195,7 @@ export function MacbookMockupSection() {
       className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
     >
       <h2 className="section-title mx-auto mb-6 max-w-4xl text-center md:mb-4">
-        How could this look in practice?
+        {t("How could this look in practice?")}
       </h2>
 
       <div className="mb-8 flex justify-center md:mb-10">
@@ -208,7 +210,7 @@ export function MacbookMockupSection() {
           aria-hidden={toastExpanded}
           tabIndex={toastExpanded ? -1 : 0}
         >
-          Skip to the good part
+          {t("Skip to the good part")}
         </motion.button>
       </div>
 
@@ -288,22 +290,23 @@ export function MacbookMockupSection() {
                       />
                     </div>
                     <p className="min-w-0 flex-1 text-[10px] leading-tight font-semibold text-neutral-900 md:hidden max-md:text-[9px]">
-                      Pharmacogenomic Alert
+                      {t("Pharmacogenomic Alert")}
                     </p>
                   </div>
                   <div className="min-w-0 flex-1 md:pt-0.5">
                     <p className="hidden text-[10px] leading-tight font-semibold text-neutral-900 md:block">
-                      Pharmacogenomic Alert: CYP2D6 Poor Metabolizer
+                      {t("Pharmacogenomic Alert: CYP2D6 Poor Metabolizer")}
                     </p>
                     <p className="line-clamp-2 text-[8px] leading-snug text-neutral-600 md:mt-0.5 md:line-clamp-none max-md:text-[7px]">
                       <span className="md:hidden">
-                        Reduced CYP2D6 activity may increase nebivolol exposure.
+                        {t(
+                          "Reduced CYP2D6 activity may increase nebivolol exposure.",
+                        )}
                       </span>
                       <span className="hidden md:inline">
-                        Nebivolol is primarily metabolized by CYP2D6. This
-                        patient has significantly reduced CYP2D6 activity and
-                        may experience substantially increased nebivolol
-                        exposure.
+                        {t(
+                          "Nebivolol is primarily metabolized by CYP2D6. This patient has significantly reduced CYP2D6 activity and may experience substantially increased nebivolol exposure.",
+                        )}
                       </span>
                     </p>
                     <motion.button
@@ -328,7 +331,7 @@ export function MacbookMockupSection() {
                       }}
                       className="text-mint-dark hover:text-mint-darker mt-2 rounded-md border bg-white/90 px-2 py-0.5 text-[8px] font-semibold transition-colors max-md:mt-1 max-md:px-1.5 max-md:py-px max-md:text-[7px]"
                     >
-                      Read more
+                      {t("Read more")}
                     </motion.button>
                   </div>
                 </div>

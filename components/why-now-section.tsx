@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Sheet, SheetPanel, SheetPopup } from "@/components/ui/sheet";
+import { useI18n } from "@/lib/i18n";
 
 const CX = 230;
 const CY = 122;
@@ -138,6 +139,7 @@ function ConvergenceGraphic({
   onSelect: (i: number | null) => void;
 }) {
   const [hovered, setHovered] = useState<number | null>(null);
+  const { t } = useI18n();
 
   return (
     <div className="relative w-full overflow-hidden rounded-2xl bg-black/20 px-2 py-4 backdrop-blur-sm md:px-8 md:py-7">
@@ -260,7 +262,7 @@ function ConvergenceGraphic({
                 style={{ transition: "fill 0.25s" }}
               >
                 <tspan fill={active ? "#ffffff" : "rgba(255,255,255,0.78)"}>
-                  {tag}
+                  {t(tag)}
                 </tspan>
               </text>
             </g>
@@ -286,7 +288,7 @@ function ConvergenceGraphic({
           letterSpacing="1.2"
           fontFamily="system-ui, sans-serif"
         >
-          NOW
+          {t("NOW")}
         </text>
       </svg>
     </div>
@@ -295,18 +297,19 @@ function ConvergenceGraphic({
 
 /* ── Expandable detail panel for the selected factor ── */
 function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
+  const { t } = useI18n();
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr]">
       <div className="border-b border-white/10 p-8 md:p-10 lg:border-r lg:border-b-0">
         <div className="text-mint-lighter text-[11px] font-medium tracking-[0.18em] uppercase">
-          {detail.eyebrow}
+          {t(detail.eyebrow)}
         </div>
 
         <h3 className="section-heading mt-4 text-2xl md:text-3xl">
-          {detail.title}
+          {t(detail.title)}
         </h3>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/65 md:text-base">
-          {detail.intro}
+          {t(detail.intro)}
         </p>
 
         <ul className="mt-5 space-y-3">
@@ -317,7 +320,7 @@ function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
                 strokeWidth={2.5}
               />
               <span className="text-sm leading-relaxed text-white/75">
-                {item}
+                {t(item)}
               </span>
             </li>
           ))}
@@ -326,7 +329,7 @@ function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
 
       <div className="p-8 md:p-10">
         <p className="text-xs font-medium tracking-[0.2em] text-white/45 uppercase">
-          {detail.statLabel}
+          {t(detail.statLabel)}
         </p>
         <p
           className={[
@@ -334,9 +337,9 @@ function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
             detail.tiles ? "text-5xl md:text-6xl" : "text-4xl md:text-5xl",
           ].join(" ")}
         >
-          {detail.statBig}
+          {t(detail.statBig)}
         </p>
-        <p className="mt-1 text-sm text-white/60">{detail.statSub}</p>
+        <p className="mt-1 text-sm text-white/60">{t(detail.statSub)}</p>
 
         {detail.tiles && (
           <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/8">
@@ -346,7 +349,7 @@ function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
                   {value}
                 </p>
                 <p className="mt-1 text-xs leading-snug text-white/50">
-                  {label}
+                  {t(label)}
                 </p>
               </div>
             ))}
@@ -360,7 +363,7 @@ function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
             rel="noopener noreferrer"
             className="group border-mint/40 bg-mint/10 text-mint-lighter hover:border-mint/60 hover:bg-mint/20 mt-6 flex w-fit items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors"
           >
-            Full call details on the EU portal
+            {t("Full call details on the EU portal")}
             <ArrowUpRight
               className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               strokeWidth={2}
@@ -373,24 +376,25 @@ function DetailPanel({ detail }: { detail: (typeof DETAILS)[number] }) {
 }
 
 export function WhyNowSection() {
+  const { t } = useI18n();
   const [openSheet, setOpenSheet] = useState<number | null>(null);
 
   return (
     <div className="w-full">
-      <p className="section-eyebrow">Why now</p>
+      <p className="section-eyebrow">{t("Why now")}</p>
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex flex-col gap-4">
-          <h2 className="section-title max-w-3xl">Limited Window</h2>
+          <h2 className="section-title max-w-3xl">{t("Limited Window")}</h2>
 
           <p className="mt-2 max-w-3xl text-base leading-relaxed text-white/55 md:text-lg">
-            Europe is funding the build-out of sovereign health and biotech
-            infrastructure across the current 2021–2027 cycle. The same money is
-            available to every EU country — and whoever moves first sets the
-            standard for the whole region. Lithuania has both the funding
-            channels and the talent to do it first. The question isn&apos;t{" "}
-            <em className="text-white/75 not-italic">whether</em> it gets built,
-            but <em className="text-white/75 not-italic">who</em> and{" "}
-            <em className="text-white/75 not-italic">when</em>.
+            {t(
+              "Europe is funding the build-out of sovereign health and biotech infrastructure across the current 2021–2027 cycle. The same money is available to every EU country — and whoever moves first sets the standard for the whole region. Lithuania has both the funding channels and the talent to do it first. The question isn't ",
+            )}
+            <em className="text-white/75 not-italic">{t("whether")}</em>
+            {t(" it gets built, but ")}
+            <em className="text-white/75 not-italic">{t("who")}</em>
+            {t(" and ")}
+            <em className="text-white/75 not-italic">{t("when")}</em>.
           </p>
         </div>
         <ConvergenceGraphic openSheet={openSheet} onSelect={setOpenSheet} />

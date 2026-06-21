@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
+import { useI18n } from "@/lib/i18n";
 import {
   BrainCircuit,
   Check,
@@ -123,6 +124,7 @@ function StageCard({
   stage: (typeof STAGES)[number];
   big?: boolean;
 }) {
+  const { t } = useI18n();
   const { years, tag, icon: Icon, title, desc, state } = stage;
   const image = "image" in stage ? (stage.image as string) : null;
   return (
@@ -148,7 +150,7 @@ function StageCard({
             TAG_STYLES[state],
           ].join(" ")}
         >
-          {tag}
+          {t(tag)}
         </span>
         <span className="rounded-md bg-mint/15 px-2.5 py-1 font-mono text-sm font-bold tracking-tight text-mint-lighter">
           {years}
@@ -183,32 +185,32 @@ function StageCard({
           big ? "text-xl md:text-2xl" : "text-lg",
         ].join(" ")}
       >
-        {title}
+        {t(title)}
       </h3>
       <p className="relative z-10 mt-2 text-sm leading-relaxed text-white/55">
-        {desc}
+        {t(desc)}
       </p>
     </article>
   );
 }
 
 export function VisionSection() {
+  const { t } = useI18n();
   return (
     <div className="w-full">
       <Reveal className="text-center">
         <p className="section-eyebrow">
-          Our goals
+          {t("Our goals")}
         </p>
         <h2 className="section-title mx-auto max-w-4xl text-center">
-          Make genetics the backbone of every prescription — and grow from there
-          into the medicine of the future.
+          {t(
+            "Make genetics the backbone of every prescription — and grow from there into the medicine of the future.",
+          )}
         </h2>
         <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-white/55 md:text-lg">
-          We&apos;re building a system that uses genetic testing to help doctors
-          make precise decisions — which drug, at what dose, and in what
-          combination is safe for each patient. This reduces ineffective
-          treatment, adverse reactions, and dosing errors — and, for the
-          healthcare system, the cost of medications and the load on hospitals.
+          {t(
+            "We're building a system that uses genetic testing to help doctors make precise decisions — which drug, at what dose, and in what combination is safe for each patient. This reduces ineffective treatment, adverse reactions, and dosing errors — and, for the healthcare system, the cost of medications and the load on hospitals.",
+          )}
         </p>
       </Reveal>
 
@@ -229,7 +231,7 @@ export function VisionSection() {
       <Reveal delay={0.05}>
         <div className="mt-12 md:mt-16">
           <h3 className="section-heading text-2xl md:text-3xl">
-            Why we do this
+            {t("Why we do this")}
           </h3>
           <div className="glass-inset mt-6 overflow-hidden rounded-3xl border border-white/10 bg-white/4 backdrop-blur-md">
             <div className="grid grid-cols-1 divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
@@ -240,7 +242,7 @@ export function VisionSection() {
                       <Icon className="size-5 text-mint" strokeWidth={2} />
                     </div>
                     <h4 className="section-heading text-base">
-                      {title}
+                      {t(title)}
                     </h4>
                   </div>
                   <ul className="mt-5 space-y-3">
@@ -250,7 +252,7 @@ export function VisionSection() {
                           <Check className="size-3 text-mint" strokeWidth={3} />
                         </span>
                         <span className="text-sm leading-snug font-medium text-white/75">
-                          {point}
+                          {t(point)}
                         </span>
                       </li>
                     ))}

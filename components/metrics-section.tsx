@@ -15,6 +15,7 @@ import {
   CITATION_SOURCES,
   type CitationSource,
 } from "@/lib/citation-sources";
+import { useI18n } from "@/lib/i18n";
 
 const TOOLTIP_CLASS =
   "rounded-xl border-white/10 bg-neutral-900/95 shadow-lg shadow-black/50 ring-white/10 backdrop-blur-md";
@@ -101,10 +102,11 @@ const METRICS: {
 ];
 
 function TooltipSourceCard({ source }: { source: CitationSource }) {
+  const { t } = useI18n();
   return (
     <div className="flex max-w-[16rem] flex-col gap-1.5">
       <p className="text-[10px] font-medium tracking-[0.18em] text-white/40 uppercase">
-        Source {source.id} · {source.label}
+        {t("Source")} {source.id} · {source.label}
       </p>
       <p className="text-sm leading-snug font-medium text-white/80">
         {source.title}
@@ -235,14 +237,15 @@ function RollingValue({
 }
 
 export function MetricsSection() {
+  const { t } = useI18n();
   const [openMetric, setOpenMetric] = useState<MetricKey | null>(null);
   const activeMetric = METRICS.find((metric) => metric.key === openMetric);
 
   return (
     <div className="w-full">
-      <p className="section-eyebrow">Impact</p>
+      <p className="section-eyebrow">{t("Impact")}</p>
       <h2 className="section-title max-w-3xl">
-        The measurable impact of genetics-aware prescribing.
+        {t("The measurable impact of genetics-aware prescribing.")}
       </h2>
 
       <div className="mt-8 md:mt-10">
@@ -272,7 +275,7 @@ export function MetricsSection() {
               />
               <div className="order-2 max-w-xl md:order-1">
                 <p className="text-lg leading-snug font-medium tracking-tight text-white/85 md:text-xl">
-                  {metric.label}
+                  {t(metric.label)}
                 </p>
                 <p className="mt-1.5 text-xs leading-snug text-white/40 md:text-sm">
                   {metric.source}
@@ -291,10 +294,10 @@ export function MetricsSection() {
           <DialogContent className="gap-5 p-6 md:max-w-md md:gap-6 md:p-8">
             <DialogHeader className="gap-2">
               <DialogTitle className="text-2xl leading-tight font-medium tracking-tight md:text-3xl">
-                {activeMetric.title}
+                {t(activeMetric.title)}
               </DialogTitle>
               <DialogDescription className="text-muted-foreground text-xs leading-snug md:text-sm">
-                {activeMetric.summary}
+                {t(activeMetric.summary)}
               </DialogDescription>
             </DialogHeader>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
 const FEATURES = [
   "Precision Prescribing",
@@ -23,6 +24,7 @@ const ITEM = 64;
 const SCROLL_SPEED = 24;
 
 export function MoreFeaturesSection() {
+  const { t } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(N * ITEM);
@@ -117,7 +119,7 @@ export function MoreFeaturesSection() {
                       color,
                     ].join(" ")}
                   >
-                    {f}
+                    {t(f)}
                   </span>
                 </div>
               );

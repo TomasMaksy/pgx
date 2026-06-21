@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { MatterButton } from "@/components/ui/matter-button";
 import { TextAnimate } from "@/components/ui/text-animate";
+import { useI18n } from "@/lib/i18n";
 
 const headlineSegmentClass = "text-gradient-headline font-sans tracking-tight";
 
@@ -53,9 +54,10 @@ function buildTimeline() {
 const { first, second, subheadlineDelay, buttonDelay } = buildTimeline();
 
 export function HeroSection() {
+  const { t } = useI18n();
   return (
     <>
-      <h1 className="max-w-5xl text-4xl leading-none font-medium md:text-7xl">
+      <h1 className="max-w-5xl pb-1 text-4xl leading-[1.08] font-medium md:text-7xl">
         {first.map(({ line, delay }) => (
           <TextAnimate
             key={line}
@@ -69,7 +71,7 @@ export function HeroSection() {
             className="block"
             segmentClassName={headlineSegmentClass}
           >
-            {line}
+            {t(line)}
           </TextAnimate>
         ))}
         <TextAnimate
@@ -83,7 +85,7 @@ export function HeroSection() {
           className="block"
           segmentClassName={headlineSegmentClass}
         >
-          {second.line}
+          {t(second.line)}
         </TextAnimate>
       </h1>
 
@@ -97,7 +99,7 @@ export function HeroSection() {
         duration={lineDuration(subheadline)}
         className="mt-6 max-w-md text-base text-white/70 md:text-2xl"
       >
-        {subheadline}
+        {t(subheadline)}
       </TextAnimate>
 
       <motion.div
@@ -114,7 +116,7 @@ export function HeroSection() {
           render={<Link href="#contact" />}
           className="inline-flex items-center gap-2"
         >
-          Contact Us
+          {t("Contact Us")}
           <ChevronRight className="size-4" strokeWidth={2} />
         </MatterButton>
       </motion.div>

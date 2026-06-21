@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ContactSection } from "@/components/contact-section";
+import { useI18n } from "@/lib/i18n";
 
 const GLASS_PANEL_CLASS =
   "w-full overflow-hidden rounded-t-3xl border border-b-0 border-neutral-500/30 bg-neutral-900/70 backdrop-blur-xs shadow-[inset_0_0_18px_rgba(255,255,255,0.06),inset_0_8px_12px_rgba(255,255,255,0.07),0_-32px_80px_-24px_rgba(0,0,0,0.92)]";
@@ -17,6 +18,7 @@ export function FooterSection() {
 
   const y = useTransform(scrollYProgress, [0, 1], [72, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [0.965, 1]);
+  const { t } = useI18n();
 
   return (
     <footer
@@ -53,8 +55,8 @@ export function FooterSection() {
           </div>
           <div className="mt-10 mb-8 flex justify-center md:mt-12">
             <p className="text-center text-xs text-white/40 md:text-sm">
-              Copyright © {new Date().getFullYear()} GenoLink Biotechnologies.
-              All rights reserved.
+              Copyright © {new Date().getFullYear()} GenoLink Biotechnologies.{" "}
+              {t("All rights reserved.")}
             </p>
           </div>
         </motion.div>

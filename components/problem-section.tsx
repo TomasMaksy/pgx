@@ -14,6 +14,7 @@ import {
   CITATION_SOURCES,
   type CitationSource,
 } from "@/lib/citation-sources";
+import { useI18n } from "@/lib/i18n";
 
 const TOOLTIP_CLASS =
   "rounded-xl border-white/10 bg-neutral-900/95 shadow-lg shadow-black/50 ring-white/10 backdrop-blur-md";
@@ -26,7 +27,8 @@ type StatModal = {
   sourceIds: number[];
   title: string;
   summary: string;
-  caption: React.ReactNode;
+  captionText: string;
+  captionIds: number[];
 };
 
 const STATS: StatModal[] = [
@@ -36,11 +38,8 @@ const STATS: StatModal[] = [
     sourceIds: [1],
     title: "8.3% ADR-related admissions",
     summary: "Approximately 1 in 12 hospital admissions are related to adverse drug reactions.",
-    caption: (
-      <>
-        ADR-related admissions <Citation ids={[1]} />
-      </>
-    ),
+    captionText: "ADR-related admissions",
+    captionIds: [1],
   },
   {
     key: "80%",
@@ -49,12 +48,8 @@ const STATS: StatModal[] = [
     title: "80% predictable or preventable",
     summary:
       "80% of medication-related admissions may be predictable or preventable.",
-    caption: (
-      <>
-        of medication-related admissions predictable or preventable{" "}
-        <Citation ids={[2]} />
-      </>
-    ),
+    captionText: "of medication-related admissions predictable or preventable",
+    captionIds: [2],
   },
   {
     key: "~47k",
@@ -63,19 +58,17 @@ const STATS: StatModal[] = [
     title: "~46,700 ADR hospitalisations/year",
     summary:
       "560,362 annual Lithuanian hospital discharges × 8.33% (1 in 12) ≈ 46,700. Estimate calculated from published discharge volume and ADR-related admission prevalence.",
-    caption: (
-      <>
-        estimated hospitalisations/year in Lithuania <Citation ids={[1, 3]} />
-      </>
-    ),
+    captionText: "estimated hospitalisations/year in Lithuania",
+    captionIds: [1, 3],
   },
 ];
 
 function TooltipSourceCard({ source }: { source: CitationSource }) {
+  const { t } = useI18n();
   return (
     <div className="flex max-w-[16rem] flex-col gap-1.5">
       <p className="text-[10px] font-medium tracking-[0.18em] text-white/40 uppercase">
-        Source {source.id} · {source.label}
+        {t("Source")} {source.id} · {source.label}
       </p>
       <p className="text-sm leading-snug font-medium text-white/80">
         {source.title}
@@ -140,21 +133,22 @@ function SourceReference({ source }: { source: CitationSource }) {
 }
 
 export function ProblemSection() {
+  const { t } = useI18n();
   const [openStat, setOpenStat] = useState<StatKey | null>(null);
   const activeStat = STATS.find((stat) => stat.key === openStat);
 
   return (
     <div className="w-full md:max-w-[50%]">
       <p className="section-eyebrow">
-        The problem
+        {t("The problem")}
       </p>
 
       <h2 className="section-title section-title-lg max-w-none">
         <span className="text-gradient-headline text-7xl font-medium tracking-tighter">
-          1 in 12
+          {t("1 in 12")}
         </span>{" "}
         <span className="mt-2 block text-2xl font-normal text-white/55 md:text-3xl">
-          hospital admissions are related to adverse drug reactions
+          {t("hospital admissions are related to adverse drug reactions")}
         </span>
       </h2>
 
@@ -179,7 +173,7 @@ export function ProblemSection() {
               </button>
             </Tooltip>
             <p className="mt-1 text-[11px] leading-snug text-white/45 md:text-xs">
-              {stat.caption}
+              {t(stat.captionText)} <Citation ids={stat.captionIds} />
             </p>
           </div>
         ))}
@@ -193,10 +187,10 @@ export function ProblemSection() {
           <DialogContent className="gap-5 p-6 md:max-w-md md:gap-6 md:p-8">
             <DialogHeader className="gap-2">
               <DialogTitle className="text-2xl leading-tight font-medium tracking-tight md:text-3xl">
-                {activeStat.title}
+                {t(activeStat.title)}
               </DialogTitle>
               <DialogDescription className="text-muted-foreground text-xs leading-snug md:text-sm">
-                {activeStat.summary}
+                {t(activeStat.summary)}
               </DialogDescription>
             </DialogHeader>
 

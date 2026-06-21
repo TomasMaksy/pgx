@@ -1,5 +1,8 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useI18n } from "@/lib/i18n";
 
 const STEPS = [
   {
@@ -287,21 +290,22 @@ function StepGraphic({ type }: { type: (typeof STEPS)[number]["graphic"] }) {
 }
 
 export function SolutionSection() {
+  const { t } = useI18n();
   return (
     <div className="w-full">
-      <p className="section-eyebrow mx-auto w-fit">The solution</p>
+      <p className="section-eyebrow mx-auto w-fit">{t("The solution")}</p>
 
       <h2 className="section-title section-title-lg mx-auto max-w-3xl text-center">
-        <span className="text-gradient-headline">One Profile.</span>{" "}
+        <span className="text-gradient-headline">{t("One Profile.")}</span>{" "}
         <span className="block text-white/85 md:inline">
-          A Lifetime of Smarter Prescribing.
+          {t("A Lifetime of Smarter Prescribing.")}
         </span>
       </h2>
 
       <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-white/60 md:text-lg">
-        Once a pharmacogenomic profile is generated, it can guide medication
-        selection, dosing, and safety decisions whenever a relevant drug is
-        prescribed.
+        {t(
+          "Once a pharmacogenomic profile is generated, it can guide medication selection, dosing, and safety decisions whenever a relevant drug is prescribed.",
+        )}
       </p>
 
       <div className="mx-auto mt-16 max-w-5xl md:mt-20">
@@ -333,10 +337,10 @@ export function SolutionSection() {
 
                 <div className="col-start-2 row-start-1 min-w-0 md:flex-1">
                   <h3 className="section-heading text-3xl md:text-4xl">
-                    {step.title}
+                    {t(step.title)}
                   </h3>
                   <p className="mt-2 text-lg leading-relaxed text-white/50">
-                    {step.description}
+                    {t(step.description)}
                   </p>
                 </div>
               </div>
