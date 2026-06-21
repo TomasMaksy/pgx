@@ -111,7 +111,6 @@ export function HeroSection() {
         className="mt-10"
       >
         <MatterButton
-          nativeButton={false}
           render={<Link href="#contact" />}
           className="inline-flex items-center gap-2"
         >

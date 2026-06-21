@@ -25,6 +25,7 @@
     "@shadcnblocks": "https://shadcnblocks.com/r/{name}.json",
     "@magicui": "https://magicui.design/r/{name}",
     "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
-    "@efferd": "https://efferd.com/r/{style}/{name}.json"
+    "@efferd": "https://efferd.com/r/{style}/{name}.json",
+    "@coss": "https://coss.com/ui/r/{name}.json"
   }
 }

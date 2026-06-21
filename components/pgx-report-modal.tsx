@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Info, Target } from "lucide-react";
 import {
   Dialog,
@@ -134,13 +135,22 @@ export function PgxReportModal({ open, onOpenChange }: PgxReportModalProps) {
           nebivolol as the primary drug for a CYP2D6 poor metabolizer.
         </DialogDescription>
 
-        <div className="border-b border-neutral-200 px-6 py-5 pr-14 md:px-7 md:pr-16">
-          <p className="text-[17px] font-medium text-neutral-900">
-            Pharmacogenomic profile
-          </p>
-          <p className="mt-0.5 text-xs text-neutral-500">
-            Drug-gene interaction report · CPIC / FDA-guided
-          </p>
+        <div className="flex items-center gap-3 border-b border-neutral-200 px-6 py-5 pr-14 md:gap-3.5 md:px-7 md:pr-16">
+          <Image
+            src="/logo_icon.webp"
+            alt="GenoLink"
+            width={36}
+            height={36}
+            className="size-9 shrink-0 object-contain"
+          />
+          <div className="min-w-0">
+            <p className="text-[17px] font-medium text-neutral-900">
+              Pharmacogenomic profile
+            </p>
+            <p className="mt-0.5 text-xs text-neutral-500">
+              Drug-gene interaction report · CPIC / FDA-guided
+            </p>
+          </div>
         </div>
 
         <div className="overflow-y-auto px-6 py-5 md:px-7 md:pb-6">

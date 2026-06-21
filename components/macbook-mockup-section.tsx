@@ -156,7 +156,8 @@ export function MacbookMockupSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-10 mx-auto max-w-7xl px-8 py-16 md:px-16 md:py-20 lg:px-24"
+      id="platform"
+      className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
     >
       <h2 className="section-title mx-auto mb-6 max-w-4xl text-center md:mb-4">
         How could this look in practice?

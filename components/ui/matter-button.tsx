@@ -21,6 +21,8 @@ function MatterButton({
   children,
   className,
   wrapperClassName,
+  render,
+  nativeButton,
   ...props
 }: MatterButtonProps) {
   const reduceMotion = useReducedMotion();
@@ -37,6 +39,8 @@ function MatterButton({
       whileTap={reduceMotion ? undefined : "tap"}
     >
       <Button
+        render={render}
+        nativeButton={nativeButton ?? (render ? false : undefined)}
         className={cn(
           "relative h-13 overflow-hidden rounded-full border-0 bg-black px-6 text-base text-white hover:bg-black active:translate-y-0 [a]:hover:bg-black",
 

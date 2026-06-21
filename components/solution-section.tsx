@@ -4,28 +4,30 @@ import Image from "next/image";
 const STEPS = [
   {
     number: "01",
-    title: "Test Once",
-    description: "Identify clinically actionable genetic variants.",
+    title: "Sequence Once",
+    description:
+      "A one-time sample is sequenced to identify the clinically actionable genetic variants that influence drug response. No repeat testing — the same data supports prescribing decisions for years to come.",
     graphic: "test",
   },
   {
     number: "02",
     title: "Interpret With Bioinformatics",
     description:
-      "An AI-assisted analysis layer processes raw genomic data — identifying clinically relevant variants and structuring them into profile-ready pharmacogenomic insights.",
+      "An AI-assisted analysis layer processes the raw genomic data, flags clinically relevant variants, and structures them into standardized, prescribing-ready pharmacogenomic insights.",
     graphic: "analysis",
   },
   {
     number: "03",
-    title: "Get a Pharmacogenomic Passport",
+    title: "Generate a Pharmacogenomic Passport",
     description:
-      "A lifelong profile containing medication-relevant genetic information.",
+      "The result is a lifelong profile that consolidates each patient's medication-relevant genetics into a single, portable record clinicians can reference at the point of care.",
     graphic: "passport",
   },
   {
     number: "04",
     title: "Integrate With Any Platform",
-    description: "Results become available across healthcare settings.",
+    description:
+      "Profiles surface across healthcare settings and systems — supporting consistent, evidence-based prescribing at both the individual and population level.",
     graphic: "esveikata",
   },
 ] as const;
@@ -333,7 +335,7 @@ export function SolutionSection() {
                   <h3 className="section-heading text-3xl md:text-4xl">
                     {step.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/50 md:text-base">
+                  <p className="mt-2 text-lg leading-relaxed text-white/50">
                     {step.description}
                   </p>
                 </div>

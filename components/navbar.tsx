@@ -75,7 +75,6 @@ export function Navbar() {
           </ul>
 
           <MatterButton
-            nativeButton={false}
             render={<Link href="#contact" />}
             wrapperClassName="col-start-3 justify-self-end shrink-0"
             className="h-11 px-6 text-sm"

@@ -5,6 +5,7 @@ import { MacbookMockupSection } from "@/components/macbook-mockup-section";
 import { SolutionSection } from "@/components/solution-section";
 import { VisionSection } from "@/components/vision-section";
 import { WhyNowSection } from "@/components/why-now-section";
+import { EuGrantSection } from "@/components/eu-grant-section";
 import { MoreFeaturesSection } from "@/components/more-features-section";
 import { TeamSection } from "@/components/team-section";
 import { FooterSection } from "@/components/footer-section";
@@ -57,6 +58,13 @@ export default function Home() {
         className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
       >
         <WhyNowSection />
+      </section>
+
+      <section
+        id="eu-grant"
+        className="relative z-10 mx-auto max-w-7xl scroll-mt-24 px-8 py-16 md:px-16 md:py-20 lg:px-24"
+      >
+        <EuGrantSection />
       </section>
 
       <section
