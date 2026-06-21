@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import {
   BrainCircuit,
@@ -21,6 +22,7 @@ const STAGES = [
     years: "2027–2028",
     tag: "Stage 1 · Core",
     icon: BrainCircuit,
+    image: "/1test.webp",
     title: "AI recommendation platform",
     desc: "Analyzes the patient's genetic data and, at the moment of prescribing, helps the doctor choose the right drug and dose — and flags dangerous drug combinations.",
     state: "now" as const,
@@ -30,8 +32,9 @@ const STAGES = [
     years: "2028–2029",
     tag: "Stage 2",
     icon: FlaskConical,
+    image: "/test32.webp",
     title: "In-house laboratory",
-    desc: "A full cycle of genetic testing in Lithuania — from sample collection to interpretation and recommendations for doctors. Quality control at every step, fast turnaround, and sovereign data.",
+    desc: "A full cycle of genetic testing in Lithuania — from sample collection to interpretation and recommendations. Quality control at every step, fast turnaround, and sovereign data.",
     state: "build" as const,
   },
   {
@@ -39,6 +42,7 @@ const STAGES = [
     years: "2029–2030",
     tag: "Stage 3",
     icon: Microscope,
+    image: "/2test.webp",
     title: "New fields and a scientific base",
     desc: "Building on a working system and accumulated data — expansion into new areas of medicine, new tests, and joint research with universities and clinics.",
     state: "grow" as const,
@@ -48,6 +52,7 @@ const STAGES = [
     years: "2030+",
     tag: "Horizon 2030+",
     icon: Sparkles,
+    image: "/test4.webp",
     title: "A genomic profile from birth — for life",
     desc: "Our vision — that a genetic profile is created early in life, with parental consent, and accompanies a person throughout their life. For any illness, any doctor immediately sees the patient's drug predispositions and receives ready-made recommendations — treatment stays precise from day one. This requires a clear legal framework and data protection, and is built together with the government and regulators. As genomic science advances, the accumulated profiles will become the foundation of preventive medicine: more and more conditions can be predicted and prevented in advance.",
     state: "dream" as const,
@@ -384,6 +389,7 @@ function StageCard({
   big?: boolean;
 }) {
   const { years, tag, icon: Icon, title, desc, state } = stage;
+  const image = "image" in stage ? (stage.image as string) : null;
   return (
     <article
       className={[
@@ -416,23 +422,41 @@ function StageCard({
         </span>
       </div>
 
-      <div
-        className={[
-          "relative z-10 mt-6 flex size-12 items-center justify-center rounded-xl border",
-          state === "dream"
-            ? "border-mint/50 bg-mint/25"
-            : "border-mint/25 bg-mint/15",
-        ].join(" ")}
-      >
-        <Icon
-          className={
+      {image ? (
+        <div
+          className={[
+            "relative z-10 mt-4 w-full",
+            big ? "h-48 md:h-60" : "h-36 md:h-40",
+          ].join(" ")}
+        >
+          <Image
+            src={image}
+            alt={title}
+            fill
+            unoptimized
+            sizes="(max-width: 768px) 90vw, 33vw"
+            className="object-contain object-center"
+          />
+        </div>
+      ) : (
+        <div
+          className={[
+            "relative z-10 mt-6 flex size-12 items-center justify-center rounded-xl border",
             state === "dream"
-              ? "size-6 text-mint-lighter"
-              : "size-6 text-mint"
-          }
-          strokeWidth={2}
-        />
-      </div>
+              ? "border-mint/50 bg-mint/25"
+              : "border-mint/25 bg-mint/15",
+          ].join(" ")}
+        >
+          <Icon
+            className={
+              state === "dream"
+                ? "size-6 text-mint-lighter"
+                : "size-6 text-mint"
+            }
+            strokeWidth={2}
+          />
+        </div>
+      )}
 
       <h3
         className={[
