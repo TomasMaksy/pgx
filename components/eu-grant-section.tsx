@@ -18,10 +18,10 @@ export function EuGrantSection() {
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-start lg:gap-16 xl:gap-24">
         <div className="max-w-xl">
           <p className="section-eyebrow">{t("Horizon Europe")}</p>
-          <h2 className="section-title section-title-lg mt-4 max-w-md">
+          <h2 className="section-title max-w-3xl">
             {t("EU funding matched to what we build")}
           </h2>
-          <p className="mt-6 text-base leading-relaxed text-white/55 md:text-lg">
+          <p className="mt-2 max-w-3xl text-base leading-relaxed text-white/55 md:text-lg">
             {t(
               "A matched EU Research & Innovation Action under Cluster 1 Health. Direct contribution covering 100% of eligible costs — and the call scope reads almost line-for-line like the GenoLink platform.",
             )}

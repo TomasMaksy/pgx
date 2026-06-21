@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Live site: [pgx-chi.vercel.app](https://pgx-chi.vercel.app)
+Live site: [genolink.lt](https://genolink.lt)
 
 ## Getting Started
 

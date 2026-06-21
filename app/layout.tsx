@@ -13,22 +13,43 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const SITE_NAME = "GenoLink";
-const SITE_TITLE = "GenoLink — фармакогеномика как клинический стандарт";
+const SITE_URL = "https://genolink.lt";
+const SITE_NAME = "Genolink";
+const SITE_TITLE = "Genolink — Pharmacogenomics as a Clinical Standard";
 const SITE_DESCRIPTION =
-  "Платформа клинической поддержки решений на основе фармакогеномики и ИИ: один тест — пожизненный PGx-паспорт, безопасное назначение и дозирование лекарств, меньше нежелательных реакций.";
+  "Clinical decision support powered by pharmacogenomics and AI. One test creates a lifelong PGx passport for safer prescribing, dosing, and fewer adverse drug reactions.";
+const FAVICON_VERSION = "2";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pgx.bio"),
+  metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
+  alternates: {
+    canonical: SITE_URL,
+  },
+  manifest: `/site.webmanifest?v=${FAVICON_VERSION}`,
+  appleWebApp: {
+    title: SITE_NAME,
+  },
+  icons: {
+    icon: [
+      {
+        url: `/favicon-96x96.png?v=${FAVICON_VERSION}`,
+        sizes: "96x96",
+        type: "image/png",
+      },
+      { url: `/favicon.svg?v=${FAVICON_VERSION}`, type: "image/svg+xml" },
+    ],
+    shortcut: `/favicon.ico?v=${FAVICON_VERSION}`,
+    apple: `/apple-touch-icon.png?v=${FAVICON_VERSION}`,
+  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    url: "https://pgx.bio",
+    url: SITE_URL,
     images: [{ url: "/genolink-white.webp", width: 2400, height: 609, alt: SITE_NAME }],
   },
   twitter: {
@@ -55,6 +76,25 @@ export default function RootLayout({
       )}
     >
       <head>
+        <link
+          rel="icon"
+          type="image/png"
+          href={`/favicon-96x96.png?v=${FAVICON_VERSION}`}
+          sizes="96x96"
+        />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href={`/favicon.svg?v=${FAVICON_VERSION}`}
+        />
+        <link rel="shortcut icon" href={`/favicon.ico?v=${FAVICON_VERSION}`} />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href={`/apple-touch-icon.png?v=${FAVICON_VERSION}`}
+        />
+        <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
+        <link rel="manifest" href={`/site.webmanifest?v=${FAVICON_VERSION}`} />
         {/*
           Preload the entire scroll sequence at the document level so it starts
           fetching before hydration. Frame 0 is highest priority (it's the
