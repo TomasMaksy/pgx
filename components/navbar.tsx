@@ -26,9 +26,9 @@ function LanguageToggle() {
       onClick={() => setLang(next)}
       aria-label={title}
       title={title}
-      className="group flex h-11 cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 text-sm font-semibold tracking-wide text-white/80 transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95"
+      className="group flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 text-xs font-semibold tracking-wide text-white/80 transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95 md:h-11 md:gap-2 md:px-3.5 md:text-sm"
     >
-      <span className="text-lg leading-none transition-transform duration-200 group-hover:scale-110">
+      <span className="text-base leading-none transition-transform duration-200 group-hover:scale-110 md:text-lg">
         {flag}
       </span>
       {code}
