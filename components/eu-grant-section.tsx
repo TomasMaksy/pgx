@@ -57,7 +57,7 @@ export function EuGrantSection() {
                   className="mt-4 text-4xl leading-none font-light tracking-tight text-white/85 tabular-nums md:mt-0 md:text-[clamp(2.5rem,7vw,4.5rem)] md:font-medium md:leading-[1.05] md:tracking-tighter"
                   aria-label="Horizon Europe — EU grant per project"
                 >
-                  €10M
+                  {t("€10M")}
                 </p>
                 <p className="mt-3 text-sm leading-snug text-white/45 md:mt-2 md:text-base">
                   {t("Horizon Europe — EU grant per project")}
@@ -81,7 +81,7 @@ export function EuGrantSection() {
                 className="mt-4 text-4xl leading-none font-light tracking-tight text-white/85 tabular-nums md:text-5xl"
                 aria-label="Inovacijų agentūra — Lithuanian innovation funding"
               >
-                €100K
+                {t("€100K")}
               </p>
               <p className="mt-3 text-sm leading-snug text-white/45">
                 {t("Inovacijų agentūra — Lithuanian innovation funding")}
@@ -102,7 +102,7 @@ export function EuGrantSection() {
                 className="mt-4 text-4xl leading-none font-light tracking-tight text-white/85 tabular-nums md:text-5xl"
                 aria-label="Eurostars 3 / Eureka — cross-border R&D"
               >
-                €300K
+                {t("€300K")}
               </p>
               <p className="mt-3 text-sm leading-snug text-white/45">
                 {t("Eurostars 3 / Eureka — cross-border R&D")}

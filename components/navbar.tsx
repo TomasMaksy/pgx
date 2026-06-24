@@ -13,10 +13,29 @@ const NAV_LINKS = [
   { label: "Why now", href: "#why-now" },
 ];
 
+const FLAG_IMAGES = {
+  lt: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Cpath fill='%23fdb913' d='M0 0h30v6.667H0z'/%3E%3Cpath fill='%23006a44' d='M0 6.667h30v6.666H0z'/%3E%3Cpath fill='%23c1272d' d='M0 13.333h30V20H0z'/%3E%3C/svg%3E\")",
+  gb: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Cpath fill='%23012169' d='M0 0h60v40H0z'/%3E%3Cpath stroke='%23fff' stroke-width='8' d='m0 0 60 40M60 0 0 40'/%3E%3Cpath stroke='%23c8102e' stroke-width='4.8' d='m0 0 60 40M60 0 0 40'/%3E%3Cpath stroke='%23fff' stroke-width='13.333' d='M30 0v40M0 20h60'/%3E%3Cpath stroke='%23c8102e' stroke-width='8' d='M30 0v40M0 20h60'/%3E%3C/svg%3E\")",
+} as const;
+
+function FlagIcon({ country }: { country: "lt" | "gb" }) {
+  return (
+    <span
+      aria-hidden
+      className="block h-3.5 w-5 shrink-0 overflow-hidden rounded-[2px] shadow-[0_0_0_1px_rgba(255,255,255,0.28)] transition-transform duration-200 group-hover:scale-110 md:h-4 md:w-6"
+      style={{
+        backgroundImage: FLAG_IMAGES[country],
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    />
+  );
+}
+
 function LanguageToggle() {
   const { lang, setLang } = useI18n();
   const next = lang === "lt" ? "en" : "lt";
-  const flag = next === "lt" ? "🇱🇹" : "🇬🇧";
   const code = next === "lt" ? "LT" : "EN";
   const title = next === "lt" ? "Pereiti į lietuvių" : "Switch to English";
 
@@ -28,9 +47,7 @@ function LanguageToggle() {
       title={title}
       className="group flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 text-xs font-semibold tracking-wide text-white/80 transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95 md:h-11 md:gap-2 md:px-3.5 md:text-sm"
     >
-      <span className="text-base leading-none transition-transform duration-200 group-hover:scale-110 md:text-lg">
-        {flag}
-      </span>
+      <FlagIcon country={next === "lt" ? "lt" : "gb"} />
       {code}
     </button>
   );

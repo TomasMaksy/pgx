@@ -106,12 +106,14 @@ function TooltipSourceCard({ source }: { source: CitationSource }) {
   return (
     <div className="flex max-w-[16rem] flex-col gap-1.5">
       <p className="text-[10px] font-medium tracking-[0.18em] text-white/40 uppercase">
-        {t("Source")} {source.id} · {source.label}
+        {t("Source")} {source.id} · {t(source.label)}
       </p>
       <p className="text-sm leading-snug font-medium text-white/80">
-        {source.title}
+        {t(source.title)}
       </p>
-      <p className="text-xs leading-relaxed text-white/60">{source.detail}</p>
+      <p className="text-xs leading-relaxed text-white/60">
+        {t(source.detail)}
+      </p>
     </div>
   );
 }
@@ -130,6 +132,7 @@ function TooltipSourceCards({ ids }: { ids: number[] }) {
 }
 
 function SourceReference({ source }: { source: CitationSource }) {
+  const { t } = useI18n();
   return (
     <a
       href={source.url}
@@ -138,11 +141,13 @@ function SourceReference({ source }: { source: CitationSource }) {
       className="group hover:text-foreground flex items-start justify-between gap-3 py-2.5 transition-colors"
     >
       <div className="min-w-0">
-        <p className="text-muted-foreground text-xs">{source.label}</p>
+        <p className="text-muted-foreground text-xs">{t(source.label)}</p>
         <p className="text-foreground mt-0.5 text-sm leading-snug">
-          {source.title}
+          {t(source.title)}
         </p>
-        <p className="text-muted-foreground mt-0.5 text-xs">{source.fact}</p>
+        <p className="text-muted-foreground mt-0.5 text-xs">
+          {t(source.fact)}
+        </p>
       </div>
       <ExternalLink className="text-muted-foreground group-hover:text-foreground mt-0.5 size-3.5 shrink-0 transition-colors" />
     </a>
@@ -278,7 +283,7 @@ export function MetricsSection() {
                   {t(metric.label)}
                 </p>
                 <p className="mt-1.5 text-xs leading-snug text-white/40 md:text-sm">
-                  {metric.source}
+                  {t(metric.source)}
                 </p>
               </div>
             </button>
