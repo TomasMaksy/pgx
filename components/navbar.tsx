@@ -46,7 +46,7 @@ export function Navbar() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-x-0 top-0 z-40 hidden h-32 w-full md:block"
+        className="pointer-events-none fixed inset-x-0 top-0 z-40 hidden h-40 w-full md:block"
       >
         <GradualBlur
           target="parent"
@@ -65,9 +65,9 @@ export function Navbar() {
         initial={{ y: "-100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={enter}
-        className="fixed inset-x-0 top-0 z-50 py-3 backdrop-blur-md md:py-0 md:pt-7 md:backdrop-blur-none"
+        className="fixed inset-x-0 top-0 z-50 backdrop-blur-md md:backdrop-blur-none"
       >
-        <nav className="mx-auto flex h-12 w-full max-w-7xl items-center justify-between gap-3 px-5 md:grid md:h-16 md:grid-cols-[1fr_auto_1fr] md:gap-4 md:px-16 lg:px-24">
+        <nav className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-5 py-3 md:grid md:grid-cols-[1fr_auto_1fr] md:gap-4 md:px-16 md:py-4 lg:px-24">
           <Link
             href="/"
             className="flex shrink-0 items-center md:col-start-1 md:justify-self-start"
@@ -96,7 +96,7 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="flex shrink-0 items-center gap-2 md:col-start-3 md:justify-self-end md:gap-3">
+          <div className="flex shrink-0 items-center gap-2 md:col-start-3 md:gap-3 md:justify-self-end">
             <MatterButton
               render={<Link href="#contact" />}
               wrapperClassName="shrink-0 p-0.5 md:p-1"
