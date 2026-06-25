@@ -272,6 +272,12 @@ export const LT: Record<string, string> = {
   "Full name": "Vardas ir pavardė",
   Message: "Žinutė",
   Submit: "Siųsti",
+  "Sending...": "Siunčiama...",
+  "Email sent": "Laiškas išsiųstas",
+  "Thanks — we'll be in touch soon.":
+    "Ačiū — netrukus susisieksime.",
+  "Something went wrong. Please try again.":
+    "Kažkas nepavyko. Bandykite dar kartą.",
   "Jane Doe": "Vardenis Pavardenis",
   "jane@clinic.com": "vardas@klinika.lt",
   "How can we help?": "Kuo galime padėti?",

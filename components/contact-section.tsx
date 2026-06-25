@@ -1,12 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "motion/react";
+import { CheckIcon, Loader2Icon, MailIcon, PhoneIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MailIcon, PhoneIcon } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 const contactInfo = [
@@ -23,6 +25,15 @@ const contactInfo = [
     href: "tel:+37060000000",
   },
 ] as const;
+
+type SubmitStatus = "idle" | "loading" | "success" | "error";
+
+const labelMotion = {
+  initial: { opacity: 0, y: 8, filter: "blur(4px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  exit: { opacity: 0, y: -8, filter: "blur(4px)" },
+  transition: { duration: 0.28, ease: [0.16, 1, 0.3, 1] as const },
+};
 
 export function ContactSection() {
   const { t } = useI18n();
@@ -55,8 +66,53 @@ export function ContactSection() {
 
 function ContactForm() {
   const { t } = useI18n();
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const isDisabled = status === "loading" || status === "success";
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (isDisabled) return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(data?.error ?? t("Something went wrong. Please try again."));
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : t("Something went wrong. Please try again."),
+      );
+    }
+  }
+
   return (
-    <form className="w-full font-sans">
+    <form className="w-full font-sans" onSubmit={handleSubmit} noValidate>
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="full-name" className="text-white/80">
@@ -64,9 +120,12 @@ function ContactForm() {
           </FieldLabel>
           <Input
             autoComplete="name"
+            disabled={isDisabled}
             id="full-name"
+            name="name"
             placeholder={t("Jane Doe")}
-            className="border-white/15 bg-white/5 font-sans text-white placeholder:text-white/35"
+            required
+            className="border-white/15 bg-white/5 font-sans text-white placeholder:text-white/35 disabled:opacity-60"
           />
         </Field>
         <Field>
@@ -75,10 +134,13 @@ function ContactForm() {
           </FieldLabel>
           <Input
             autoComplete="email"
+            disabled={isDisabled}
             id="email"
+            name="email"
             placeholder={t("jane@clinic.com")}
+            required
             type="email"
-            className="border-white/15 bg-white/5 font-sans text-white placeholder:text-white/35"
+            className="border-white/15 bg-white/5 font-sans text-white placeholder:text-white/35 disabled:opacity-60"
           />
         </Field>
         <Field>
@@ -87,18 +149,93 @@ function ContactForm() {
           </FieldLabel>
           <Textarea
             autoComplete="off"
+            disabled={isDisabled}
             id="message"
+            name="message"
             placeholder={t("How can we help?")}
-            className="min-h-28 border-white/15 bg-white/5 font-sans text-white placeholder:text-white/35"
+            required
+            className="min-h-28 border-white/15 bg-white/5 font-sans text-white placeholder:text-white/35 disabled:opacity-60"
           />
         </Field>
       </FieldGroup>
-      <Button
-        className="mt-8 h-11 w-full rounded-full bg-white font-sans text-black hover:bg-white/90"
-        type="button"
-      >
-        {t("Submit")}
-      </Button>
+
+      <div className="mt-8 space-y-3">
+        <motion.div layout transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}>
+          <Button
+            className={cn(
+              "relative h-11 w-full overflow-hidden rounded-full font-sans transition-colors duration-300",
+              status === "success"
+                ? "bg-emerald-400 text-black hover:bg-emerald-400"
+                : "bg-white text-black hover:bg-white/90",
+            )}
+            disabled={isDisabled}
+            type="submit"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {status === "loading" ? (
+                <motion.span
+                  key="loading"
+                  className="inline-flex items-center gap-2"
+                  {...labelMotion}
+                >
+                  <Loader2Icon className="size-4 animate-spin" />
+                  {t("Sending...")}
+                </motion.span>
+              ) : status === "success" ? (
+                <motion.span
+                  key="success"
+                  className="inline-flex items-center gap-2"
+                  {...labelMotion}
+                >
+                  <motion.span
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+                  >
+                    <CheckIcon className="size-4" strokeWidth={2.5} />
+                  </motion.span>
+                  {t("Email sent")}
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="idle"
+                  className="inline-flex items-center gap-2"
+                  {...labelMotion}
+                >
+                  {t("Submit")}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Button>
+        </motion.div>
+
+        <AnimatePresence initial={false}>
+          {status === "success" ? (
+            <motion.p
+              key="success-message"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="text-center text-sm text-emerald-300/90"
+            >
+              {t("Thanks — we'll be in touch soon.")}
+            </motion.p>
+          ) : status === "error" && errorMessage ? (
+            <motion.p
+              key="error-message"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="text-center text-sm text-red-300/90"
+              role="alert"
+            >
+              {errorMessage}
+            </motion.p>
+          ) : null}
+        </AnimatePresence>
+      </div>
     </form>
   );
 }

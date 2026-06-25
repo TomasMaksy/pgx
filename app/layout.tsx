@@ -67,7 +67,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="lt"
+      lang="en"
       className={cn(
         "h-full bg-black antialiased",
         inter.variable,

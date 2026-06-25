@@ -19,9 +19,20 @@ type I18nCtx = {
 
 const I18nContext = createContext<I18nCtx | null>(null);
 
+const STORAGE_KEY = "genolink-lang";
+
+function readStoredLang(): Lang | null {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored === "lt" || stored === "en" ? stored : null;
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  // По умолчанию литовский (совпадает с SSR, чтобы не было гидрации-mismatch).
-  const [lang, setLangState] = useState<Lang>("lt");
+  const [lang, setLangState] = useState<Lang>("en");
+
+  useEffect(() => {
+    const stored = readStoredLang();
+    if (stored) setLangState(stored);
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -29,6 +40,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const setLang = useCallback((l: Lang) => {
     setLangState(l);
+    localStorage.setItem(STORAGE_KEY, l);
   }, []);
 
   const t = useCallback(
