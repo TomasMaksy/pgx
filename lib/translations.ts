@@ -77,16 +77,28 @@ export const LT: Record<string, string> = {
     "Genetika pagrįsto vaistų skyrimo poveikis — išmatuojamas.",
   "30% fewer serious adverse drug reactions":
     "30% mažiau sunkių nepageidaujamų reakcijų į vaistus",
+  "fewer serious adverse drug reactions":
+    "mažiau sunkių nepageidaujamų reakcijų į vaistus",
   "95% of people carry a PGx variant that can inform prescribing":
     "95% žmonių turi genetinį variantą, galintį padėti priimti vaistų skyrimo sprendimus",
+  "of people carry a PGx variant that can inform prescribing":
+    "žmonių turi genetinį variantą, galintį padėti priimti vaistų skyrimo sprendimus",
   "1 in 4 primary-care prescriptions are PGx-relevant":
     "1 iš 4 receptų yra farmakogenetiškai reikšmingas",
+  "primary-care prescriptions are PGx-relevant":
+    "pirminės priežiūros receptų yra farmakogenetiškai reikšmingi",
   "36% shorter hospital stays when prescribing is PGx-guided":
     "36% trumpesnė hospitalizacija taikant farmakogenomiką",
+  "shorter hospital stays when prescribing is PGx-guided":
+    "trumpesnė hospitalizacija taikant farmakogenomiką",
   "≈€2,500 per preventable ADR-related hospitalisation":
     "≈€2 500 už vieną išvengiamą hospitalizaciją dėl NRV",
+  "per preventable ADR-related hospitalisation":
+    "už vieną išvengiamą hospitalizaciją dėl NRV",
   "€5–10M estimated annual savings for Lithuania's healthcare system":
     "€5–10M galimų metinių sutaupymų Lietuvos sveikatos sistemai",
+  "estimated annual savings for Lithuania's healthcare system":
+    "galimų metinių sutaupymų Lietuvos sveikatos sistemai",
 
   // ── Why now ──
   "Why now": "Kodėl dabar",

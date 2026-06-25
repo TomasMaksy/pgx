@@ -32,6 +32,7 @@ const METRICS: {
   key: MetricKey;
   value: string;
   label: string;
+  mobileLabel: string;
   source: string;
   sourceIds: number[];
   title: string;
@@ -42,6 +43,7 @@ const METRICS: {
     key: "adr-reduction",
     value: "−30%",
     label: "30% fewer serious adverse drug reactions",
+    mobileLabel: "fewer serious adverse drug reactions",
     source: "PREPARE trial — The Lancet, 2023",
     sourceIds: [4],
     title: "30% fewer clinically relevant adverse drug reactions",
@@ -52,6 +54,7 @@ const METRICS: {
     key: "actionable-variants",
     value: "95%",
     label: "95% of people carry a PGx variant that can inform prescribing",
+    mobileLabel: "of people carry a PGx variant that can inform prescribing",
     source: "Swiss hospital cohort study",
     sourceIds: [5],
     title: "Nearly everyone carries an actionable PGx variant",
@@ -62,6 +65,7 @@ const METRICS: {
     key: "pgx-relevant-prescriptions",
     value: "1 in 4",
     label: "1 in 4 primary-care prescriptions are PGx-relevant",
+    mobileLabel: "primary-care prescriptions are PGx-relevant",
     source: "Dutch primary-care implementation data",
     sourceIds: [6],
     title: "1 in 4 prescriptions carry an actionable gene-drug interaction",
@@ -72,6 +76,7 @@ const METRICS: {
     key: "hospital-stays",
     value: "−36%",
     label: "36% shorter hospital stays when prescribing is PGx-guided",
+    mobileLabel: "shorter hospital stays when prescribing is PGx-guided",
     source: "PREPARE: 2.4 → 1.5 days average stay",
     sourceIds: [7],
     title: "36% shorter hospitalisations",
@@ -82,6 +87,7 @@ const METRICS: {
     key: "adr-cost",
     value: "≈€2 500",
     label: "≈€2,500 per preventable ADR-related hospitalisation",
+    mobileLabel: "per preventable ADR-related hospitalisation",
     source: "Lithuanian estimate; EU average ~€5,500 (IATROSTAT-ECO, 2023)",
     sourceIds: [8],
     title: "ADR hospitalisations are expensive",
@@ -92,6 +98,7 @@ const METRICS: {
     key: "annual-savings",
     value: "≈€5–10M",
     label: "€5–10M estimated annual savings for Lithuania's healthcare system",
+    mobileLabel: "estimated annual savings for Lithuania's healthcare system",
     source: "Modeled from PREPARE outcomes and local ADR incidence",
     sourceIds: [4],
     title: "€5–10M estimated annual savings",
@@ -280,7 +287,8 @@ export function MetricsSection() {
               />
               <div className="order-2 max-w-xl md:order-1">
                 <p className="text-lg leading-snug font-medium tracking-tight text-white/85 md:text-xl">
-                  {t(metric.label)}
+                  <span className="md:hidden">{t(metric.mobileLabel)}</span>
+                  <span className="hidden md:inline">{t(metric.label)}</span>
                 </p>
                 <p className="mt-1.5 text-xs leading-snug text-white/40 md:text-sm">
                   {t(metric.source)}
