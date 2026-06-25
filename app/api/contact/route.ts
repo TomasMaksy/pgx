@@ -3,11 +3,10 @@ import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const CONTACT_TO_EMAIL = "maksimovictom@gmail.com";
-const CONTACT_FROM_ADDRESS =
-  process.env.RESEND_FROM_EMAIL?.match(/<([^>]+)>/)?.[1] ??
-  process.env.RESEND_FROM_EMAIL ??
-  "onboarding@resend.dev";
+const CONTACT_TO_EMAIL =
+  process.env.RESEND_TO_EMAIL ?? "maksimovictom@gmail.com";
+const CONTACT_FROM =
+  process.env.RESEND_FROM_EMAIL ?? "GenoLink <onboarding@resend.dev>";
 
 type ContactPayload = {
   name?: string;
@@ -63,7 +62,7 @@ export async function POST(request: Request) {
   const { error } = await resend.emails.send({
     // "From" must be a verified Resend address — we show the visitor's name
     // here and set replyTo to their email so Reply goes straight to them.
-    from: `${name} via GenoLink <${CONTACT_FROM_ADDRESS}>`,
+    from: CONTACT_FROM,
     to: CONTACT_TO_EMAIL,
     replyTo: email,
     subject: `GenoLink contact form — ${name}`,

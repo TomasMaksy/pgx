@@ -11,6 +11,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useI18n } from "@/lib/i18n";
 
+/** Set to false when Resend is configured and ready. */
+const FAKE_CONTACT_SUBMIT = true;
+
 const contactInfo = [
   {
     icon: <MailIcon />,
@@ -83,6 +86,13 @@ function ContactForm() {
 
     setStatus("loading");
     setErrorMessage("");
+
+    if (FAKE_CONTACT_SUBMIT) {
+      await new Promise((resolve) => setTimeout(resolve, 700));
+      setStatus("success");
+      form.reset();
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact", {
