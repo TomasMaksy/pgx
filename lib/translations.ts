@@ -11,7 +11,7 @@ export const LT: Record<string, string> = {
   Source: "Šaltinis",
 
   // ── Hero ──
-  "Your DNA": "Jūsų genai",
+  "Your DNA": "Jūsų DNR",
   "Doesn't Change.": "nesikeičia.",
   "Prescribing Should.": "Gydymas turi keistis.",
   "Clinical decision support powered by pharmacogenomics and AI":
@@ -21,7 +21,7 @@ export const LT: Record<string, string> = {
   "The problem": "Problema",
   "1 in 12": "1 iš 12",
   "hospital admissions are related to adverse drug reactions":
-    "hospitalizacijų yra susijusi su nepageidaujamomis reakcijomis į vaistus",
+    "hospitalizacijų susijusi su nepageidaujamomis reakcijomis į vaistus",
   "ADR-related admissions": "hospitalizacijų dėl NRV",
   "of medication-related admissions predictable or preventable":
     "su vaistais susijusių hospitalizacijų galima numatyti arba išvengti",
@@ -43,25 +43,25 @@ export const LT: Record<string, string> = {
   "The solution": "Sprendimas",
   "One Profile.": "Vienas profilis.",
   "A Lifetime of Smarter Prescribing.":
-    "Tikslesnis vaistų skyrimas visam gyvenimui.",
+    "Tikslesni vaistų skyrimo sprendimai ateičiai.",
   "Once a pharmacogenomic profile is generated, it can guide medication selection, dosing, and safety decisions whenever a relevant drug is prescribed.":
-    "Sukūrus farmakogenetinį profilį, jis gali padėti priimti vaistų parinkimo, dozavimo ir saugumo sprendimus kaskart, kai pacientui skiriamas aktualus vaistas.",
+    "Farmakogenetinis profilis gali padėti priimti vaistų parinkimo, dozavimo ir saugumo sprendimus kiekvieną kartą, kai pacientui skiriamas vaistas.",
   "Sequence Once": "Vienas tyrimas",
   "A one-time sample is sequenced to identify the clinically actionable genetic variants that influence drug response. No repeat testing — the same data supports prescribing decisions for years to come.":
-    "Paciento mėginys ištiriamas vieną kartą, kad būtų nustatyti kliniškai svarbūs genetiniai variantai, galintys turėti įtakos vaistų veiksmingumui, dozavimui ir saugumui. Pakartotinio tyrimo nereikia — tie patys duomenys gali būti naudojami priimant vaistų skyrimo sprendimus ir ateityje.",
-  "Interpret With Bioinformatics": "Duomenys, pritaikyti klinikai",
+    "Paciento mėginys ištiriamas vieną kartą, siekiant nustatyti kliniškai svarbius genetinius variantus, galinčius turėti įtakos vaistų veiksmingumui, dozavimui ir saugumui. Pakartotinio tyrimo nereikia – tie patys duomenys gali būti naudojami priimant vaistų skyrimo sprendimus ir ateityje.",
+  "Interpret With Bioinformatics": "Duomenys klinikiniams sprendimams",
   "An AI-assisted analysis layer processes the raw genomic data, flags clinically relevant variants, and structures them into standardized, prescribing-ready pharmacogenomic insights.":
-    "DI ir bioinformatikos analizė apdoroja paciento genetinius duomenis, atrenka kliniškai reikšmingus variantus ir paverčia juos aiškiomis farmakogenetinėmis įžvalgomis, kurios padeda gydytojui priimti vaistų skyrimo sprendimus.",
+    "DI ir bioinformatikos analizė apdoroja paciento genetinius duomenis, atrenka kliniškai reikšmingus variantus ir paverčia juos aiškiomis farmakogenetinėmis įžvalgomis, padedančiomis gydytojui priimti vaistų skyrimo sprendimus.",
   "Generate a Pharmacogenomic Passport":
     "Sukuriamas farmakogenenetinis pasas",
   "The result is a lifelong profile that consolidates each patient's medication-relevant genetics into a single, portable record clinicians can reference at the point of care.":
-    "Sukuriamas ilgalaikis paciento profilis, kuriame genetinė informacija apie vaistų veikimą pateikiama aiškiai ir vienoje vietoje, kad gydytojas galėtų ja naudotis skirdamas gydymą.",
+    "Sukuriamas ilgalaikis paciento profilis, kuriame aiškiai ir vienoje vietoje pateikiama informacija apie genetinių ypatumų įtaką vaistų veiksmingumui, dozavimui ir saugumui. Gydytojas gali juo naudoti priimdamas gydymo sprendimus.",
   "Integrate With Any Platform": "Integracija su sveikatos sistemomis",
   "Profiles surface across healthcare settings and systems — supporting consistent, evidence-based prescribing at both the individual and population level.":
-    "Profiliai gali būti naudojami skirtingose gydymo įstaigose ir sveikatos sistemose, kad vaistai būtų skiriami nuosekliai, remiantis įrodymais – tiek konkrečiam pacientui, tiek visos populiacijos lygmeniu.",
+    "Farmakogenetiniai profiliai gali būti naudojami skirtingose gydymo įstaigose, kad vaistų skyrimo sprendimai būtų nuoseklūs ir pagrįsti įrodymais – tiek konkrečiam pacientui, tiek visos populiacijos mastu.",
 
   // ── Macbook ──
-  "How could this look in practice?": "Kaip tai atrodytų praktikoje?",
+  "How could this look in practice?": "Kaip tai veikia?",
   "Skip to the good part": "Prie esmės",
   "Pharmacogenomic Alert": "Farmakogenominis įspėjimas",
   "Pharmacogenomic Alert: CYP2D6 Poor Metabolizer":
@@ -74,13 +74,13 @@ export const LT: Record<string, string> = {
   // ── Metrics ──
   Impact: "Poveikis",
   "The measurable impact of genetics-aware prescribing.":
-    "Genetika pagrįsto vaistų skyrimo poveikis — išmatuojamas.",
+    "Genetika pagrįsto vaistų skyrimo nauda – išmatuojama.",
   "30% fewer serious adverse drug reactions":
     "30% mažiau sunkių nepageidaujamų reakcijų į vaistus",
   "fewer serious adverse drug reactions":
     "mažiau sunkių nepageidaujamų reakcijų į vaistus",
   "95% of people carry a PGx variant that can inform prescribing":
-    "95% žmonių turi genetinį variantą, galintį padėti priimti vaistų skyrimo sprendimus",
+    "95 % žmonių turi bent vieną vaistų skyrimui reikšmingą genetinį variantą",
   "of people carry a PGx variant that can inform prescribing":
     "žmonių turi genetinį variantą, galintį padėti priimti vaistų skyrimo sprendimus",
   "1 in 4 primary-care prescriptions are PGx-relevant":
@@ -88,7 +88,7 @@ export const LT: Record<string, string> = {
   "primary-care prescriptions are PGx-relevant":
     "pirminės priežiūros receptų yra farmakogenetiškai reikšmingi",
   "36% shorter hospital stays when prescribing is PGx-guided":
-    "36% trumpesnė hospitalizacija taikant farmakogenomiką",
+    "36 % trumpesnė hospitalizacijos trukmė taikant farmakogenetiką",
   "shorter hospital stays when prescribing is PGx-guided":
     "trumpesnė hospitalizacija taikant farmakogenomiką",
   "≈€2,500 per preventable ADR-related hospitalisation":
@@ -107,7 +107,7 @@ export const LT: Record<string, string> = {
   who: "kas tai padarys",
   when: "pirmas",
   "Europe is funding the build-out of sovereign health and biotech infrastructure across the current 2021–2027 cycle. The same money is available to every EU country — and whoever moves first sets the standard for the whole region. Lithuania has both the funding channels and the talent to do it first. The question isn't ":
-    "Europa šiuo metu finansuoja nacionalinės sveikatos ir biotechnologijų infrastruktūros kūrimą 2021–2027 m. laikotarpiu. Šios lėšos prieinamos visoms ES šalims — todėl standartą regione nustatys tie, kurie judės pirmi. Lietuva turi ir finansavimo kanalus, ir specialistus tai padaryti pirmoji. Klausimas nebe ",
+    "Europa 2021–2027 m. finansuoja nacionalinės sveikatos ir biotechnologijų infrastruktūros plėtrą. Šiomis lėšomis gali naudotis visos ES valstybės. Lietuva turi finansavimo galimybių ir reikiamų specialistų, todėl gali viena pirmųjų regione sukurti farmakogenetikos sprendimų infrastruktūrą. Klausimas nebe ",
   " it gets built, but ": ", o ",
   " and ": " ",
   "EU Grant": "ES finansavimas",
@@ -120,7 +120,7 @@ export const LT: Record<string, string> = {
   // Why-now details
   "The matched call": "Tinkamas projektas",
   "The EU grant reads as if it were written for what we build.":
-    "ES finansavimo kryptis sutampa su mūsų kuriamu sprendimu.",
+    "ES finansavimo kryptys atitinka mūsų kuriamą sprendimą.",
   "A Horizon Europe call (Research & Innovation Action) under Cluster 1 \u201cHealth.\u201d Its scope reads almost line-for-line like the GenoLink platform:":
     "„Horizon Europe“ kvietimas pagal 1 klasterį „Health“ beveik tiesiogiai atitinka „GenoLink“ platformos kryptį:",
   "Pharmacogenomics, PK & PD to predict and prevent adverse drug reactions in polypharmacy":
@@ -197,7 +197,7 @@ export const LT: Record<string, string> = {
   "EU funding matched to what we build":
     "ES finansavimas tiksliai atitinka tai, ką kuriame",
   "A matched EU Research & Innovation Action under Cluster 1 Health. Direct contribution covering 100% of eligible costs — and the call scope reads almost line-for-line like the GenoLink platform.":
-    "„Horizon Europe“ 1 klasterio „Sveikata“ mokslinių tyrimų ir inovacijų kvietimas numato tiesioginį finansavimą, padengiantį 100 % tinkamų išlaidų, o kvietimo kryptis beveik tiesiogiai sutampa su „GenoLink“ platforma.",
+    "„Horizon Europe“ 1-ojo klasterio „Sveikata“ mokslinių tyrimų ir inovacijų kvietimas numato tiesioginį finansavimą, padengiantį 100 % tinkamų išlaidų, o kvietimo prioritetai glaudžiai dera su „GenoLink“ platformos kryptimi.",
   "Horizon Europe — EU grant per project":
     "„Horizon Europe“ — ES dotacija vienam projektui",
   "Inovacijų agentūra — Lithuanian innovation funding":
@@ -213,47 +213,47 @@ export const LT: Record<string, string> = {
   "Make genetics the backbone of every prescription — and grow from there into the medicine of the future.":
     "Genetika turi tapti kiekvieno išrašomo vaisto pagrindu — nuo čia prasideda ateities medicina",
   "We're building a system that uses genetic testing to help doctors make precise decisions — which drug, at what dose, and in what combination is safe for each patient. This reduces ineffective treatment, adverse reactions, and dosing errors — and, for the healthcare system, the cost of medications and the load on hospitals.":
-    "Kuriame sistemą, kuri naudoja genetinius tyrimus tam, kad gydytojai galėtų tiksliau nuspręsti, kuris vaistas, kokia dozė ir koks vaistų derinys yra saugiausias konkrečiam pacientui. Tai padeda mažinti neveiksmingą gydymą, nepageidaujamas reakcijas, dozavimo klaidas, o sveikatos sistemai — vaistų kaštus ir ligoninių apkrovą.",
+    "Kuriame sistemą, kuri padeda gydytojams, remiantis genetinių tyrimų duomenimis, tiksliau parinkti vaistą, jo dozę ir saugiausią vaistų derinį konkrečiam pacientui. Tai padeda mažinti neveiksmingo gydymo, nepageidaujamų reakcijų ir dozavimo klaidų riziką, o sveikatos sistemai – vaistų kaštus ir ligoninių apkrovą.",
   "Stage 1 · Core": "1 etapas · Pagrindas",
   "Stage 2": "2 etapas",
   "Stage 3": "3 etapas",
   "AI recommendation platform": "DI rekomendacijų platforma",
   "Analyzes the patient's genetic data and, at the moment of prescribing, helps the doctor choose the right drug and dose — and flags dangerous drug combinations.":
-    "Analizuoja paciento genetinius duomenis ir vaisto skyrimo momentu padeda gydytojui parinkti tinkamą vaistą bei dozę, kartu įspėdama apie pavojingus vaistų derinius.",
+    "Platforma analizuoja paciento genetinius duomenis ir vaisto skyrimo metu padeda gydytojui parinkti tinkamą vaistą bei jo dozę, taip pat įspėja apie galimai pavojingus vaistų derinius.",
   "In-house laboratory": "Vidinė laboratorija",
   "A full cycle of genetic testing in Lithuania — from sample collection to interpretation and recommendations. Quality control at every step, fast turnaround, and sovereign data.":
-    "Pilnas genetinio tyrimo ciklas Lietuvoje — nuo mėginio paėmimo iki interpretacijos ir rekomendacijų. Kokybės kontrolė kiekviename žingsnyje, greitesni rezultatai ir saugūs vietiniai duomenys.",
+    "Visas genetinio tyrimo ciklas atliekamas Lietuvoje – nuo mėginio paėmimo iki rezultatų interpretavimo ir rekomendacijų pateikimo. Taip užtikrinama kokybės kontrolė, greitesnis rezultatų pateikimas ir saugus duomenų tvarkymas vietoje.",
   "New fields and a scientific base": "Naujos sritys ir mokslinė bazė",
   "Building on a working system and accumulated data — expansion into new areas of medicine, new tests, and joint research with universities and clinics.":
-    "Remiantis veikiančia sistema ir sukauptais duomenimis, plėtra į naujas medicinos sritis, naujus tyrimus ir bendrus mokslinius projektus su universitetais bei klinikomis.",
+    "Remiantis veikiančia sistema ir sukauptais duomenimis, sprendimas plečiamas į naujas medicinos sritis, o kartu vystomi tyrimai ir bendri moksliniai projektai su universitetais bei klinikomis.",
   "For patients": "Pacientams",
   "Treatment matched to the individual genome":
     "Gydymas parenkamas pagal paciento genetinius duomenis",
   "The right drug and dose from the first prescription":
-    "Tinkamas vaistas ir dozė nuo pat pirmo recepto",
+    "Tinkamas vaistas ir dozė nuo pirmojo paskyrimo",
   "Fewer adverse reactions and ineffective treatments":
-    "Mažiau nepageidaujamų reakcijų ir neveiksmingo gydymo",
+    "Mažesnė nepageidaujamų reakcijų ir neveiksmingo gydymo rizika",
   "For doctors": "Gydytojams",
   "A ready recommendation at the moment of prescribing":
-    "Aiški rekomendacija vaisto skyrimo metu",
+    "Aiškios rekomendacijos vaisto skyrimo metu",
   "No manual interpretation of genetics":
-    "Nereikia rankiniu būdu aiškinti genetinių tyrimų",
+    "Nereikia savarankiškai interpretuoti genetinių tyrimų rezultatų",
   "Lower risk, greater confidence in the decision":
-    "Mažesnė rizika ir daugiau užtikrintumo priimant sprendimą",
+    "Mažesnė rizika ir daugiau užtikrintumo priimant sprendimus",
   "For the healthcare system": "Sveikatos sistemai",
   "Lower costs for complications and therapy selection":
     "Mažesnės išlaidos dėl komplikacijų ir netinkamo gydymo",
   "Shorter hospital waiting times":
     "Trumpesnės eilės ir mažesnė ligoninių apkrova",
   "Citizens' data kept under control in Lithuania":
-    "Pacientų duomenys išlieka Lietuvos kontrolėje",
+    "Pacientų duomenų kontrolė išlieka Lietuvoje",
   "Why we do this": "Kodėl mes tai darome",
 
   // ── Team ──
   "Our team": "Mūsų komanda",
   "Why us?": "Kodėl mes?",
   "Young team combining expertise in Medicine, Biochemistry, and Bioinformatics, with hands-on experience in personalized medicine at AskBio and Bayer Pharmaceuticals. Our background ranges from VC-backed startups to leading teams and companies with multimillion-euro annual revenues. We believe the time for personalized healthcare is now, and with your support, we can make it more effective, efficient, and accessible for everyone.":
-    "Jauna komanda, jungianti medicinos, biochemijos ir bioinformatikos kompetencijas bei praktinę personalizuotos medicinos patirtį „AskBio“ ir „Bayer Pharmaceuticals“. Mūsų patirtis – nuo rizikos kapitalo finansuojamų startuolių iki komandų ir įmonių su daugiamilijonine metine apyvarta vadovavimo. Tikime, kad personalizuotos sveikatos priežiūros laikas yra dabar, ir su jūsų parama galime padaryti ją veiksmingesnę, efektyvesnę ir prieinamesnę visiems.",
+    "Esame jauna komanda, jungianti medicinos, biochemijos ir bioinformatikos kompetencijas bei praktinę personalizuotos medicinos patirtį, įgytą „AskBio“ ir „Bayer Pharmaceuticals“. Mūsų patirtis apima tiek darbą su rizikos kapitalo finansuojamais startuoliais, tiek vadovavimą komandoms ir įmonėms, kurių metinė apyvarta siekia milijonus eurų. Tikime, kad personalizuotos sveikatos priežiūros laikas yra dabar, o su jūsų parama galime padaryti ją veiksmingesnę, efektyvesnę ir prieinamesnę visiems.",
   "MSc Bioinformatics": "Bioinformatikos magistras",
   "MD Medicine": "Medicinos gydytojas",
   "Medical Student": "Medicinos studentas",
